@@ -3,6 +3,7 @@
 // made by that core at its recorded commit, and the CLI starts.
 import { spawnSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
+import { tmpdir } from "node:os";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
@@ -22,7 +23,8 @@ for (const cape of record.capes) {
 	if (!existsSync(join(repo, "dist", "capes", `${cape.build}.js`))) problems.push(`${cape.name}: dist/capes/${cape.build}.js is missing`);
 }
 for (const [name, result] of Object.entries(record.tests)) if (result !== "passed") console.warn(`verify: ${name}'s tests ${result} when bundled`);
-const help = spawnSync(process.execPath, [join(repo, "dist", "cli.js"), "help"], { cwd: repo, encoding: "utf8" });
+// Run from no repo at all, as a fresh install would be.
+const help = spawnSync(process.execPath, [join(repo, "dist", "cli.js"), "help"], { cwd: tmpdir(), encoding: "utf8" });
 if (help.status !== 0 || !help.stdout.startsWith("Usage: nosedive [--at <target>] <action>")) problems.push(`the CLI does not start: ${help.stderr || help.stdout}`);
 if (problems.length > 0) {
 	console.error(`verify: the bundle does not agree with bundle.json:\n  ${problems.join("\n  ")}`);
