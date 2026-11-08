@@ -1,13 +1,13 @@
 [
 	{
-		"id": "85c00848-4847-5973-83f6-046dc906851c",
+		"id": "cdaf0220-95a3-582e-8c6d-bef1177344c1",
 		"owner": "01a15bb1-da9e-7d2d-aa82-5ee97257adc6",
 		"shortName": "work",
 		"repo": "01a15ba8-0bff-7ce3-83dc-e08af3633e26",
 		"ref": "f3c449cfdcff28c865805c5c129be0feb67dfcb7",
 		"commit": "f3c449cfdcff28c865805c5c129be0feb67dfcb7",
-		"core": "402b22ec-06fd-55f8-99bd-5af83c555c78",
-		"coreVersion": "2026.11.8-1794151651555",
+		"core": "6e9069d4-aa33-5dbb-b5b0-e7ced5ecdfa4",
+		"coreVersion": "2026.11.8-1794153358365",
 		"actions": {
 			"jump": "Picks a dive up, or starts one on a feat: checks its repos out for it, on its local branch or read-only at trunk",
 			"pack": "Puts the dive on deck down for anyone, on any hero repo, to jump again: its work pushed to its refs, its ignored files packed for its feat, its checkouts left at their base",
@@ -68,17 +68,17 @@
 		},
 		"needs": {},
 		"version": "2026.11.7-1794081991900",
-		"builtAt": "2026-11-08T15:38:50.006Z"
+		"builtAt": "2026-11-08T16:09:32.184Z"
 	},
 	{
-		"id": "6aa87e37-d402-590b-b08b-465b08bc2367",
+		"id": "82fc3d27-c649-5406-a8f9-9924bec85e93",
 		"owner": "01a1b128-2c08-790f-80f4-e2c40a98bfcc",
 		"shortName": "nosedive-legacy",
 		"repo": "01a1b13e-111d-73de-8f7d-41b47af07703",
 		"ref": "bedf403f2e1b434971c31f6ae2fbe9d5630d67b7",
 		"commit": "bedf403f2e1b434971c31f6ae2fbe9d5630d67b7",
-		"core": "402b22ec-06fd-55f8-99bd-5af83c555c78",
-		"coreVersion": "2026.11.8-1794151651555",
+		"core": "6e9069d4-aa33-5dbb-b5b0-e7ced5ecdfa4",
+		"coreVersion": "2026.11.8-1794153358365",
 		"actions": {
 			"test": "Runs gates as a check on the dive on deck, or the gates named, streaming each and exiting 1 if any gate that is not flaky failed",
 			"hydrate-repo.workspace": "Checks one registered repo out into the workspace, detached at trunk or at a ref",
@@ -89,6 +89,6 @@
 		"kinds": {},
 		"needs": {},
 		"version": "2026.11.7-1794019084053",
-		"builtAt": "2026-11-08T15:40:35.068Z"
+		"builtAt": "2026-11-08T16:11:14.713Z"
 	}
 ]
