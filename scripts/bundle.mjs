@@ -100,7 +100,12 @@ const record = {
 	node: ">=24",
 };
 writeFileSync(join(repo, "bundle.json"), `${JSON.stringify(record, null, "\t")}\n`);
-rmSync(work, { recursive: true, force: true });
+// Windows keeps the scratch core loaded while this script runs, so its directory may not go until later.
+try {
+	rmSync(work, { recursive: true, force: true });
+} catch {
+	console.warn(`bundle: could not remove ${work}; delete it by hand`);
+}
 
 const summary = `bundle: core ${commit.slice(0, 7)} (${core.version}) with ${capes.map((each) => `${each.name} ${each.commit.slice(0, 7)}`).join(", ")}`;
 if (args.includes("--no-commit")) {
