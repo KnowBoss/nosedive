@@ -1,0 +1,32 @@
+{
+	"core": {
+		"origin": "https://github.com/KnowBoss/nosedive-core.git",
+		"commit": "22b4bf6135e38c355d10681d63ddb288798e4d42",
+		"id": "402b22ec-06fd-55f8-99bd-5af83c555c78",
+		"version": "2026.11.8-1794151651555"
+	},
+	"capes": [
+		{
+			"name": "nosedive-work",
+			"repo": "01a15ba8-0bff-7ce3-83dc-e08af3633e26",
+			"origin": "https://github.com/KnowBoss/nosedive-work.git",
+			"commit": "f3c449cfdcff28c865805c5c129be0feb67dfcb7",
+			"build": "85c00848-4847-5973-83f6-046dc906851c",
+			"version": "2026.11.7-1794081991900"
+		},
+		{
+			"name": "nosedive-legacy",
+			"repo": "01a1b13e-111d-73de-8f7d-41b47af07703",
+			"origin": "https://github.com/KnowBoss/nosedive-legacy.git",
+			"commit": "bedf403f2e1b434971c31f6ae2fbe9d5630d67b7",
+			"build": "6aa87e37-d402-590b-b08b-465b08bc2367",
+			"version": "2026.11.7-1794019084053"
+		}
+	],
+	"tests": {
+		"nosedive-core": "failed",
+		"nosedive-work": "passed",
+		"nosedive-legacy": "passed"
+	},
+	"node": ">=24"
+}

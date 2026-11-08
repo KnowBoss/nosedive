@@ -39,5 +39,7 @@
 		"bundle": "node scripts/bundle.mjs",
 		"verify": "node scripts/verify.mjs"
 	},
-	"dependencies": {}
+	"dependencies": {
+		"esbuild": "0.25.12"
+	}
 }

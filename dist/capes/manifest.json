@@ -1,0 +1,94 @@
+[
+	{
+		"id": "85c00848-4847-5973-83f6-046dc906851c",
+		"owner": "01a15bb1-da9e-7d2d-aa82-5ee97257adc6",
+		"shortName": "work",
+		"repo": "01a15ba8-0bff-7ce3-83dc-e08af3633e26",
+		"ref": "f3c449cfdcff28c865805c5c129be0feb67dfcb7",
+		"commit": "f3c449cfdcff28c865805c5c129be0feb67dfcb7",
+		"core": "402b22ec-06fd-55f8-99bd-5af83c555c78",
+		"coreVersion": "2026.11.8-1794151651555",
+		"actions": {
+			"jump": "Picks a dive up, or starts one on a feat: checks its repos out for it, on its local branch or read-only at trunk",
+			"pack": "Puts the dive on deck down for anyone, on any hero repo, to jump again: its work pushed to its refs, its ignored files packed for its feat, its checkouts left at their base",
+			"bail": "Abandons the dive on deck, recording why and what it held",
+			"land": "Publishes the dive on deck: each repo's work pushed to its feat's work branch"
+		},
+		"kinds": {
+			"dive": {
+				"schema": {
+					"type": "object",
+					"additionalProperties": false,
+					"properties": {
+						"diver": {
+							"type": [
+								"string",
+								"null"
+							]
+						},
+						"packer": {
+							"type": [
+								"string",
+								"null"
+							]
+						},
+						"outcome": {
+							"enum": [
+								"landed",
+								"bailed"
+							]
+						},
+						"feat": {
+							"type": "string"
+						}
+					},
+					"required": [
+						"feat"
+					]
+				},
+				"links": [
+					{
+						"kb/01a18f45-42c6-70cc-b111-f6bd564e1f50.md": {
+							"rel": "turn.gate"
+						}
+					},
+					{
+						"kb/01a1b45b-04a0-79a4-94fe-d25a3665456d.md": {
+							"rel": "crud.gate"
+						}
+					}
+				],
+				"id": "01a15bb2-5092-7858-90dd-e6c5b1b45254",
+				"file": ".nosedive/kinds/01a15bb2-5092-7858-90dd-e6c5b1b45254.md",
+				"digest": "dda1d445fe6b",
+				"dropWhen": "It was jumped and is over, landed or bailed, as `meta.outcome` says; and what its log learned is kept where it lasts: each decision made and each lesson worth keeping recorded on the durable doc it concerns, the feature or area its feat works toward, never only in the dive, whose log goes with it. A bailed dive's reason is such a lesson when the next attempt needs it, as a slice found too big to review. One held or packed is not dropped: jump it and finish it. Whoever drops it, having read it, says on its feat what it completed, `nosedive crud <feat> --section:Dropped.<dive> -`, then `nosedive crud --drop <dive>`, which takes its feat's `dives.feat` link with it (drops-recorded).",
+				"version": "2b5aaf891e026c73f7a075542449a06e87722fbf",
+				"published": true
+			}
+		},
+		"needs": {},
+		"version": "2026.11.7-1794081991900",
+		"builtAt": "2026-11-08T15:38:50.006Z"
+	},
+	{
+		"id": "6aa87e37-d402-590b-b08b-465b08bc2367",
+		"owner": "01a1b128-2c08-790f-80f4-e2c40a98bfcc",
+		"shortName": "nosedive-legacy",
+		"repo": "01a1b13e-111d-73de-8f7d-41b47af07703",
+		"ref": "bedf403f2e1b434971c31f6ae2fbe9d5630d67b7",
+		"commit": "bedf403f2e1b434971c31f6ae2fbe9d5630d67b7",
+		"core": "402b22ec-06fd-55f8-99bd-5af83c555c78",
+		"coreVersion": "2026.11.8-1794151651555",
+		"actions": {
+			"test": "Runs gates as a check on the dive on deck, or the gates named, streaming each and exiting 1 if any gate that is not flaky failed",
+			"hydrate-repo.workspace": "Checks one registered repo out into the workspace, detached at trunk or at a ref",
+			"dehydrate-repo.workspace": "Removes one repo's checkout from the workspace once origin has its work, or regardless with --force",
+			"record.gate": "Mints a gate: its doc, its stub script, and the link declaring it on a feat, ready to fail until somebody writes the check",
+			"note": "Mints one kb doc and links it from the repo it is about"
+		},
+		"kinds": {},
+		"needs": {},
+		"version": "2026.11.7-1794019084053",
+		"builtAt": "2026-11-08T15:40:35.068Z"
+	}
+]
