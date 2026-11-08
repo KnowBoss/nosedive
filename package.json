@@ -1,6 +1,6 @@
 {
 	"name": "nosedive",
-	"version": "2026.10.11-1791741249908",
+	"version": "0.0.0",
 	"description": "Turns a plain notes repo into a bridge: one repo that holds the plan and drives agentic work across your other repos.",
 	"keywords": [
 		"cli",
@@ -15,54 +15,29 @@
 	],
 	"homepage": "https://nosedive.dev",
 	"bugs": {
-		"url": "https://github.com/sycdan/nosedive/issues"
+		"url": "https://github.com/KnowBoss/nosedive/issues"
 	},
 	"license": "MIT",
 	"author": "Dan Stace <dstace@gmail.com>",
 	"funding": "https://ko-fi.com/sycdan",
 	"repository": {
 		"type": "git",
-		"url": "git+https://github.com/sycdan/nosedive.git"
+		"url": "git+https://github.com/KnowBoss/nosedive.git"
 	},
 	"type": "module",
 	"bin": {
 		"nosedive": "dist/cli.js"
 	},
 	"files": [
-		"COMMANDS.md",
 		"dist",
-		"kb",
-		".nosedive-ref"
+		"bundle.json"
 	],
 	"engines": {
-		"node": ">=22"
+		"node": ">=24"
 	},
 	"scripts": {
-		"commands:surface": "node scripts/update-readme-command-surface.mjs",
-		"faq:surface": "node scripts/update-readme-faq.mjs",
-		"commands:identifiers": "node scripts/command-identifiers.mjs",
-		"check:command-surface": "node scripts/update-readme-command-surface.mjs --check",
-		"check:faq-surface": "node scripts/update-readme-faq.mjs --check",
-		"build": "tsup src/cli.ts src/nosedive.ts --format esm --target node22 --clean",
-		"format": "prettier --write \"src/**/*.ts\" \"scripts/**/*.mjs\" \"package.json\" \"tsconfig.json\" \".github/workflows/*.yml\" \".prettierrc.json\"",
-		"format:check": "prettier --check \"src/**/*.ts\" \"scripts/**/*.mjs\" \"package.json\" \"tsconfig.json\" \".github/workflows/*.yml\" \".prettierrc.json\"",
-		"typecheck": "tsc",
-		"check:release-surface": "node scripts/check-release-surface.mjs",
-		"check:signoff": "node scripts/check-signoff.mjs",
-		"test": "npm run format:check && npm run check:release-surface && node --test \"scripts/test/*.mjs\"",
-		"test:pack-bin": "node scripts/test-pack-bin.mjs",
-		"prepack": "npm run build",
-		"prepare": "git config core.hooksPath .githooks"
+		"bundle": "node scripts/bundle.mjs",
+		"verify": "node scripts/verify.mjs"
 	},
-	"devDependencies": {
-		"@types/node": "^26.1.0",
-		"prettier": "3.9.6",
-		"tsup": "^8.5.1",
-		"typescript": "^6.0.3"
-	},
-	"dependencies": {
-		"ajv": "^8.20.0",
-		"marked": "^18.0.14",
-		"yaml": "^2.9.0"
-	}
+	"dependencies": {}
 }
