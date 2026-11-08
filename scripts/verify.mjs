@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // Checks the committed bundle agrees with bundle.json: core's build is the one recorded, every shipped cape build is there and was
-// made by that core at its recorded commit, and the CLI starts.
+// made by that core at its recorded commit, every recorded test passed, and the CLI starts.
 import { spawnSync } from "node:child_process";
 import { existsSync, readFileSync } from "node:fs";
 import { tmpdir } from "node:os";
@@ -22,7 +22,8 @@ for (const cape of record.capes) {
 	else if (build.repo !== cape.repo || build.commit !== cape.commit || build.core !== core.id) problems.push(`${cape.name}: its shipped build is not ${cape.commit.slice(0, 7)} made by core ${core.id}`);
 	if (!existsSync(join(repo, "dist", "capes", `${cape.build}.js`))) problems.push(`${cape.name}: dist/capes/${cape.build}.js is missing`);
 }
-for (const [name, result] of Object.entries(record.tests)) if (result !== "passed") console.warn(`verify: ${name}'s tests ${result} when bundled`);
+// A bundle made with --accept-test-failures can be kept, but never published (green-bundles-only).
+for (const [name, result] of Object.entries(record.tests)) if (result !== "passed") problems.push(`${name}'s tests ${result} when bundled`);
 // Run from no repo at all, as a fresh install would be.
 const help = spawnSync(process.execPath, [join(repo, "dist", "cli.js"), "help"], { cwd: tmpdir(), encoding: "utf8" });
 if (help.status !== 0 || !help.stdout.startsWith("Usage: nosedive [--at <target>] <action>")) problems.push(`the CLI does not start: ${help.stderr || help.stdout}`);
