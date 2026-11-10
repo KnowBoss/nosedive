@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Bundles nosedive for npm: core built at a commit and tested, and the capes core's legacy-capes migration pins, built by that
+// Bundles nosedive for npm: core built at a commit, typechecked and tested, and the capes core's legacy-capes migration pins, built by that
 // core and tested, into dist/, with bundle.json naming every source commit; then commits them.
 // Usage: node scripts/bundle.mjs [--core <git url or path>] [--commit <ref>] [--accept-test-failures] [--no-commit]
 import { spawnSync } from "node:child_process";
@@ -35,6 +35,9 @@ const commit = read("git", ["rev-parse", "--verify", "-q", `origin/${ref}^{commi
 if (!commit) fail(`core has no ref ${ref}`);
 if (!run("git", ["checkout", "-q", "--detach", commit], coreDir)) fail("checking core out failed");
 if (!run("npm", ["ci", "--no-audit", "--no-fund"], coreDir)) fail("installing core failed");
+// core's suite passes with type errors, so this is what keeps them out of a bundle; --accept-test-failures does not cover it.
+step("core's typecheck");
+if (!run("npm", ["run", "typecheck"], coreDir)) fail("core's typecheck failed");
 
 const tests = {};
 step("core's tests");

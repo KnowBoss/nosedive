@@ -24,7 +24,7 @@ This repo publishes bundles; it holds no source of its own. Each bundle is:
 
 ## Making a release
 
-1. `npm run bundle -- --commit <core commit or branch>` builds and tests core and its capes in a scratch directory, copies them into `dist/`, writes `bundle.json` and commits.
+1. `npm run bundle -- --commit <core commit or branch>` typechecks core, then builds and tests it and its capes in a scratch directory, copies them into `dist/`, writes `bundle.json` and commits.
 2. Pushing that commit to `main` verifies it and publishes it as `nosedive@dev`.
 3. Running the Publish workflow by hand with a published version tags it `latest`.
 
