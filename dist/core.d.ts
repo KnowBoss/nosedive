@@ -84,15 +84,18 @@ export { i01a1b15ad92b7f44ae1b3f41e24eb3ef } from "../src/i01a1b15ad92b7f44ae1b3
 export { i01a1b30d4b537775a4e1260cd7fb9067 } from "../src/i01a1b30d4b537775a4e1260cd7fb9067.ts";
 export { i01a1b3c3531177d3a3b89d851c6b456c } from "../src/i01a1b3c3531177d3a3b89d851c6b456c.ts";
 export { i01a1b453a16c799bb9ce20fad1a9075b } from "../src/i01a1b453a16c799bb9ce20fad1a9075b.ts";
+export { i01a1bd8370eb761d998cc4d957a14cfd } from "../src/i01a1bd8370eb761d998cc4d957a14cfd.ts";
 export { kingsmetal } from "../src/i01a1335483aa776cb84df698b04adc06.ts";
 export { insideWorkspace } from "../src/i01a1335485c67c95b7efdf2f0e03cfd6.ts";
 export { uncanonicalDocs, namedExports, kindVersion, schemaDigest, dropWhenOf, dropWhenSlips, onTrunk } from "../src/i01a1335487e477549d84a6fc2c901bf6.ts";
 export { consoleCtx, renderActions } from "../src/i01a1336a958f71c7beec4db3195c7966.ts";
 export { shippedDir, capeImports } from "../src/i01a1337c81b57799820f96a757b791d0.ts";
 export { checkDocMeta } from "../src/i01a138b2b8ef7e8097e19d599ba39bcc.ts";
+export { pathComponent } from "../src/i01a13c760de87562b4738946402010b8.ts";
 export { selectRoot } from "../src/i01a13dee4b1d78f7a699c3777bf63587.ts";
 export { wornCapes } from "../src/i01a141f869bf7f76b5bc81aa991ff9b9.ts";
 export { isDurable, unknownKind, undeclaredKind, kindOfDoc, spellingOf, versionOf, digestOf, pinOf, assertPublished } from "../src/i01a147171f057d019118aaa1f269f5fd.ts";
+export { userDir, remoteKey, cachePath, fetchCache } from "../src/i01a15baf13e27bd88dc880d4871f2210.ts";
 export { MIGRATIONS } from "../src/i01a175dbf4517dafa3a9048ecd98ab84.ts";
 export { CORE_OWNER, scopeEntries } from "../src/i01a18e2a3b4b798d98068d4778a158e6.ts";
 export { subjectLine, featNameOf } from "../src/i01a19005c109715583553072f4e38dc4.ts";
