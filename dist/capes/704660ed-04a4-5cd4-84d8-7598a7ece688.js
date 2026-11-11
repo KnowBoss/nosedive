@@ -2,7 +2,7 @@ import { createRequire as __nosediveRequire } from "node:module"; const require 
 
 // cape:nosedive-core
 var from = globalThis.__nosediveCore;
-if (from?.id !== "c53be1ee-76dd-5c3b-93e5-25df8b39b9c7") throw new Error("nosedive-legacy was built against other capes than these: run `nosedive seed`");
+if (from?.id !== "3dc168c4-efac-501d-b9f3-8a16ad51e3db") throw new Error("nosedive-legacy was built against other capes than these: run `nosedive seed`");
 var wornCapes = from.named["wornCapes"];
 var isDurable = from.named["isDurable"];
 var CORE_OWNER = from.named["CORE_OWNER"];
@@ -14,30 +14,30 @@ var featRoot = from.named["featRoot"];
 var pinOf = from.named["pinOf"];
 var coAuthor = from.named["coAuthor"];
 var changed = from.named["changed"];
-var i01a1335485c67c95b7efdf2f0e03cfd6 = from.index["937ef8a4-6a18-583b-940b-a98610721b23"];
-var i01a147171f057d019118aaa1f269f5fd = from.index["b681bc6e-a563-544f-9afc-eaf9a9a94f4c"];
-var i01a1901e263b7209a4b5f39a71c568b3 = from.index["7d1c6e61-a13c-5149-a224-4eb8d2a807b0"];
-var i01a1335480c776ba8945020d0af333eb = from.index["b1613828-2281-50ef-b2d2-7dbfabbbbb77"];
-var i01a141f869c07c4da8288927a559c8ae = from.index["9e2fd0f8-eb7d-5570-804d-47252f203ca3"];
-var i01a13354850c7ba3ba5b8ac41a7b6b11 = from.index["e800bb60-7526-564f-b152-224b658f23cb"];
-var i01a13c760de87562b4738946402010b8 = from.index["9b453ec6-620d-5973-8851-33a6c8343a95"];
-var i01a15baf13e27bd88dc880d4871f2210 = from.index["e1331716-7b59-5934-b04d-960c67db8e28"];
-var i01a138b2b8ee703cab227b010f588b6a = from.index["4a94cc9a-b7b4-51e4-9d22-7eb3ec42bc8d"];
-var i01a18e2a3b4b798d98068d4778a158e6 = from.index["40ae04e6-1a74-50b4-a565-5af0527555ef"];
-var i01a14ab1d36771eea2bc6f13bdeb0526 = from.index["52c8f17b-b193-5f77-8173-63cf593278ac"];
-var i01a133588bcc7f8bae725ff70d8f6800 = from.index["3cdad4ac-1aa7-5fa6-8ed7-20326a69f60e"];
-var i01a133588b1f7d4ea13f1b5e79f02e4c = from.index["bbcd21e3-20f0-5507-95c3-f10a9e050aa9"];
-var i01a1335483aa776cb84df698b04adc06 = from.index["85fc6729-0668-529c-9475-1921682f84bd"];
-var i01a13354894273b1be253424511ba82c = from.index["fb66a230-0227-5b98-bd20-1f389f71a40a"];
-var i01a19005c109715583553072f4e38dc4 = from.index["70ea0643-f743-5d32-b84e-5fa5ad873d5b"];
-var i01a141f869bf7f76b5bc81aa991ff9b9 = from.index["5a0e9734-a0f0-52ce-bbc6-2045bbcbeae3"];
-var i01a13dee4b1d78f7a699c3777bf63587 = from.index["9cc61996-c391-5f42-905d-e2230ace206d"];
-var i01a19005c31172b68871d4842563d310 = from.index["22edf81c-24ab-51be-88ef-51a4345aadac"];
-var i01a13354845c7253a55b60bba87285d8 = from.index["f4d31075-7adf-5792-90af-b1300b421875"];
-var i01a1471723807d6e8ef228ad9472fff7 = from.index["a0ea1381-8b4d-5882-be49-d8b507ed3205"];
-var i01a17fba20d673c5b8dd8551943369a2 = from.index["fff4559e-13f0-5851-b960-a864944d064f"];
+var i01a1335485c67c95b7efdf2f0e03cfd6 = from.index["f023d633-09e8-500b-97cf-9ea9abe7f573"];
+var i01a147171f057d019118aaa1f269f5fd = from.index["284524aa-bce6-58e1-bf3b-766c0d6e9d55"];
+var i01a1901e263b7209a4b5f39a71c568b3 = from.index["b8b655bd-c3f6-5136-93b4-1151f3600f85"];
+var i01a1335480c776ba8945020d0af333eb = from.index["6a3e7d03-a9b8-5d69-83ef-ca123ece5254"];
+var i01a141f869c07c4da8288927a559c8ae = from.index["3883aad7-e1b8-5d2e-bbe5-085a42d24cf8"];
+var i01a13354850c7ba3ba5b8ac41a7b6b11 = from.index["06db4f0e-0172-54c4-b02e-2b01d6207bed"];
+var i01a13c760de87562b4738946402010b8 = from.index["fb5072ae-f59d-5a3d-8dc9-1a86263a63a0"];
+var i01a15baf13e27bd88dc880d4871f2210 = from.index["ca280fb3-5c8e-5db5-a7c2-859af4d8ae56"];
+var i01a138b2b8ee703cab227b010f588b6a = from.index["16b31ba7-4789-5a7e-9412-3d7240b8b060"];
+var i01a18e2a3b4b798d98068d4778a158e6 = from.index["f70a7820-dbb8-5a59-b5eb-9db9e956e305"];
+var i01a14ab1d36771eea2bc6f13bdeb0526 = from.index["1d659d3b-2c8f-5e6e-a956-7464fd0c7296"];
+var i01a133588bcc7f8bae725ff70d8f6800 = from.index["b1c1aeb6-1da9-5194-b413-abdc9174f30e"];
+var i01a133588b1f7d4ea13f1b5e79f02e4c = from.index["d2b151cf-2058-522c-8e93-31c620266fe4"];
+var i01a1335483aa776cb84df698b04adc06 = from.index["ba5d5c1d-9483-5ecb-b69c-31d7639c4350"];
+var i01a13354894273b1be253424511ba82c = from.index["8382bd4a-e78f-5672-8664-a9220c1f6079"];
+var i01a19005c109715583553072f4e38dc4 = from.index["a6ec5c8c-c8ed-598d-981d-0b1546b6ec0b"];
+var i01a141f869bf7f76b5bc81aa991ff9b9 = from.index["aaffc29b-13bc-57ed-ad6b-559e12220d03"];
+var i01a13dee4b1d78f7a699c3777bf63587 = from.index["fc0e7247-3bb1-5947-ad41-737b950853bf"];
+var i01a19005c31172b68871d4842563d310 = from.index["e0198d45-fe69-582a-90ec-755556ba1279"];
+var i01a13354845c7253a55b60bba87285d8 = from.index["e481a3ce-f332-53c0-abdf-c48b6eb48e5d"];
+var i01a1471723807d6e8ef228ad9472fff7 = from.index["5170d149-65a1-5775-b689-20436265a9e5"];
+var i01a17fba20d673c5b8dd8551943369a2 = from.index["a3ba31a2-4c09-58cb-9932-b073c27f8bf7"];
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b131e0177e7f8518b309634ebbd8.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b131e0177e7f8518b309634ebbd8.ts
 import { spawnSync } from "node:child_process";
 import { existsSync } from "node:fs";
 import { relative } from "node:path";
@@ -80,13 +80,13 @@ function checkoutAt(hero, repo, ref, say) {
   return { dir, root, head };
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0a67a64836f167c23ffa097.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0a67a64836f167c23ffa097.ts
 import { spawnSync as spawnSync3 } from "node:child_process";
 import { createHash } from "node:crypto";
 import { existsSync as existsSync2, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { dirname, isAbsolute, join, relative as relative2 } from "node:path";
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/node_modules/fflate/esm/index.mjs
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/node_modules/fflate/esm/index.mjs
 import { createRequire } from "module";
 var require2 = createRequire("/");
 var Worker;
@@ -1055,14 +1055,14 @@ function unzipSync(data, opts) {
   return files;
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0c37d27a058e908481307c3.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0c37d27a058e908481307c3.ts
 import { spawnSync as spawnSync2 } from "node:child_process";
 function i01a1c72ba0c37d27a058e908481307c3(cwd, ...args) {
   const result = spawnSync2("git", args, { cwd, encoding: "utf8" });
   return { ok: result.status === 0, text: (result.status === 0 ? result.stdout : result.stderr || result.stdout || result.error?.message || "").trim() };
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0a67a64836f167c23ffa097.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0a67a64836f167c23ffa097.ts
 var LEGACY_ID = "01a1b128-2c08-790f-80f4-e2c40a98bfcc";
 function hasCanonical(doc) {
   return (Array.isArray(doc.fm.scopes) ? doc.fm.scopes : []).some((entry) => entry && typeof entry === "object" && Object.values(entry).some((value) => value?.canonical === true));
@@ -1539,7 +1539,7 @@ function pushRecord(hero, record) {
   }
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b131e1947fa5b316b390a3be2415.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b131e1947fa5b316b390a3be2415.ts
 var WORK_ID = "01a15bb1-da9e-7d2d-aa82-5ee97257adc6";
 var DIVE_BRANCH2 = /^nosedive-([0-9a-f]{12})-([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/;
 function isDive2(doc) {
@@ -1572,7 +1572,7 @@ function i01a1b131e1947fa5b316b390a3be2415(hero) {
   return { id: id2, doc: found, featId: featIdOf(hero, found, hung?.by ?? []) ?? (typeof meta.feat === "string" ? meta.feat : void 0), scopes: scopesOf2(hero, found) };
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b131e31f7b329bc1c4389343491a.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b131e31f7b329bc1c4389343491a.ts
 import { spawn } from "node:child_process";
 import { existsSync as existsSync3, mkdtempSync, rmSync as rmSync2, writeFileSync as writeFileSync2 } from "node:fs";
 import { tmpdir } from "node:os";
@@ -1719,7 +1719,7 @@ async function i01a1b131e31f7b329bc1c4389343491a(hero, selected, dive, ctx) {
   if (blocking.length) throw new Error(`${blocking.length} gate${blocking.length === 1 ? "" : "s"} failed: ${blocking.map((gate) => gate.name).join(", ")}`);
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/iffb5aa30b4e659e68b40ad7dee378a62.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/iffb5aa30b4e659e68b40ad7dee378a62.ts
 async function iffb5aa30b4e659e68b40ad7dee378a62(args, ctx) {
   const hero = i01a1335485c67c95b7efdf2f0e03cfd6(ctx.cwd);
   if (!hero?.workspace) throw new Error("test works in a hero repo, and this is not one");
@@ -1762,7 +1762,7 @@ function reachedFeats(docs2, featId) {
   return [...reached];
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i79c0bcc90fa55bff9c8e62fed26dfa9a.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i79c0bcc90fa55bff9c8e62fed26dfa9a.ts
 import { existsSync as existsSync4 } from "node:fs";
 import { resolve } from "node:path";
 var QUID3 = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i;
@@ -1814,7 +1814,7 @@ function reachable(docs2, from2) {
   return reached;
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b129c08179e5abdcc058f6a359a4.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b129c08179e5abdcc058f6a359a4.ts
 async function i01a1b129c08179e5abdcc058f6a359a4(call) {
   switch (call.usage) {
     case "uffb5aa30b4e659e68b40ad7dee378a62":
@@ -1826,14 +1826,14 @@ async function i01a1b129c08179e5abdcc058f6a359a4(call) {
   }
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i552b992cd74d50a489e0b2c84fcc203b.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i552b992cd74d50a489e0b2c84fcc203b.ts
 async function i552b992cd74d50a489e0b2c84fcc203b(args, ctx) {
   const hero = i01a1335485c67c95b7efdf2f0e03cfd6(ctx.cwd);
   if (!hero?.workspace) throw new Error("hydrate-repo.workspace works in a hero repo, and this is not one");
   checkoutAt(hero, i01a1b131e0177e7f8518b309634ebbd8(hero, String(args.repo)), typeof args.at === "string" ? args.at : void 0, ctx);
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b129c3b876719f5521826bd5a66b.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b129c3b876719f5521826bd5a66b.ts
 async function i01a1b129c3b876719f5521826bd5a66b(call) {
   switch (call.usage) {
     case "u552b992cd74d50a489e0b2c84fcc203b":
@@ -1843,7 +1843,7 @@ async function i01a1b129c3b876719f5521826bd5a66b(call) {
   }
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/idf324b14b9135de2893fffa8705388da.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/idf324b14b9135de2893fffa8705388da.ts
 import { existsSync as existsSync5 } from "node:fs";
 import { relative as relative4 } from "node:path";
 async function idf324b14b9135de2893fffa8705388da(args, ctx) {
@@ -1858,7 +1858,7 @@ async function idf324b14b9135de2893fffa8705388da(args, ctx) {
   ctx.out(`${relative4(hero.dir, dir).replace(/\\/g, "/")}: removed`);
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b129c70279ed9ccced39e882d827.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b129c70279ed9ccced39e882d827.ts
 async function i01a1b129c70279ed9ccced39e882d827(call) {
   switch (call.usage) {
     case "udf324b14b9135de2893fffa8705388da":
@@ -1868,11 +1868,11 @@ async function i01a1b129c70279ed9ccced39e882d827(call) {
   }
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i0190147b40b25ca2b1d03135a75a3502.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i0190147b40b25ca2b1d03135a75a3502.ts
 import { existsSync as existsSync6, mkdirSync as mkdirSync2, writeFileSync as writeFileSync3 } from "node:fs";
 import { join as join3, relative as relative6, resolve as resolve2 } from "node:path";
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b13770be7a7a95b5e4ae9eed1407.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b13770be7a7a95b5e4ae9eed1407.ts
 import { relative as relative5 } from "node:path";
 function i01a1b13770be7a7a95b5e4ae9eed1407(hero, version2, commit2, link, files = []) {
   const edit = i01a14ab1d36771eea2bc6f13bdeb0526(hero.dir, version2);
@@ -1883,7 +1883,7 @@ function i01a1b13770be7a7a95b5e4ae9eed1407(hero, version2, commit2, link, files 
   i01a13354894273b1be253424511ba82c(hero.dir, [link.docPath, from2.path, ...files], i01a19005c109715583553072f4e38dc4(hero, commit2.action, commit2.what, [link.docId, link.fromId]), version2);
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i0190147b40b25ca2b1d03135a75a3502.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i0190147b40b25ca2b1d03135a75a3502.ts
 var QUID4 = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i;
 function stub(script) {
   return [
@@ -1916,7 +1916,7 @@ async function i0190147b40b25ca2b1d03135a75a3502(args, ctx) {
   ctx.out(`write its check in ${script}, then run it: nosedive test ${id2}`);
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b129ca537ef6973626eeeaebc87c.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b129ca537ef6973626eeeaebc87c.ts
 async function i01a1b129ca537ef6973626eeeaebc87c(call) {
   switch (call.usage) {
     case "u0190147b40b25ca2b1d03135a75a3502":
@@ -1926,7 +1926,7 @@ async function i01a1b129ca537ef6973626eeeaebc87c(call) {
   }
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i58b390d976c95aa4bc065fbc8605e404.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i58b390d976c95aa4bc065fbc8605e404.ts
 import { appendFileSync } from "node:fs";
 import { relative as relative7 } from "node:path";
 var SLUG = /^[a-z0-9]+(-[a-z0-9]+)*$/;
@@ -1958,7 +1958,7 @@ ${(await i01a1471723807d6e8ef228ad9472fff7(args.body, ctx)).trimEnd()}
   ctx.out(relative7(hero.dir, doc.path).replace(/\\/g, "/"));
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b13078b173229a3b1e21f7e12c20.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b13078b173229a3b1e21f7e12c20.ts
 async function i01a1b13078b173229a3b1e21f7e12c20(call) {
   switch (call.usage) {
     case "u58b390d976c95aa4bc065fbc8605e404":
@@ -1968,7 +1968,7 @@ async function i01a1b13078b173229a3b1e21f7e12c20(call) {
   }
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b31bdffb73989a9e8bcd257167b5.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b31bdffb73989a9e8bcd257167b5.ts
 var STATES = ["landed", "bailed", "planned", "jumped", "packed"];
 var QUID5 = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
 var WORK_META = /* @__PURE__ */ new Set(["diver", "packer", "outcome", "feat"]);
@@ -2059,7 +2059,7 @@ ${kept.join("\n")}
   return [...changed2].map((doc) => doc.path);
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b31be41b7a31a5918d04ef4091be.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b31be41b7a31a5918d04ef4091be.ts
 import { spawnSync as spawnSync4 } from "node:child_process";
 import { existsSync as existsSync7, mkdirSync as mkdirSync3, mkdtempSync as mkdtempSync2, rmSync as rmSync3 } from "node:fs";
 import { homedir, tmpdir as tmpdir2 } from "node:os";
@@ -2212,11 +2212,11 @@ function firstLine(text) {
   return text.split(/\r?\n/).find((line) => line.trim() && !line.startsWith("hint:")) ?? text;
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i0e2024913efd5dc8afe194f5650bda20.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i0e2024913efd5dc8afe194f5650bda20.ts
 import { existsSync as existsSync8 } from "node:fs";
 import { relative as relative8 } from "node:path";
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0b57a0c80e3fdd641d001a8.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0b57a0c80e3fdd641d001a8.ts
 function i01a1c72ba0b57a0c80e3fdd641d001a8(hero, doc, change, version2) {
   for (const [key, value] of Object.entries(change.meta ?? {})) {
     if (value === null) doc.yaml.deleteIn(["meta", key]);
@@ -2236,7 +2236,7 @@ ${change.lines.join("\n")}
   i01a13354894273b1be253424511ba82c(hero.dir, [.../* @__PURE__ */ new Set([doc.path, ...linkers.map((linker) => linker.path), ...change.also ?? []])], `${change.action}(${String(doc.fm.name)}): ${change.summary}`, version2);
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i0e2024913efd5dc8afe194f5650bda20.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i0e2024913efd5dc8afe194f5650bda20.ts
 var LISTED = /^(?:.*[\\/])?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\.md$/i;
 async function i0e2024913efd5dc8afe194f5650bda20(args, ctx) {
   const hero = i01a1335485c67c95b7efdf2f0e03cfd6(ctx.cwd);
@@ -2491,12 +2491,12 @@ function bareDiverIs(diver, email) {
   return !diver.includes("#") && diver === email;
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/ia65e6ec583fa51079af219fd79e4ad87.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/ia65e6ec583fa51079af219fd79e4ad87.ts
 async function ia65e6ec583fa51079af219fd79e4ad87(args, ctx) {
   return i0e2024913efd5dc8afe194f5650bda20({ ...args, sure: true }, ctx);
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba06b7cfd9e5f710dc60e4a37.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba06b7cfd9e5f710dc60e4a37.ts
 async function i01a1c72ba06b7cfd9e5f710dc60e4a37(call) {
   switch (call.usage) {
     case "u0e2024913efd5dc8afe194f5650bda20":
@@ -2508,7 +2508,7 @@ async function i01a1c72ba06b7cfd9e5f710dc60e4a37(call) {
   }
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i5f74ee87748f528b9fd9b00a48c2275b.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i5f74ee87748f528b9fd9b00a48c2275b.ts
 async function i5f74ee87748f528b9fd9b00a48c2275b(args, ctx) {
   const hero = i01a1335485c67c95b7efdf2f0e03cfd6(ctx.cwd);
   if (!hero?.workspace) throw new Error("pack works in a hero repo, and this is not one");
@@ -2528,7 +2528,7 @@ async function i5f74ee87748f528b9fd9b00a48c2275b(args, ctx) {
 ${lines.join("\n")}` : ""}`);
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0797d52baaa1a9bba46a525.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0797d52baaa1a9bba46a525.ts
 async function i01a1c72ba0797d52baaa1a9bba46a525(call) {
   switch (call.usage) {
     case "u5f74ee87748f528b9fd9b00a48c2275b":
@@ -2538,7 +2538,7 @@ async function i01a1c72ba0797d52baaa1a9bba46a525(call) {
   }
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/ia159fdc01ac85e4f831dc1c523787ce6.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/ia159fdc01ac85e4f831dc1c523787ce6.ts
 async function ia159fdc01ac85e4f831dc1c523787ce6(args, ctx) {
   const reason = String(args.reason ?? "").trim();
   if (!reason) throw new Error("bail needs a reason: --reason <why>");
@@ -2556,7 +2556,7 @@ async function ia159fdc01ac85e4f831dc1c523787ce6(args, ctx) {
   ctx.out(`bailed ${String(dive.doc.fm.name)}`);
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba088715da4fe90ea388bb097.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba088715da4fe90ea388bb097.ts
 async function i01a1c72ba088715da4fe90ea388bb097(call) {
   switch (call.usage) {
     case "ua159fdc01ac85e4f831dc1c523787ce6":
@@ -2566,7 +2566,7 @@ async function i01a1c72ba088715da4fe90ea388bb097(call) {
   }
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i3b8461aa9eac5f10837c2515b5231e78.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i3b8461aa9eac5f10837c2515b5231e78.ts
 import { relative as relative9 } from "node:path";
 async function i3b8461aa9eac5f10837c2515b5231e78(args, ctx) {
   const hero = i01a1335485c67c95b7efdf2f0e03cfd6(ctx.cwd);
@@ -2646,7 +2646,7 @@ ${rebased.text}`);
 ${lines.join("\n")}` : ""}`);
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0977036ae1a496002396328.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0977036ae1a496002396328.ts
 async function i01a1c72ba0977036ae1a496002396328(call) {
   switch (call.usage) {
     case "u3b8461aa9eac5f10837c2515b5231e78":
@@ -2656,7 +2656,7 @@ async function i01a1c72ba0977036ae1a496002396328(call) {
   }
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0e174878930a64e361790a6.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0e174878930a64e361790a6.ts
 async function i01a1c72ba0e174878930a64e361790a6(ctx) {
   i01a1c72ba0a67a64836f167c23ffa097(ctx.bridge, ctx, ctx.doc.id);
   const summary = typeof ctx.args.summary === "string" ? ctx.args.summary.trimEnd() : "";
@@ -2674,12 +2674,12 @@ ${lines.join("\n")}
   ctx.edit.change(ctx.doc);
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i6164926c34715ab39455948b647cbb0e.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i6164926c34715ab39455948b647cbb0e.ts
 async function i6164926c34715ab39455948b647cbb0e(ctx) {
   return i01a1c72ba0e174878930a64e361790a6(ctx);
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0d2794783de8f2dd490283a.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0d2794783de8f2dd490283a.ts
 async function i01a1c72ba0d2794783de8f2dd490283a(call) {
   switch (call.usage) {
     case "u6164926c34715ab39455948b647cbb0e": {
@@ -2693,7 +2693,7 @@ async function i01a1c72ba0d2794783de8f2dd490283a(call) {
   }
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i98e9ab6e1535570abad65bf95895aa3d.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i98e9ab6e1535570abad65bf95895aa3d.ts
 var metaOf2 = (state) => state.fm.meta ?? {};
 async function i98e9ab6e1535570abad65bf95895aa3d(ctx) {
   const { before, after } = ctx;
@@ -2719,7 +2719,7 @@ async function i98e9ab6e1535570abad65bf95895aa3d(ctx) {
   }
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i7c5c26ef056c5803a6607b86db00c4d0.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i7c5c26ef056c5803a6607b86db00c4d0.ts
 async function i7c5c26ef056c5803a6607b86db00c4d0(ctx) {
   const { before, after, doc, bridge: hero } = ctx;
   if (!after) return;
@@ -2746,7 +2746,7 @@ async function i7c5c26ef056c5803a6607b86db00c4d0(ctx) {
   if (after.fm.name !== name2 && !old) ctx.crud(doc.id, "name", name2);
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0f07508a3987c47eef04568.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0f07508a3987c47eef04568.ts
 async function i01a1c72ba0f07508a3987c47eef04568(call) {
   switch (call.usage) {
     case "u98e9ab6e1535570abad65bf95895aa3d":
@@ -2758,7 +2758,7 @@ async function i01a1c72ba0f07508a3987c47eef04568(call) {
   }
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1cb89380779298b9fa95284af753a.ts
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1cb89380779298b9fa95284af753a.ts
 var QUID7 = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
 function stateOf(dive) {
   const outcome = dive.fm.meta?.outcome;
@@ -2804,14 +2804,14 @@ function i01a1cb89380779298b9fa95284af753a(dir, ctx) {
   return [...changed2].map((doc) => doc.path);
 }
 
-// ../nosedive-bundle-YRQ4CZ/hero/.nosedive/capes/74acf625-adbc-5262-b62f-a4f196a0f4c1.js.build/entry.ts
-var id = "74acf625-adbc-5262-b62f-a4f196a0f4c1";
+// ../nosedive-bundle-SIxenq/hero/.nosedive/capes/704660ed-04a4-5cd4-84d8-7598a7ece688.js.build/entry.ts
+var id = "704660ed-04a4-5cd4-84d8-7598a7ece688";
 var owner = "01a1b128-2c08-790f-80f4-e2c40a98bfcc";
 var shortName = "nosedive-legacy";
 var name = "nosedive-legacy";
 var commit = "b74024c8d55135b94838bda094744e7ad8047caf";
 var version = "2026.11.11-1794420672932";
-var core = "c53be1ee-76dd-5c3b-93e5-25df8b39b9c7";
+var core = "3dc168c4-efac-501d-b9f3-8a16ad51e3db";
 var needs = {};
 var docs = { "01a1b129-c081-79e5-abdc-c058f6a359a4": { "kind": "action", "name": "test", "gist": "Runs gates as a check on the dive on deck, or the gates named, streaming each and exiting 1 if any gate that is not flaky failed", "usages": [{ "id": "ffb5aa30b4e659e68b40ad7dee378a62", "text": "test [--full]" }, { "id": "79c0bcc90fa55bff9c8e62fed26dfa9a", "text": "test <gate>... [--via <doc>]" }], "top": true, "text": "---\nkind: action\nid: 01a1b129-c081-79e5-abdc-c058f6a359a4\nname: test\ngist: \"Runs gates as a check on the dive on deck, or the gates named, streaming each and exiting 1 if any gate that is not flaky failed\"\nscopes:\n  - 01a1336b-c0b8-7cde-b7c6-285196062297:\n      canonical: true\n      version: 7bf363e12b620ec5e386d079712c729333bd43f4\n      schema: 3d47d51108fa\nmeta:\n  usages:\n    - test [--full]\n    - test <gate>... [--via <doc>]\nlinks:\n  - nosedive-core:01a13354-85c6-7c95-b7ef-df2f0e03cfd6:\n      rel: uses.function\n  - nosedive-core:01a18e2a-3b4b-798d-9806-8d4778a158e6:\n      rel: uses.function\n---\n\n# Test\n\n## Usage\n\nLegacy nosedive's `test` (its command doc `1e62a79d`, test@2), on a hero migrated to core, without the backlog sweep and without writing anything.\n\n## Selecting gates\n\nA gate is any doc a link names with a rel ending in `.gate` whose `meta.test-script` is a hero-relative path; its kind does not matter.\n\n- `test`: the `test.gate` links of the dive this worktree holds, found as the loop finds it: an open dive of legacy's dive kind, as legacy nosedive wrote it, or of work's, whose `diver` carries this checkout's holder token (see held-dive). No dive held is refused, naming `jump` and the named form.\n- `test --full`: also every `test.gate` on the dive's feat, on each repo doc it scopes, and on every feat reached from the dive's feat through links whose rel names `.feat` as its role, in either direction. Nothing else is followed, so another dive's gates are never swept.\n- `test <gate>...`: the named gates, by quid or hero-relative path, in the order given. A gate is declared by the docs with a `.gate` link to it. One declaration is used; several are refused naming each, unless the held dive is among them, which then answers. `--via <doc>` narrows the declarers to that doc and the docs its links reach, before the held dive is considered; a gate with its own `scopes:` needs no declarer.\n\nSelecting no gates is a failure.\n\n## Running them\n\nEach gate runs in its own process, one after another, its output streamed as it comes. Its script exports `run(ctx)`; a `false` return or a throw fails it. A failing gate does not stop the run; the summary names every failure, and the exit is 1 if any gate failed whose declaring link is not `test-is-flaky: true`. A flaky failure is a warning.\n\n`ctx` is legacy's:\n\n- `bridgeRoot`: the hero's absolute path.\n- `gateId`, `introducedById`: the gate, and the doc whose link selected it.\n- `diveId`, `featId`: the held dive and its feat, empty when none.\n- `repos`: by repo `name`, `{ id, root }`, root hero-relative, for the gate's scopes: its own `scopes:` when it has the key (`[]` meaning none), else its declarer's.\n- `resolve(quid)`: the parsed doc, `{ fm, body }`; it throws when no doc has that quid.\n\nA scope's checkout is used as it is when present, saying when it is not at the scope's `ref`. A missing one is hydrated as hydrate-repo.workspace does, at the scope's `ref`, else trunk, naming the commit. The first gate to claim a repo decides its ref; a later one wanting another is named with both refs. An empty `repos` is named before its gate runs.\n\nA gate whose doc or script has uncommitted changes is named on stderr, and runs.\n\n## Code\n\n- Entrypoint: [src/i01a1b129c08179e5abdcc058f6a359a4.ts](../src/i01a1b129c08179e5abdcc058f6a359a4.ts)\n- `test [--full]`: [impl](../src/iffb5aa30b4e659e68b40ad7dee378a62.ts), [tests](../src/iffb5aa30b4e659e68b40ad7dee378a62.test.ts)\n- `test <gate>... [--via <doc>]`: [impl](../src/i79c0bcc90fa55bff9c8e62fed26dfa9a.ts), [tests](../src/i79c0bcc90fa55bff9c8e62fed26dfa9a.test.ts)\n", "body": "# Test\n\n## Usage\n\nLegacy nosedive's `test` (its command doc `1e62a79d`, test@2), on a hero migrated to core, without the backlog sweep and without writing anything.\n\n## Selecting gates\n\nA gate is any doc a link names with a rel ending in `.gate` whose `meta.test-script` is a hero-relative path; its kind does not matter.\n\n- `test`: the `test.gate` links of the dive this worktree holds, found as the loop finds it: an open dive of legacy's dive kind, as legacy nosedive wrote it, or of work's, whose `diver` carries this checkout's holder token (see held-dive). No dive held is refused, naming `jump` and the named form.\n- `test --full`: also every `test.gate` on the dive's feat, on each repo doc it scopes, and on every feat reached from the dive's feat through links whose rel names `.feat` as its role, in either direction. Nothing else is followed, so another dive's gates are never swept.\n- `test <gate>...`: the named gates, by quid or hero-relative path, in the order given. A gate is declared by the docs with a `.gate` link to it. One declaration is used; several are refused naming each, unless the held dive is among them, which then answers. `--via <doc>` narrows the declarers to that doc and the docs its links reach, before the held dive is considered; a gate with its own `scopes:` needs no declarer.\n\nSelecting no gates is a failure.\n\n## Running them\n\nEach gate runs in its own process, one after another, its output streamed as it comes. Its script exports `run(ctx)`; a `false` return or a throw fails it. A failing gate does not stop the run; the summary names every failure, and the exit is 1 if any gate failed whose declaring link is not `test-is-flaky: true`. A flaky failure is a warning.\n\n`ctx` is legacy's:\n\n- `bridgeRoot`: the hero's absolute path.\n- `gateId`, `introducedById`: the gate, and the doc whose link selected it.\n- `diveId`, `featId`: the held dive and its feat, empty when none.\n- `repos`: by repo `name`, `{ id, root }`, root hero-relative, for the gate's scopes: its own `scopes:` when it has the key (`[]` meaning none), else its declarer's.\n- `resolve(quid)`: the parsed doc, `{ fm, body }`; it throws when no doc has that quid.\n\nA scope's checkout is used as it is when present, saying when it is not at the scope's `ref`. A missing one is hydrated as hydrate-repo.workspace does, at the scope's `ref`, else trunk, naming the commit. The first gate to claim a repo decides its ref; a later one wanting another is named with both refs. An empty `repos` is named before its gate runs.\n\nA gate whose doc or script has uncommitted changes is named on stderr, and runs.\n\n## Code\n\n- Entrypoint: [src/i01a1b129c08179e5abdcc058f6a359a4.ts](../src/i01a1b129c08179e5abdcc058f6a359a4.ts)\n- `test [--full]`: [impl](../src/iffb5aa30b4e659e68b40ad7dee378a62.ts), [tests](../src/iffb5aa30b4e659e68b40ad7dee378a62.test.ts)\n- `test <gate>... [--via <doc>]`: [impl](../src/i79c0bcc90fa55bff9c8e62fed26dfa9a.ts), [tests](../src/i79c0bcc90fa55bff9c8e62fed26dfa9a.test.ts)" }, "01a1b129-c3b8-7671-9f55-21826bd5a66b": { "kind": "action", "name": "hydrate-repo.workspace", "gist": "Checks one registered repo out into the workspace, detached at trunk or at a ref", "usages": [{ "id": "552b992cd74d50a489e0b2c84fcc203b", "text": "hydrate-repo.workspace <repo> [--at <ref>] [--read-only]" }], "top": true, "text": "---\nkind: action\nid: 01a1b129-c3b8-7671-9f55-21826bd5a66b\nname: hydrate-repo.workspace\ngist: \"Checks one registered repo out into the workspace, detached at trunk or at a ref\"\nscopes:\n  - 01a1336b-c0b8-7cde-b7c6-285196062297:\n      canonical: true\n      version: 7bf363e12b620ec5e386d079712c729333bd43f4\n      schema: 3d47d51108fa\nmeta:\n  usages:\n    - hydrate-repo.workspace <repo> [--at <ref>] [--read-only]\nlinks:\n  - nosedive-core:01a13354-85c6-7c95-b7ef-df2f0e03cfd6:\n      rel: uses.function\n---\n\n# Hydrate repo.workspace\n\n## Usage\n\nLegacy's `hydrate-repo.workspace` on core's hydrate-repo. `<repo>` is a registered repo doc's quid or exact name; a name two docs share is refused naming both.\n\nWithout `--at`, the checkout is core's: detached at trunk, read-only. With `--at <ref>`, core hydrates it at trunk, then it is detached at the ref, fetched from origin when the cache lacks it. An existing checkout is left where it is, saying when it is not at the ref asked for.\n\n`--read-only` is accepted for legacy's callers and changes nothing: a checkout without a feat never has a branch to push.\n\n## Code\n\n- Entrypoint: [src/i01a1b129c3b876719f5521826bd5a66b.ts](../src/i01a1b129c3b876719f5521826bd5a66b.ts)\n- `hydrate-repo.workspace <repo> [--at <ref>] [--read-only]`: [impl](../src/i552b992cd74d50a489e0b2c84fcc203b.ts), [tests](../src/i552b992cd74d50a489e0b2c84fcc203b.test.ts)\n", "body": "# Hydrate repo.workspace\n\n## Usage\n\nLegacy's `hydrate-repo.workspace` on core's hydrate-repo. `<repo>` is a registered repo doc's quid or exact name; a name two docs share is refused naming both.\n\nWithout `--at`, the checkout is core's: detached at trunk, read-only. With `--at <ref>`, core hydrates it at trunk, then it is detached at the ref, fetched from origin when the cache lacks it. An existing checkout is left where it is, saying when it is not at the ref asked for.\n\n`--read-only` is accepted for legacy's callers and changes nothing: a checkout without a feat never has a branch to push.\n\n## Code\n\n- Entrypoint: [src/i01a1b129c3b876719f5521826bd5a66b.ts](../src/i01a1b129c3b876719f5521826bd5a66b.ts)\n- `hydrate-repo.workspace <repo> [--at <ref>] [--read-only]`: [impl](../src/i552b992cd74d50a489e0b2c84fcc203b.ts), [tests](../src/i552b992cd74d50a489e0b2c84fcc203b.test.ts)" }, "01a1b129-c702-79ed-9ccc-ed39e882d827": { "kind": "action", "name": "dehydrate-repo.workspace", "gist": "Removes one repo's checkout from the workspace once origin has its work, or regardless with --force", "usages": [{ "id": "df324b14b9135de2893fffa8705388da", "text": "dehydrate-repo.workspace <repo> [--force]" }], "top": true, "text": "---\nkind: action\nid: 01a1b129-c702-79ed-9ccc-ed39e882d827\nname: dehydrate-repo.workspace\ngist: \"Removes one repo's checkout from the workspace once origin has its work, or regardless with --force\"\nscopes:\n  - 01a1336b-c0b8-7cde-b7c6-285196062297:\n      canonical: true\n      version: 7bf363e12b620ec5e386d079712c729333bd43f4\n      schema: 3d47d51108fa\nmeta:\n  usages:\n    - dehydrate-repo.workspace <repo> [--force]\nlinks:\n  - nosedive-core:01a13354-85c6-7c95-b7ef-df2f0e03cfd6:\n      rel: uses.function\n  - nosedive-core:01a13c76-0de8-7562-b473-8946402010b8:\n      rel: uses.function\n  - nosedive-core:01a17fba-20d6-73c5-b8dd-8551943369a2:\n      rel: uses.function\n---\n\n# Dehydrate repo.workspace\n\n## Usage\n\nLegacy's `dehydrate-repo.workspace` on core's dehydrate-repo. `<repo>` is a registered repo doc's quid or exact name, as for hydrate-repo.workspace.\n\nCore refuses to remove a checkout holding anything origin lacks. `--force` is legacy's: the worktree is removed regardless, and what it held that origin lacks goes with it.\n\n## Code\n\n- Entrypoint: [src/i01a1b129c70279ed9ccced39e882d827.ts](../src/i01a1b129c70279ed9ccced39e882d827.ts)\n- `dehydrate-repo.workspace <repo> [--force]`: [impl](../src/idf324b14b9135de2893fffa8705388da.ts), [tests](../src/idf324b14b9135de2893fffa8705388da.test.ts)\n", "body": "# Dehydrate repo.workspace\n\n## Usage\n\nLegacy's `dehydrate-repo.workspace` on core's dehydrate-repo. `<repo>` is a registered repo doc's quid or exact name, as for hydrate-repo.workspace.\n\nCore refuses to remove a checkout holding anything origin lacks. `--force` is legacy's: the worktree is removed regardless, and what it held that origin lacks goes with it.\n\n## Code\n\n- Entrypoint: [src/i01a1b129c70279ed9ccced39e882d827.ts](../src/i01a1b129c70279ed9ccced39e882d827.ts)\n- `dehydrate-repo.workspace <repo> [--force]`: [impl](../src/idf324b14b9135de2893fffa8705388da.ts), [tests](../src/idf324b14b9135de2893fffa8705388da.test.ts)" }, "01a1b129-ca53-7ef6-9736-26eeeaebc87c": { "kind": "action", "name": "record.gate", "gist": "Mints a gate: its doc, its stub script, and the link declaring it on a feat, ready to fail until somebody writes the check", "usages": [{ "id": "0190147b40b25ca2b1d03135a75a3502", "text": "record.gate --gist <gist> --feat <feat> [--name <name>] [--action <action>] [--flaky]" }], "top": true, "text": "---\nkind: action\nid: 01a1b129-ca53-7ef6-9736-26eeeaebc87c\nname: record.gate\ngist: \"Mints a gate: its doc, its stub script, and the link declaring it on a feat, ready to fail until somebody writes the check\"\nscopes:\n  - 01a1336b-c0b8-7cde-b7c6-285196062297:\n      canonical: true\n      version: 7bf363e12b620ec5e386d079712c729333bd43f4\n      schema: 3d47d51108fa\nmeta:\n  usages:\n    - record.gate --gist <gist> --feat <feat> [--name <name>] [--action <action>] [--flaky]\nlinks:\n  - nosedive-core:01a13354-85c6-7c95-b7ef-df2f0e03cfd6:\n      rel: uses.function\n  - nosedive-core:01a14717-1f05-7d01-9118-aaa1f269f5fd:\n      rel: uses.function\n  - nosedive-core:01a1901e-263b-7209-a4b5-f39a71c568b3:\n      rel: uses.function\n  - nosedive-core:01a13354-80c7-76ba-8945-020d0af333eb:\n      rel: uses.function\n  - nosedive-core:01a141f8-69c0-7c4d-a828-8927a559c8ae:\n      rel: uses.function\n---\n\n# Record.gate\n\n## Usage\n\nLegacy's `record.gate` (its command doc `2c678acb`), minting only. Writes, in one commit to the hero:\n\n- a doc of the hero's `gate` kind with `meta.test-script: kb/artifacts/<gate id>.mjs`, its name `--name` or else made from the gist;\n- that script, a stub whose `run` writes the gate's id to stderr and returns `false`, so an unwritten gate is red;\n- a link to the gate on `<feat>`, rel `test.gate`, or `land.gate` with `--action land`, carrying `test-is-flaky: true` with `--flaky`.\n\n`<feat>` is a quid or hero-relative path to a doc core knows as a feat. A hero with no `gate` kind is refused. It prints the gate doc's path and the command that runs it.\n\n## Code\n\n- Entrypoint: [src/i01a1b129ca537ef6973626eeeaebc87c.ts](../src/i01a1b129ca537ef6973626eeeaebc87c.ts)\n- `record.gate --gist <gist> --feat <feat> [--name <name>] [--action <action>] [--flaky]`: [impl](../src/i0190147b40b25ca2b1d03135a75a3502.ts), [tests](../src/i0190147b40b25ca2b1d03135a75a3502.test.ts)\n", "body": "# Record.gate\n\n## Usage\n\nLegacy's `record.gate` (its command doc `2c678acb`), minting only. Writes, in one commit to the hero:\n\n- a doc of the hero's `gate` kind with `meta.test-script: kb/artifacts/<gate id>.mjs`, its name `--name` or else made from the gist;\n- that script, a stub whose `run` writes the gate's id to stderr and returns `false`, so an unwritten gate is red;\n- a link to the gate on `<feat>`, rel `test.gate`, or `land.gate` with `--action land`, carrying `test-is-flaky: true` with `--flaky`.\n\n`<feat>` is a quid or hero-relative path to a doc core knows as a feat. A hero with no `gate` kind is refused. It prints the gate doc's path and the command that runs it.\n\n## Code\n\n- Entrypoint: [src/i01a1b129ca537ef6973626eeeaebc87c.ts](../src/i01a1b129ca537ef6973626eeeaebc87c.ts)\n- `record.gate --gist <gist> --feat <feat> [--name <name>] [--action <action>] [--flaky]`: [impl](../src/i0190147b40b25ca2b1d03135a75a3502.ts), [tests](../src/i0190147b40b25ca2b1d03135a75a3502.test.ts)" }, "01a1b130-78b1-7322-9a3b-1e21f7e12c20": { "kind": "action", "name": "note", "gist": "Mints one kb doc and links it from the repo it is about", "usages": [{ "id": "58b390d976c95aa4bc065fbc8605e404", "text": "note <gist>... [--scope <repo>] [--title <title>] [--body <source>]" }], "top": true, "text": "---\nkind: action\nid: 01a1b130-78b1-7322-9a3b-1e21f7e12c20\nname: note\ngist: \"Mints one kb doc and links it from the repo it is about\"\nscopes:\n  - 01a1336b-c0b8-7cde-b7c6-285196062297:\n      canonical: true\n      version: 7bf363e12b620ec5e386d079712c729333bd43f4\n      schema: 3d47d51108fa\nmeta:\n  usages:\n    - note <gist>... [--scope <repo>] [--title <title>] [--body <source>]\nlinks:\n  - nosedive-core:01a13354-85c6-7c95-b7ef-df2f0e03cfd6:\n      rel: uses.function\n  - nosedive-core:01a14717-1f05-7d01-9118-aaa1f269f5fd:\n      rel: uses.function\n  - nosedive-core:01a13354-80c7-76ba-8945-020d0af333eb:\n      rel: uses.function\n  - nosedive-core:01a141f8-69c0-7c4d-a828-8927a559c8ae:\n      rel: uses.function\n  - nosedive-core:01a14717-2380-7d6e-8ef2-28ad9472fff7:\n      rel: uses.function\n---\n\n# Note\n\n## Usage\n\nLegacy's `note` (its command doc `6274f51e`). The gist is the words given, joined by spaces. A first word ending in `:` names the note's kind, else it is a `memo`; the kind must be one the hero has.\n\nThe note is `kb/<quid>.md`, named by the gist slugged plus the id's last six hex digits, titled by the slug half, or by `--title`. `--body -` reads stdin, and `--body <file>` a file, as the text under the title.\n\n`--scope <repo>` names the registered repo it is about, by quid or exact name; without it, the repo the config's `bridge:` key names, said on stdout. That repo doc links the note, rel `<kind>.note`. Legacy took `--scope` more than once; one is taken here.\n\nThe note and the repo doc it links from are one commit.\n\n## Code\n\n- Entrypoint: [src/i01a1b13078b173229a3b1e21f7e12c20.ts](../src/i01a1b13078b173229a3b1e21f7e12c20.ts)\n- `note <gist>... [--scope <repo>] [--title <title>] [--body <source>]`: [impl](../src/i58b390d976c95aa4bc065fbc8605e404.ts), [tests](../src/i58b390d976c95aa4bc065fbc8605e404.test.ts)\n", "body": "# Note\n\n## Usage\n\nLegacy's `note` (its command doc `6274f51e`). The gist is the words given, joined by spaces. A first word ending in `:` names the note's kind, else it is a `memo`; the kind must be one the hero has.\n\nThe note is `kb/<quid>.md`, named by the gist slugged plus the id's last six hex digits, titled by the slug half, or by `--title`. `--body -` reads stdin, and `--body <file>` a file, as the text under the title.\n\n`--scope <repo>` names the registered repo it is about, by quid or exact name; without it, the repo the config's `bridge:` key names, said on stdout. That repo doc links the note, rel `<kind>.note`. Legacy took `--scope` more than once; one is taken here.\n\nThe note and the repo doc it links from are one commit.\n\n## Code\n\n- Entrypoint: [src/i01a1b13078b173229a3b1e21f7e12c20.ts](../src/i01a1b13078b173229a3b1e21f7e12c20.ts)\n- `note <gist>... [--scope <repo>] [--title <title>] [--body <source>]`: [impl](../src/i58b390d976c95aa4bc065fbc8605e404.ts), [tests](../src/i58b390d976c95aa4bc065fbc8605e404.test.ts)" }, "01a1b131-e017-7e7f-8518-b309634ebbd8": { "kind": "function", "name": "find-repo", "gist": "A repo the hero registers, by quid or exact name, and its checkout at a ref", "usages": [], "top": true, "text": "---\nkind: function\nid: 01a1b131-e017-7e7f-8518-b309634ebbd8\nname: find-repo\ngist: \"A repo the hero registers, by quid or exact name, and its checkout at a ref\"\nscopes:\n  - 01a1336b-c0b8-7cde-b7c6-285196062297:\n      canonical: true\n      version: 7bf363e12b620ec5e386d079712c729333bd43f4\n      schema: cd1a463c46d6\nlinks:\n  - nosedive-core:01a13354-850c-7ba3-ba5b-8ac41a7b6b11:\n      rel: uses.function\n  - nosedive-core:01a13c76-0de8-7562-b473-8946402010b8:\n      rel: uses.function\n  - nosedive-core:01a15baf-13e2-7bd8-8dc8-80d4871f2210:\n      rel: uses.function\n---\n\n# Find repo\n\nThe repo doc in `.nosedive/repos` whose id is the quid given, or whose name is the name given; a name two docs share is refused, naming both quids.\n\n`checkoutAt` gives a repo's checkout at a ref: a missing one is made by core's hydrate-repo, read-only at trunk, then detached at the ref, fetched from origin when the cache lacks it. An existing one is left where it is, saying when it is not at the ref.\n\n## Code\n\n- Function: [src/i01a1b131e0177e7f8518b309634ebbd8.ts](../src/i01a1b131e0177e7f8518b309634ebbd8.ts)\n- Tests: [src/i01a1b131e0177e7f8518b309634ebbd8.test.ts](../src/i01a1b131e0177e7f8518b309634ebbd8.test.ts)\n", "body": "# Find repo\n\nThe repo doc in `.nosedive/repos` whose id is the quid given, or whose name is the name given; a name two docs share is refused, naming both quids.\n\n`checkoutAt` gives a repo's checkout at a ref: a missing one is made by core's hydrate-repo, read-only at trunk, then detached at the ref, fetched from origin when the cache lacks it. An existing one is left where it is, saying when it is not at the ref.\n\n## Code\n\n- Function: [src/i01a1b131e0177e7f8518b309634ebbd8.ts](../src/i01a1b131e0177e7f8518b309634ebbd8.ts)\n- Tests: [src/i01a1b131e0177e7f8518b309634ebbd8.test.ts](../src/i01a1b131e0177e7f8518b309634ebbd8.test.ts)" }, "01a1b131-e194-7fa5-b316-b390a3be2415": { "kind": "function", "name": "held-dive", "gist": "The dive this checkout holds, as the loop's dive branches name it, legacy's or work's: its doc, its feat id and its scopes, or nothing", "usages": [], "top": true, "text": "---\nkind: function\nid: 01a1b131-e194-7fa5-b316-b390a3be2415\nname: held-dive\ngist: \"The dive this checkout holds, as the loop's dive branches name it, legacy's or work's: its doc, its feat id and its scopes, or nothing\"\nscopes:\n  - 01a1336b-c0b8-7cde-b7c6-285196062297:\n      canonical: true\n      version: 7bf363e12b620ec5e386d079712c729333bd43f4\n      schema: cd1a463c46d6\nlinks:\n  - nosedive-core:01a138b2-b8ee-703c-ab22-7b010f588b6a:\n      rel: uses.function\n  - nosedive-core:01a18e2a-3b4b-798d-9806-8d4778a158e6:\n      rel: uses.function\n---\n\n# Held dive\n\nThe dive the hero's branch names as a dive branch, `nosedive-<holder token>-<dive id>`: a doc of legacy's dive kind in the hero, as legacy nosedive wrote it, or of work's, which names its dive branches alike, its feat and its scope entries keyed by registered repos, each with its `ref`. A hero on any other branch holds none. A dive that is over, or whose `diver` carries another token, is refused, as the loop refuses it.\n\nEither shape is read as it is. A legacy dive hangs from a doc by a state link, over once it says landed or bailed, even for the memo legacy nosedive left; its feat is `meta.feat`, else `meta.effort`, else the doc that links it. A work dive has no state link, hangs by `dives.feat`, names its feat in `meta.feat` and is over by `meta.outcome`: a dive with a state link takes its end from that link, any other from its outcome.\n\nIt takes work's dives too so `test` runs a dive's gates in a hero wearing both capes, whichever loop jumped it (see dive, Wearing work too). It repeats the loop's rule rather than calling legacy's dive-on-deck, which refuses where test only finds nothing; it changes when the dive branches do.\n\n## Code\n\n- Function: [src/i01a1b131e1947fa5b316b390a3be2415.ts](../src/i01a1b131e1947fa5b316b390a3be2415.ts)\n- Tests: [src/i01a1b131e1947fa5b316b390a3be2415.test.ts](../src/i01a1b131e1947fa5b316b390a3be2415.test.ts)\n", "body": "# Held dive\n\nThe dive the hero's branch names as a dive branch, `nosedive-<holder token>-<dive id>`: a doc of legacy's dive kind in the hero, as legacy nosedive wrote it, or of work's, which names its dive branches alike, its feat and its scope entries keyed by registered repos, each with its `ref`. A hero on any other branch holds none. A dive that is over, or whose `diver` carries another token, is refused, as the loop refuses it.\n\nEither shape is read as it is. A legacy dive hangs from a doc by a state link, over once it says landed or bailed, even for the memo legacy nosedive left; its feat is `meta.feat`, else `meta.effort`, else the doc that links it. A work dive has no state link, hangs by `dives.feat`, names its feat in `meta.feat` and is over by `meta.outcome`: a dive with a state link takes its end from that link, any other from its outcome.\n\nIt takes work's dives too so `test` runs a dive's gates in a hero wearing both capes, whichever loop jumped it (see dive, Wearing work too). It repeats the loop's rule rather than calling legacy's dive-on-deck, which refuses where test only finds nothing; it changes when the dive branches do.\n\n## Code\n\n- Function: [src/i01a1b131e1947fa5b316b390a3be2415.ts](../src/i01a1b131e1947fa5b316b390a3be2415.ts)\n- Tests: [src/i01a1b131e1947fa5b316b390a3be2415.test.ts](../src/i01a1b131e1947fa5b316b390a3be2415.test.ts)" }, "01a1b131-e31f-7b32-9bc1-c4389343491a": { "kind": "function", "name": "run-gates", "gist": "Runs gates one by one with legacy's ctx, checking their scopes out, streaming each, and fails when one that is not flaky failed", "usages": [], "top": true, "text": "---\nkind: function\nid: 01a1b131-e31f-7b32-9bc1-c4389343491a\nname: run-gates\ngist: \"Runs gates one by one with legacy's ctx, checking their scopes out, streaming each, and fails when one that is not flaky failed\"\nscopes:\n  - 01a1336b-c0b8-7cde-b7c6-285196062297:\n      canonical: true\n      version: 7bf363e12b620ec5e386d079712c729333bd43f4\n      schema: cd1a463c46d6\nlinks:\n  - nosedive-core:01a13354-850c-7ba3-ba5b-8ac41a7b6b11:\n      rel: uses.function\n  - nosedive-core:01a138b2-b8ee-703c-ab22-7b010f588b6a:\n      rel: uses.function\n---\n\n# Run gates\n\nRuns gates in order with legacy's ctx, as [test](01a1b129-c081-79e5-abdc-c058f6a359a4.md) describes: each in its own node process, its output inherited so it streams, `resolve` answered over IPC, and drained after `run` as legacy's runner was, exiting after 30 seconds of silence (`NOSEDIVE_GATE_IDLE_MS`). A missing script fails its gate. After the summary it throws when a gate failed whose link is not flaky, which is how test exits 1.\n\n## Code\n\n- Function: [src/i01a1b131e31f7b329bc1c4389343491a.ts](../src/i01a1b131e31f7b329bc1c4389343491a.ts)\n- Tests: [src/i01a1b131e31f7b329bc1c4389343491a.test.ts](../src/i01a1b131e31f7b329bc1c4389343491a.test.ts)\n", "body": "# Run gates\n\nRuns gates in order with legacy's ctx, as [test](01a1b129-c081-79e5-abdc-c058f6a359a4.md) describes: each in its own node process, its output inherited so it streams, `resolve` answered over IPC, and drained after `run` as legacy's runner was, exiting after 30 seconds of silence (`NOSEDIVE_GATE_IDLE_MS`). A missing script fails its gate. After the summary it throws when a gate failed whose link is not flaky, which is how test exits 1.\n\n## Code\n\n- Function: [src/i01a1b131e31f7b329bc1c4389343491a.ts](../src/i01a1b131e31f7b329bc1c4389343491a.ts)\n- Tests: [src/i01a1b131e31f7b329bc1c4389343491a.test.ts](../src/i01a1b131e31f7b329bc1c4389343491a.test.ts)" }, "01a1b137-70be-7a7a-95b5-e4ae9eed1407": { "kind": "function", "name": "link-new-doc", "gist": "Links a newly written doc from an existing one, committing both and any files beside them as one commit", "usages": [], "top": true, "text": `---
 kind: function
@@ -2872,50 +2872,50 @@ Finds the passing dive through dive-on-deck, refusing unless it is the dive on d
 `, "body": "# Record turn\n\nFinds the passing dive through dive-on-deck, refusing unless it is the dive on deck. Validates a nonempty summary or next, and a next gist without line breaks. Appends the UTC ISO timestamp (until core's hero-zone helper lands), optional label, summary and Next gist through the current pass edit. It writes no files or commits directly. The gate entrypoint reads a stdin summary before calling it. Integration tests exercise it through the real launcher and pass, including one commit per turn.\n\n## Code\n\n- Function: [src/i01a1c72ba0e174878930a64e361790a6.ts](../src/i01a1c72ba0e174878930a64e361790a6.ts)\n- Tests: [src/i01a1c72ba0e174878930a64e361790a6.test.ts](../src/i01a1c72ba0e174878930a64e361790a6.test.ts)" }, "01a1c72b-a0f0-7508-a398-7c47eef04568": { "kind": "action", "name": "dive-shape", "gist": "Keeps a dive in its feat's shape however crud changes it: minted with its feat's scopes and linked from its feat, moved only before it is jumped, and dropped only when it is over or never jumped", "usages": [{ "id": "98e9ab6e1535570abad65bf95895aa3d", "text": "before crud dive" }, { "id": "7c5c26ef056c5803a6607b86db00c4d0", "text": "after crud dive" }], "top": true, "text": "---\nkind: action\nid: 01a1c72b-a0f0-7508-a398-7c47eef04568\nname: dive-shape\ngist: \"Keeps a dive in its feat's shape however crud changes it: minted with its feat's scopes and linked from its feat, moved only before it is jumped, and dropped only when it is over or never jumped\"\nscopes:\n  - 01a1336b-c0b8-7cde-b7c6-285196062297:\n      canonical: true\n      version: 7bf363e12b620ec5e386d079712c729333bd43f4\n      schema: 3d47d51108fa\nmeta:\n  usages:\n    - before crud dive\n    - after crud dive\n---\n\n# Dive shape\n\n## Usage\n\nThe dive kind links this gate `crud.gate` (see core's crud-gates), so a dive made or changed by crud keeps the shape jump gives one it mints: `meta.feat` names its feat (or, with none, the doc that already links it), its scopes are its feat's, and its feat links it `planned.dive`, the state link legacy nosedive wrote (see [dive](../.nosedive/kinds/01a1c72b-a065-7e5b-9c4f-271115cffbe5.md), Shape). A dive can so be minted with crud, briefed in its body, and jumped later by anyone.\n\n- **Before**: an edit that changes a dive's name is refused: its feat names it, and its gist says what it is for. A drop of a dive that is not over, its link neither landed nor bailed, with a `diver` or a `packer` or its link jumped or packed, is refused: jump it and finish it, landing or bailing it; one never jumped, or over, goes, once core finds its feat records it (drops-recorded). A change of `meta.feat` is refused once the dive was jumped, having a `diver`, a `packer` or a link that is not `planned.dive`: its branches and refs are its feat's.\n- **After**: a dive minted, or a doc made a dive, gets its feat's repo scopes, each with the feat's work branch, the feat's `planned.dive` link (its state kept if a doc links it already), and its name, `<last 6 hex of its id>.<feat name>`, as jump names a dive, replacing any crud gave it but `<feat name>.<last 6 hex of its id>`, the name dives were minted with before they went hex first, which it keeps (dive-name-hex-first); a dive whose `meta.feat` changed has its scopes replaced by the new feat's, its link moved there from the docs that held it, and is renamed after it, hex first (dive-names-derived). Its other scope entries, its kind's canonical one among them, are kept.\n\n## Code\n\n- Entrypoint: [src/i01a1c72ba0f07508a3987c47eef04568.ts](../src/i01a1c72ba0f07508a3987c47eef04568.ts)\n- `before crud dive`: [impl](../src/i98e9ab6e1535570abad65bf95895aa3d.ts), [tests](../src/i98e9ab6e1535570abad65bf95895aa3d.test.ts)\n- `after crud dive`: [impl](../src/i7c5c26ef056c5803a6607b86db00c4d0.ts), [tests](../src/i7c5c26ef056c5803a6607b86db00c4d0.test.ts)\n", "body": "# Dive shape\n\n## Usage\n\nThe dive kind links this gate `crud.gate` (see core's crud-gates), so a dive made or changed by crud keeps the shape jump gives one it mints: `meta.feat` names its feat (or, with none, the doc that already links it), its scopes are its feat's, and its feat links it `planned.dive`, the state link legacy nosedive wrote (see [dive](../.nosedive/kinds/01a1c72b-a065-7e5b-9c4f-271115cffbe5.md), Shape). A dive can so be minted with crud, briefed in its body, and jumped later by anyone.\n\n- **Before**: an edit that changes a dive's name is refused: its feat names it, and its gist says what it is for. A drop of a dive that is not over, its link neither landed nor bailed, with a `diver` or a `packer` or its link jumped or packed, is refused: jump it and finish it, landing or bailing it; one never jumped, or over, goes, once core finds its feat records it (drops-recorded). A change of `meta.feat` is refused once the dive was jumped, having a `diver`, a `packer` or a link that is not `planned.dive`: its branches and refs are its feat's.\n- **After**: a dive minted, or a doc made a dive, gets its feat's repo scopes, each with the feat's work branch, the feat's `planned.dive` link (its state kept if a doc links it already), and its name, `<last 6 hex of its id>.<feat name>`, as jump names a dive, replacing any crud gave it but `<feat name>.<last 6 hex of its id>`, the name dives were minted with before they went hex first, which it keeps (dive-name-hex-first); a dive whose `meta.feat` changed has its scopes replaced by the new feat's, its link moved there from the docs that held it, and is renamed after it, hex first (dive-names-derived). Its other scope entries, its kind's canonical one among them, are kept.\n\n## Code\n\n- Entrypoint: [src/i01a1c72ba0f07508a3987c47eef04568.ts](../src/i01a1c72ba0f07508a3987c47eef04568.ts)\n- `before crud dive`: [impl](../src/i98e9ab6e1535570abad65bf95895aa3d.ts), [tests](../src/i98e9ab6e1535570abad65bf95895aa3d.test.ts)\n- `after crud dive`: [impl](../src/i7c5c26ef056c5803a6607b86db00c4d0.ts), [tests](../src/i7c5c26ef056c5803a6607b86db00c4d0.test.ts)" }, "01a1cb89-3807-7929-8b9f-a95284af753a": { "kind": "function", "name": "legacy-dives-restored", "gist": "Gives a legacy hero an earlier legacy-dives converted its dives' state links back, so legacy's loop finds them again", "usages": [], "top": true, "text": "---\nkind: migration\nid: 01a1cb89-3807-7929-8b9f-a95284af753a\nname: legacy-dives-restored\ngist: \"Gives a legacy hero an earlier legacy-dives converted its dives' state links back, so legacy's loop finds them again\"\nscopes:\n  - 01a1336b-c0b8-7cde-b7c6-285196062297:\n      canonical: true\n      version: 7bf363e12b620ec5e386d079712c729333bd43f4\n      schema: 39c33321d487\nmeta:\n  after: 01a1b31b-e41b-7a31-a591-8d04ef4091be\nlinks:\n  - nosedive-core:01a13354-85c6-7c95-b7ef-df2f0e03cfd6:\n      rel: uses.function\n  - nosedive-core:01a13354-850c-7ba3-ba5b-8ac41a7b6b11:\n      rel: uses.function\n  - nosedive-core:01a13354-83aa-776c-b84d-f698b04adc06:\n      rel: uses.function\n---\n\n# Legacy dives restored\n\nUndoes, for a hero that wears legacy and not work, what [legacy-dives](01a1b31b-dffb-7398-9a9e-8bcd257167b5.md) did before it was retired (legacy-keeps-dive-shape). That version rewrote each state link to `dives.feat` and gave landed and bailed dives `meta.outcome`, a shape legacy's loop no longer reads: such dives are not listed as open, and jump refuses them as hanging from no doc. Legacy's loop at that version minted dives the same way, so they are restored too.\n\n- **Links**: a `dives.feat` link, from whatever doc in the hero's roots holds it, to a dive of legacy's (see [dive](../.nosedive/kinds/01a1c72b-a065-7e5b-9c4f-271115cffbe5.md)) becomes the state link the dive's meta says it stood for, its other attributes kept: `landed.dive` or `bailed.dive` by `meta.outcome`; else `jumped.dive` when it has a diver, `packed.dive` when it has a packer, and `planned.dive` when it has neither. A `dives.feat` link to any other doc is left as it is.\n- **Outcome**: each dive so relinked loses `meta.outcome`, which the loop neither reads nor writes.\n- **Left as they are**: the dive's kind and canonical entry, which legacy's dive kind accepts; `meta.feat`, which the loop reads first; and a `## Legacy meta` section, whose values legacy-dives wrote as text. Where several docs linked one dive by different states, legacy-dives kept only the strongest, which every link now takes, as the loop moves them.\n\nA hero that wears work is left as it is, since work's loop reads `dives.feat`, and so is a hero with no such link, so it says nothing on a fresh hero, and run again it finds nothing to change. A hero that has already seeded gets it with `nosedive seed --migrate`. It says how many dives and docs it changed.\n\n## Code\n\n- Function: [src/i01a1cb89380779298b9fa95284af753a.ts](../src/i01a1cb89380779298b9fa95284af753a.ts)\n- Tests: [src/i01a1cb89380779298b9fa95284af753a.test.ts](../src/i01a1cb89380779298b9fa95284af753a.test.ts)\n", "body": "# Legacy dives restored\n\nUndoes, for a hero that wears legacy and not work, what [legacy-dives](01a1b31b-dffb-7398-9a9e-8bcd257167b5.md) did before it was retired (legacy-keeps-dive-shape). That version rewrote each state link to `dives.feat` and gave landed and bailed dives `meta.outcome`, a shape legacy's loop no longer reads: such dives are not listed as open, and jump refuses them as hanging from no doc. Legacy's loop at that version minted dives the same way, so they are restored too.\n\n- **Links**: a `dives.feat` link, from whatever doc in the hero's roots holds it, to a dive of legacy's (see [dive](../.nosedive/kinds/01a1c72b-a065-7e5b-9c4f-271115cffbe5.md)) becomes the state link the dive's meta says it stood for, its other attributes kept: `landed.dive` or `bailed.dive` by `meta.outcome`; else `jumped.dive` when it has a diver, `packed.dive` when it has a packer, and `planned.dive` when it has neither. A `dives.feat` link to any other doc is left as it is.\n- **Outcome**: each dive so relinked loses `meta.outcome`, which the loop neither reads nor writes.\n- **Left as they are**: the dive's kind and canonical entry, which legacy's dive kind accepts; `meta.feat`, which the loop reads first; and a `## Legacy meta` section, whose values legacy-dives wrote as text. Where several docs linked one dive by different states, legacy-dives kept only the strongest, which every link now takes, as the loop moves them.\n\nA hero that wears work is left as it is, since work's loop reads `dives.feat`, and so is a hero with no such link, so it says nothing on a fresh hero, and run again it finds nothing to change. A hero that has already seeded gets it with `nosedive seed --migrate`. It says how many dives and docs it changed.\n\n## Code\n\n- Function: [src/i01a1cb89380779298b9fa95284af753a.ts](../src/i01a1cb89380779298b9fa95284af753a.ts)\n- Tests: [src/i01a1cb89380779298b9fa95284af753a.test.ts](../src/i01a1cb89380779298b9fa95284af753a.test.ts)" } };
 var kinds = { "dive": { "schema": { "type": "object", "properties": { "diver": { "type": ["string", "null"] }, "packer": { "type": ["string", "null"] }, "feat": { "type": "string" }, "effort": { "type": "string" } } }, "next": ["planned.dive", "jumped.dive", "packed.dive", "landed.dive", "bailed.dive"], "links": [{ "kb/01a1c72b-a0d2-7947-83de-8f2dd490283a.md": { "rel": "turn.gate" } }, { "kb/01a1c72b-a0f0-7508-a398-7c47eef04568.md": { "rel": "crud.gate" } }], "id": "01a1c72b-a065-7e5b-9c4f-271115cffbe5", "file": ".nosedive/kinds/01a1c72b-a065-7e5b-9c4f-271115cffbe5.md", "digest": "41712191d445", "dropWhen": "It was jumped and is over, its link `landed.dive` or `bailed.dive`; and what its log learned is kept where it lasts: each decision made and each lesson worth keeping recorded on the durable doc it concerns, the feature or area its feat works toward, never only in the dive, whose log goes with it. A bailed dive's reason is such a lesson when the next attempt needs it, as a slice found too big to review. One held or packed is not dropped: jump it and finish it. Whoever drops it, having read it, records what it completed on the doc that links it, `nosedive crud <linking doc> --section:Dropped.<dive> -`, then `nosedive crud --drop <dive>`, which takes the state link with it, as `meta.next` declares it (drop-takes-declared-links).", "version": "b74024c8d55135b94838bda094744e7ad8047caf", "published": true } };
 var index = {
-  "b5d65135-bbaa-5808-89ae-24a2f5ac6804": "01a1b129-c081-79e5-abdc-c058f6a359a4",
-  "b23304d2-003e-53f5-a1cb-507cf3bca5fc": "01a1b129-c3b8-7671-9f55-21826bd5a66b",
-  "fea9a36d-a19e-56dd-af02-778c0318da23": "01a1b129-c702-79ed-9ccc-ed39e882d827",
-  "749fdbba-35ff-5b1b-b42a-b4844029519f": "01a1b129-ca53-7ef6-9736-26eeeaebc87c",
-  "8398d8f7-fd2e-5975-8ede-68a93a3d6874": "01a1b130-78b1-7322-9a3b-1e21f7e12c20",
-  "fbc87887-e897-5cdc-a26a-2947f8605158": "01a1b131-e017-7e7f-8518-b309634ebbd8",
-  "ede43d26-6d2f-5e30-bb9d-2cf6686cf599": "01a1b131-e194-7fa5-b316-b390a3be2415",
-  "f3c1884d-414e-5062-b16b-82fe521bc9fc": "01a1b131-e31f-7b32-9bc1-c4389343491a",
-  "498f433f-715d-56b2-b2a3-878e337b30f4": "01a1b137-70be-7a7a-95b5-e4ae9eed1407",
-  "0d6825cc-6bff-583b-a4f9-6f690e052f4f": "01a1b31b-dffb-7398-9a9e-8bcd257167b5",
-  "59132e27-4690-574f-ae34-2a3c89ac2847": "01a1b31b-e41b-7a31-a591-8d04ef4091be",
-  "e4da8297-17ff-5589-b854-a82389b53f26": "01a1c72b-a06b-7cfd-9e5f-710dc60e4a37",
-  "bfc50fb8-5c54-5643-a3a4-03304e84c2cb": "01a1c72b-a079-7d52-baaa-1a9bba46a525",
-  "823c0d9e-6c2f-5297-a8f3-99145a69ca03": "01a1c72b-a088-715d-a4fe-90ea388bb097",
-  "126b4f41-8449-5a8d-b505-d8015657c25d": "01a1c72b-a097-7036-ae1a-496002396328",
-  "55dff26b-df56-5351-b51d-3ef56cb5a522": "01a1c72b-a0a6-7a64-836f-167c23ffa097",
-  "73a6f90a-8b29-5018-b55b-e55a15614525": "01a1c72b-a0b5-7a0c-80e3-fdd641d001a8",
-  "0b7e647d-379c-5040-833d-62a9ba138fb2": "01a1c72b-a0c3-7d27-a058-e908481307c3",
-  "405a3a42-e3bd-577c-920b-1a09ef22d2fb": "01a1c72b-a0d2-7947-83de-8f2dd490283a",
-  "7a4a0af2-07bc-511c-a7bc-46d95b9c2bf9": "01a1c72b-a0e1-7487-8930-a64e361790a6",
-  "4890d4ee-5431-5be6-8e0b-6b0479d30617": "01a1c72b-a0f0-7508-a398-7c47eef04568",
-  "3941fe17-16b0-5e82-9af2-f4004a6f9155": "01a1cb89-3807-7929-8b9f-a95284af753a",
-  "59e1ce49-aebc-5291-ae1f-09f2ee039aa6": i01a1b129c08179e5abdcc058f6a359a4,
-  "1be63048-289c-51c3-a54b-b6333dfdf60d": i01a1b129c3b876719f5521826bd5a66b,
-  "b3d159c5-0fd2-531d-a8f2-4387dbbaf6e6": i01a1b129c70279ed9ccced39e882d827,
-  "9c07f3e4-60ce-55de-9b90-8cf1adf2f430": i01a1b129ca537ef6973626eeeaebc87c,
-  "8b94cf0c-6e82-5d11-b94c-2e6a97a89e26": i01a1b13078b173229a3b1e21f7e12c20,
-  "c3be0d40-68ce-5b28-bccb-fba956c89d1b": i01a1b131e0177e7f8518b309634ebbd8,
-  "2920a673-e717-5134-83fa-05d13fda4ca3": i01a1b131e1947fa5b316b390a3be2415,
-  "2fce341d-cbc0-518c-8286-24b0b42c0147": i01a1b131e31f7b329bc1c4389343491a,
-  "07b436de-b2d7-5cc4-bd79-ea061c89354f": i01a1b13770be7a7a95b5e4ae9eed1407,
-  "05de486d-a817-598d-ae99-719cf817ab31": i01a1b31bdffb73989a9e8bcd257167b5,
-  "6d7613f1-4da0-5d1e-9c07-6856a3cc988d": i01a1b31be41b7a31a5918d04ef4091be,
-  "b95c6981-3d2f-5c10-a547-7b541cc971fe": i01a1c72ba06b7cfd9e5f710dc60e4a37,
-  "51084bba-bd10-50da-9e6f-1344173ecbfa": i01a1c72ba0797d52baaa1a9bba46a525,
-  "0bb5d3f6-fda7-5866-8471-08416ac4f23e": i01a1c72ba088715da4fe90ea388bb097,
-  "ab7b7fec-ae53-5568-a2da-3973f04f338e": i01a1c72ba0977036ae1a496002396328,
-  "21f207eb-5754-54f6-8a5c-97c9ea1134c7": i01a1c72ba0a67a64836f167c23ffa097,
-  "56f2b344-5224-5f24-8491-216a75b6d0b4": i01a1c72ba0b57a0c80e3fdd641d001a8,
-  "e813262f-3782-570a-962e-a695b38140fc": i01a1c72ba0c37d27a058e908481307c3,
-  "ceec0ec6-64da-5cf1-82c8-054c957ffde3": i01a1c72ba0d2794783de8f2dd490283a,
-  "083f18c0-93a8-5c67-946f-e6d8d166de09": i01a1c72ba0e174878930a64e361790a6,
-  "64194ed3-c09e-5513-8c98-afe33cfe4825": i01a1c72ba0f07508a3987c47eef04568,
-  "b1b9ad20-0588-572f-b852-81f0a002c313": i01a1cb89380779298b9fa95284af753a
+  "1870ba90-0a20-571b-a8a4-9e67a5743cb8": "01a1b129-c081-79e5-abdc-c058f6a359a4",
+  "e7f75bad-b38a-5aa3-89a1-fd3773bafa73": "01a1b129-c3b8-7671-9f55-21826bd5a66b",
+  "cd72d60c-4484-5ce0-8b4d-f2c1fd7942c9": "01a1b129-c702-79ed-9ccc-ed39e882d827",
+  "c26e2005-b08c-5da6-9b7d-38dd2687a054": "01a1b129-ca53-7ef6-9736-26eeeaebc87c",
+  "a295c69d-2de1-5f8c-8e57-f3443167ed87": "01a1b130-78b1-7322-9a3b-1e21f7e12c20",
+  "f5ed19bb-a6b9-5361-bb0f-66017c56c3e3": "01a1b131-e017-7e7f-8518-b309634ebbd8",
+  "b236871f-85fc-54c1-b93f-97ac6fb2faac": "01a1b131-e194-7fa5-b316-b390a3be2415",
+  "5256c3b4-f80c-512e-ac01-b810e0a50f4e": "01a1b131-e31f-7b32-9bc1-c4389343491a",
+  "18194b63-9f23-5951-9cea-f9ffb7adf5cf": "01a1b137-70be-7a7a-95b5-e4ae9eed1407",
+  "7869cd9b-e782-5747-8726-7d2efa813d44": "01a1b31b-dffb-7398-9a9e-8bcd257167b5",
+  "7e4aee17-8b88-5f52-a666-7e289992e455": "01a1b31b-e41b-7a31-a591-8d04ef4091be",
+  "e61e4aa4-e750-5354-9479-c5d682c2c720": "01a1c72b-a06b-7cfd-9e5f-710dc60e4a37",
+  "5cf733a5-cb9c-512a-81a1-0c65952ef822": "01a1c72b-a079-7d52-baaa-1a9bba46a525",
+  "f26aeb4e-b0e4-5f66-bc9e-268156963071": "01a1c72b-a088-715d-a4fe-90ea388bb097",
+  "6a8d93c7-8a21-5346-9653-3daf7b7fb4e2": "01a1c72b-a097-7036-ae1a-496002396328",
+  "44d89111-65ca-5f7e-9f02-dcdee153bc2c": "01a1c72b-a0a6-7a64-836f-167c23ffa097",
+  "a90615f5-4f2c-53e2-b1be-0da6a130757c": "01a1c72b-a0b5-7a0c-80e3-fdd641d001a8",
+  "34b87e07-e3ee-53fc-8539-e40c3a481c47": "01a1c72b-a0c3-7d27-a058-e908481307c3",
+  "4a42c78e-02f0-55ab-975e-31435b13d4c3": "01a1c72b-a0d2-7947-83de-8f2dd490283a",
+  "ac5680f4-a923-5d25-a497-f2be06de1481": "01a1c72b-a0e1-7487-8930-a64e361790a6",
+  "568a26ac-4d0c-5042-8d5d-a34a52a0b0c1": "01a1c72b-a0f0-7508-a398-7c47eef04568",
+  "7c9b7551-93d7-544a-9424-2dc13a5833a7": "01a1cb89-3807-7929-8b9f-a95284af753a",
+  "1a542405-048b-5dff-a050-e6dc116861a4": i01a1b129c08179e5abdcc058f6a359a4,
+  "4afe6a50-4f66-5b39-9ef1-7876b8abb472": i01a1b129c3b876719f5521826bd5a66b,
+  "8502a22c-d3f1-5064-8ec7-85246d20c26b": i01a1b129c70279ed9ccced39e882d827,
+  "545e5577-b3ed-57d2-9ce5-d68855b174a3": i01a1b129ca537ef6973626eeeaebc87c,
+  "eb3755f9-604f-506e-9368-100063ed1a67": i01a1b13078b173229a3b1e21f7e12c20,
+  "b2d82c9a-7334-5ef2-9cb3-7061b3772777": i01a1b131e0177e7f8518b309634ebbd8,
+  "15101368-10b9-5c8e-9311-ee154d837d61": i01a1b131e1947fa5b316b390a3be2415,
+  "2f3d0a4d-115f-535f-8c52-c44d81d4ade7": i01a1b131e31f7b329bc1c4389343491a,
+  "bfcb660f-459c-5954-97eb-62f8541f28f3": i01a1b13770be7a7a95b5e4ae9eed1407,
+  "1c37d896-330a-5142-b570-40792b3dab7c": i01a1b31bdffb73989a9e8bcd257167b5,
+  "79309384-5ac1-599a-a74a-813ad7eb657e": i01a1b31be41b7a31a5918d04ef4091be,
+  "41844bea-2f01-5105-941f-e3e3e049fc29": i01a1c72ba06b7cfd9e5f710dc60e4a37,
+  "e49c319d-9820-57b4-aac0-b7f10a565f2f": i01a1c72ba0797d52baaa1a9bba46a525,
+  "fddd63e1-9e7f-5eef-aaff-078403109ac8": i01a1c72ba088715da4fe90ea388bb097,
+  "32440db9-be63-5085-ab0c-033bfbab8108": i01a1c72ba0977036ae1a496002396328,
+  "66e77eb6-03fd-5dc5-b541-46a3956be711": i01a1c72ba0a67a64836f167c23ffa097,
+  "a629b68b-d0f1-5e49-8ea2-ef18cd8b28b6": i01a1c72ba0b57a0c80e3fdd641d001a8,
+  "66bc0fcd-161d-568e-a701-db5402fe3507": i01a1c72ba0c37d27a058e908481307c3,
+  "eae35929-dc6c-56a5-8998-9e84b18de628": i01a1c72ba0d2794783de8f2dd490283a,
+  "6b7925a1-125a-58ea-9446-de6661d6800e": i01a1c72ba0e174878930a64e361790a6,
+  "7874485a-c676-5b90-abc9-16f846753698": i01a1c72ba0f07508a3987c47eef04568,
+  "7d09cda8-5852-5bb6-8fd0-54e2f03ee5ae": i01a1cb89380779298b9fa95284af753a
 };
 export {
   commit,

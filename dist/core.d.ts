@@ -104,7 +104,7 @@ export { coAuthor, isCoAuthor, hasCoAuthor } from "../src/i01a19005c31172b68871d
 export { featTree, featRoot, linkedIds } from "../src/i01a1901e263b7209a4b5f39a71c568b3.ts";
 export { nestedRoot } from "../src/i01a1934563e77ed886f06d04416385ef.ts";
 export { UNSAID_DONE_WHEN } from "../src/i01a19f0c888e79b7ae2866e1e45a7493.ts";
-export { INSTRUCTION_FILES, SURFACE_BEGIN, SURFACE_END, surfaceDigest, hasSurface, FENCE_LINE, DROPPED_LINE, ownChange, surfaceDrift } from "../src/i01a19f5c60f879c28541aa6759d2b221.ts";
+export { INSTRUCTION_FILES, SURFACE_BEGIN, SURFACE_END, surfaceDigest, stampVersion, hasSurface, FENCE_LINE, DROPPED_LINE, ownChange, surfaceDrift } from "../src/i01a19f5c60f879c28541aa6759d2b221.ts";
 export { LEGACY_CAPES } from "../src/i01a1b14c48f277e79466d8ed690da136.ts";
 export { capeMigrations, pendingCapeMigrations } from "../src/i01a1b30d4b537775a4e1260cd7fb9067.ts";
 export { changed, stateOf, stateWas, allCapes, discardMinted, gateEdit, gateDrop } from "../src/i01a1b453a16c799bb9ce20fad1a9075b.ts";
