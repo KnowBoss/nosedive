@@ -82,7 +82,11 @@ cpSync(join(coreDir, "dist"), dist, { recursive: true });
 const shipped = join(dist, "capes");
 mkdirSync(shipped);
 const wanted = new Set(capes.flatMap((each) => [each.build, ...Object.values(each.needs)]));
-const builds = capeManifest(hero).filter((build) => wanted.has(build.id));
+// A shipped build's builtAt is rewritten when it is taken, so it only has to depend on its inputs: its commit's date, not the time of this run.
+const builds = capeManifest(hero)
+	.filter((build) => wanted.has(build.id))
+	.map((build) => ({ ...build, builtAt: read("git", ["show", "-s", "--format=%cI", build.commit], join(hero, ".nosedive", "capes", "src", build.repo)) }));
+if (builds.some((build) => !build.builtAt)) fail("a shipped build's commit has no date");
 for (const build of builds) cpSync(join(hero, ".nosedive", "capes", `${build.id}.js`), join(shipped, `${build.id}.js`));
 writeFileSync(join(shipped, "manifest.json"), `${JSON.stringify(builds, null, "\t")}\n`);
 
