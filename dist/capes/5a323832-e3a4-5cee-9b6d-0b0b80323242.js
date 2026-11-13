@@ -37,7 +37,7 @@ var i01a13354845c7253a55b60bba87285d8 = from.index["cb8ee86b-b4a3-5029-a950-09fb
 var i01a1471723807d6e8ef228ad9472fff7 = from.index["c85d452a-dd26-5962-a841-c702b323d1c9"];
 var i01a17fba20d673c5b8dd8551943369a2 = from.index["1074dfa0-3d83-548c-a631-51454efdc2f3"];
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b131e0177e7f8518b309634ebbd8.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b131e0177e7f8518b309634ebbd8.ts
 import { spawnSync } from "node:child_process";
 import { existsSync } from "node:fs";
 import { relative } from "node:path";
@@ -80,13 +80,13 @@ function checkoutAt(hero, repo, ref, say) {
   return { dir, root, head };
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0a67a64836f167c23ffa097.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0a67a64836f167c23ffa097.ts
 import { spawnSync as spawnSync3 } from "node:child_process";
 import { createHash } from "node:crypto";
 import { existsSync as existsSync2, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from "node:fs";
 import { dirname, isAbsolute, join, relative as relative2 } from "node:path";
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/node_modules/fflate/esm/index.mjs
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/node_modules/fflate/esm/index.mjs
 import { createRequire } from "module";
 var require2 = createRequire("/");
 var Worker;
@@ -1055,14 +1055,14 @@ function unzipSync(data, opts) {
   return files;
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0c37d27a058e908481307c3.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0c37d27a058e908481307c3.ts
 import { spawnSync as spawnSync2 } from "node:child_process";
 function i01a1c72ba0c37d27a058e908481307c3(cwd, ...args) {
   const result = spawnSync2("git", args, { cwd, encoding: "utf8" });
   return { ok: result.status === 0, text: (result.status === 0 ? result.stdout : result.stderr || result.stdout || result.error?.message || "").trim() };
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0a67a64836f167c23ffa097.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0a67a64836f167c23ffa097.ts
 var LEGACY_ID = "01a1b128-2c08-790f-80f4-e2c40a98bfcc";
 function hasCanonical(doc) {
   return (Array.isArray(doc.fm.scopes) ? doc.fm.scopes : []).some((entry) => entry && typeof entry === "object" && Object.values(entry).some((value) => value?.canonical === true));
@@ -1611,7 +1611,7 @@ function putTurnOnHome(hero, home, commit2) {
   }
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b131e1947fa5b316b390a3be2415.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b131e1947fa5b316b390a3be2415.ts
 var WORK_ID = "01a15bb1-da9e-7d2d-aa82-5ee97257adc6";
 var DIVE_BRANCH2 = /^nosedive-([0-9a-f]{12})-([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/;
 function isDive2(doc) {
@@ -1644,7 +1644,7 @@ function i01a1b131e1947fa5b316b390a3be2415(hero) {
   return { id: id2, doc: found, featId: featIdOf(hero, found, hung?.by ?? []) ?? (typeof meta.feat === "string" ? meta.feat : void 0), scopes: scopesOf2(hero, found) };
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b131e31f7b329bc1c4389343491a.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b131e31f7b329bc1c4389343491a.ts
 import { spawn } from "node:child_process";
 import { existsSync as existsSync3, mkdtempSync, rmSync as rmSync2, writeFileSync as writeFileSync2 } from "node:fs";
 import { tmpdir } from "node:os";
@@ -1791,7 +1791,7 @@ async function i01a1b131e31f7b329bc1c4389343491a(hero, selected, dive, ctx) {
   if (blocking.length) throw new Error(`${blocking.length} gate${blocking.length === 1 ? "" : "s"} failed: ${blocking.map((gate) => gate.name).join(", ")}`);
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/iffb5aa30b4e659e68b40ad7dee378a62.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/iffb5aa30b4e659e68b40ad7dee378a62.ts
 async function iffb5aa30b4e659e68b40ad7dee378a62(args, ctx) {
   const hero = i01a1335485c67c95b7efdf2f0e03cfd6(ctx.cwd);
   if (!hero?.workspace) throw new Error("test works in a hero repo, and this is not one");
@@ -1834,7 +1834,7 @@ function reachedFeats(docs2, featId) {
   return [...reached];
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i79c0bcc90fa55bff9c8e62fed26dfa9a.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i79c0bcc90fa55bff9c8e62fed26dfa9a.ts
 import { existsSync as existsSync4 } from "node:fs";
 import { resolve } from "node:path";
 var QUID3 = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i;
@@ -1886,7 +1886,7 @@ function reachable(docs2, from2) {
   return reached;
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b129c08179e5abdcc058f6a359a4.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b129c08179e5abdcc058f6a359a4.ts
 async function i01a1b129c08179e5abdcc058f6a359a4(call) {
   switch (call.usage) {
     case "uffb5aa30b4e659e68b40ad7dee378a62":
@@ -1898,14 +1898,14 @@ async function i01a1b129c08179e5abdcc058f6a359a4(call) {
   }
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i552b992cd74d50a489e0b2c84fcc203b.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i552b992cd74d50a489e0b2c84fcc203b.ts
 async function i552b992cd74d50a489e0b2c84fcc203b(args, ctx) {
   const hero = i01a1335485c67c95b7efdf2f0e03cfd6(ctx.cwd);
   if (!hero?.workspace) throw new Error("hydrate-repo.workspace works in a hero repo, and this is not one");
   checkoutAt(hero, i01a1b131e0177e7f8518b309634ebbd8(hero, String(args.repo)), typeof args.at === "string" ? args.at : void 0, ctx);
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b129c3b876719f5521826bd5a66b.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b129c3b876719f5521826bd5a66b.ts
 async function i01a1b129c3b876719f5521826bd5a66b(call) {
   switch (call.usage) {
     case "u552b992cd74d50a489e0b2c84fcc203b":
@@ -1915,7 +1915,7 @@ async function i01a1b129c3b876719f5521826bd5a66b(call) {
   }
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/idf324b14b9135de2893fffa8705388da.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/idf324b14b9135de2893fffa8705388da.ts
 import { existsSync as existsSync5 } from "node:fs";
 import { relative as relative4 } from "node:path";
 async function idf324b14b9135de2893fffa8705388da(args, ctx) {
@@ -1930,7 +1930,7 @@ async function idf324b14b9135de2893fffa8705388da(args, ctx) {
   ctx.out(`${relative4(hero.dir, dir).replace(/\\/g, "/")}: removed`);
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b129c70279ed9ccced39e882d827.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b129c70279ed9ccced39e882d827.ts
 async function i01a1b129c70279ed9ccced39e882d827(call) {
   switch (call.usage) {
     case "udf324b14b9135de2893fffa8705388da":
@@ -1940,11 +1940,11 @@ async function i01a1b129c70279ed9ccced39e882d827(call) {
   }
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i0190147b40b25ca2b1d03135a75a3502.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i0190147b40b25ca2b1d03135a75a3502.ts
 import { existsSync as existsSync6, mkdirSync as mkdirSync2, writeFileSync as writeFileSync3 } from "node:fs";
 import { join as join3, relative as relative6, resolve as resolve2 } from "node:path";
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b13770be7a7a95b5e4ae9eed1407.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b13770be7a7a95b5e4ae9eed1407.ts
 import { relative as relative5 } from "node:path";
 function i01a1b13770be7a7a95b5e4ae9eed1407(hero, version2, commit2, link, files = []) {
   const edit = i01a14ab1d36771eea2bc6f13bdeb0526(hero.dir, version2);
@@ -1955,7 +1955,7 @@ function i01a1b13770be7a7a95b5e4ae9eed1407(hero, version2, commit2, link, files 
   i01a13354894273b1be253424511ba82c(hero.dir, [link.docPath, from2.path, ...files], i01a19005c109715583553072f4e38dc4(hero, commit2.action, commit2.what, [link.docId, link.fromId]), version2);
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i0190147b40b25ca2b1d03135a75a3502.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i0190147b40b25ca2b1d03135a75a3502.ts
 var QUID4 = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/i;
 function stub(script) {
   return [
@@ -1988,7 +1988,7 @@ async function i0190147b40b25ca2b1d03135a75a3502(args, ctx) {
   ctx.out(`write its check in ${script}, then run it: nosedive test ${id2}`);
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b129ca537ef6973626eeeaebc87c.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b129ca537ef6973626eeeaebc87c.ts
 async function i01a1b129ca537ef6973626eeeaebc87c(call) {
   switch (call.usage) {
     case "u0190147b40b25ca2b1d03135a75a3502":
@@ -1998,7 +1998,7 @@ async function i01a1b129ca537ef6973626eeeaebc87c(call) {
   }
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i58b390d976c95aa4bc065fbc8605e404.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i58b390d976c95aa4bc065fbc8605e404.ts
 import { appendFileSync } from "node:fs";
 import { relative as relative7 } from "node:path";
 var SLUG = /^[a-z0-9]+(-[a-z0-9]+)*$/;
@@ -2030,7 +2030,7 @@ ${(await i01a1471723807d6e8ef228ad9472fff7(args.body, ctx)).trimEnd()}
   ctx.out(relative7(hero.dir, doc.path).replace(/\\/g, "/"));
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b13078b173229a3b1e21f7e12c20.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b13078b173229a3b1e21f7e12c20.ts
 async function i01a1b13078b173229a3b1e21f7e12c20(call) {
   switch (call.usage) {
     case "u58b390d976c95aa4bc065fbc8605e404":
@@ -2040,7 +2040,7 @@ async function i01a1b13078b173229a3b1e21f7e12c20(call) {
   }
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b31bdffb73989a9e8bcd257167b5.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b31bdffb73989a9e8bcd257167b5.ts
 var STATES = ["landed", "bailed", "planned", "jumped", "packed"];
 var QUID5 = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
 var WORK_META = /* @__PURE__ */ new Set(["diver", "packer", "outcome", "feat"]);
@@ -2131,13 +2131,13 @@ ${kept.join("\n")}
   return [...changed2].map((doc) => doc.path);
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b31be41b7a31a5918d04ef4091be.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b31be41b7a31a5918d04ef4091be.ts
 import { spawnSync as spawnSync4 } from "node:child_process";
 import { existsSync as existsSync7, mkdirSync as mkdirSync3, mkdtempSync as mkdtempSync2, readFileSync as readFileSync2, rmSync as rmSync3, unlinkSync } from "node:fs";
 import { homedir, tmpdir as tmpdir2 } from "node:os";
 import { isAbsolute as isAbsolute3, join as join4, relative as relative8, resolve as resolve3 } from "node:path";
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0b57a0c80e3fdd641d001a8.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0b57a0c80e3fdd641d001a8.ts
 function i01a1c72ba0b57a0c80e3fdd641d001a8(hero, doc, change, version2) {
   for (const [key, value] of Object.entries(change.meta ?? {})) {
     if (value === null) doc.yaml.deleteIn(["meta", key]);
@@ -2160,7 +2160,7 @@ ${lines.join("\n")}
 `;
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b31be41b7a31a5918d04ef4091be.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1b31be41b7a31a5918d04ef4091be.ts
 var Wait = class extends Error {
 };
 var QUID6 = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
@@ -2436,7 +2436,7 @@ function firstLine(text) {
   return text.split(/\r?\n/).find((line) => line.trim() && !line.startsWith("hint:")) ?? text;
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i0e2024913efd5dc8afe194f5650bda20.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i0e2024913efd5dc8afe194f5650bda20.ts
 import { existsSync as existsSync8 } from "node:fs";
 import { relative as relative9 } from "node:path";
 var LISTED = /^(?:.*[\\/])?([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})\.md$/i;
@@ -2695,12 +2695,12 @@ function bareDiverIs(diver, email) {
   return !diver.includes("#") && diver === email;
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/ia65e6ec583fa51079af219fd79e4ad87.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/ia65e6ec583fa51079af219fd79e4ad87.ts
 async function ia65e6ec583fa51079af219fd79e4ad87(args, ctx) {
   return i0e2024913efd5dc8afe194f5650bda20({ ...args, sure: true }, ctx);
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba06b7cfd9e5f710dc60e4a37.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba06b7cfd9e5f710dc60e4a37.ts
 async function i01a1c72ba06b7cfd9e5f710dc60e4a37(call) {
   switch (call.usage) {
     case "u0e2024913efd5dc8afe194f5650bda20":
@@ -2712,7 +2712,7 @@ async function i01a1c72ba06b7cfd9e5f710dc60e4a37(call) {
   }
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i5f74ee87748f528b9fd9b00a48c2275b.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i5f74ee87748f528b9fd9b00a48c2275b.ts
 async function i5f74ee87748f528b9fd9b00a48c2275b(args, ctx) {
   const hero = i01a1335485c67c95b7efdf2f0e03cfd6(ctx.cwd);
   if (!hero?.workspace) throw new Error("pack works in a hero repo, and this is not one");
@@ -2732,7 +2732,7 @@ async function i5f74ee87748f528b9fd9b00a48c2275b(args, ctx) {
 ${lines.join("\n")}` : ""}`);
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0797d52baaa1a9bba46a525.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0797d52baaa1a9bba46a525.ts
 async function i01a1c72ba0797d52baaa1a9bba46a525(call) {
   switch (call.usage) {
     case "u5f74ee87748f528b9fd9b00a48c2275b":
@@ -2742,7 +2742,7 @@ async function i01a1c72ba0797d52baaa1a9bba46a525(call) {
   }
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/ia159fdc01ac85e4f831dc1c523787ce6.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/ia159fdc01ac85e4f831dc1c523787ce6.ts
 async function ia159fdc01ac85e4f831dc1c523787ce6(args, ctx) {
   const reason = String(args.reason ?? "").trim();
   if (!reason) throw new Error("bail needs a reason: --reason <why>");
@@ -2760,7 +2760,7 @@ async function ia159fdc01ac85e4f831dc1c523787ce6(args, ctx) {
   ctx.out(`bailed ${String(dive.doc.fm.name)}`);
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba088715da4fe90ea388bb097.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba088715da4fe90ea388bb097.ts
 async function i01a1c72ba088715da4fe90ea388bb097(call) {
   switch (call.usage) {
     case "ua159fdc01ac85e4f831dc1c523787ce6":
@@ -2770,7 +2770,7 @@ async function i01a1c72ba088715da4fe90ea388bb097(call) {
   }
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i3b8461aa9eac5f10837c2515b5231e78.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i3b8461aa9eac5f10837c2515b5231e78.ts
 import { relative as relative10 } from "node:path";
 async function i3b8461aa9eac5f10837c2515b5231e78(args, ctx) {
   const hero = i01a1335485c67c95b7efdf2f0e03cfd6(ctx.cwd);
@@ -2850,7 +2850,7 @@ ${rebased.text}`);
 ${lines.join("\n")}` : ""}`);
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0977036ae1a496002396328.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0977036ae1a496002396328.ts
 async function i01a1c72ba0977036ae1a496002396328(call) {
   switch (call.usage) {
     case "u3b8461aa9eac5f10837c2515b5231e78":
@@ -2860,7 +2860,7 @@ async function i01a1c72ba0977036ae1a496002396328(call) {
   }
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0e174878930a64e361790a6.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0e174878930a64e361790a6.ts
 import { resolve as resolve4 } from "node:path";
 async function i01a1c72ba0e174878930a64e361790a6(ctx) {
   const { home } = i01a1c72ba0a67a64836f167c23ffa097(ctx.bridge, ctx, ctx.doc.id);
@@ -2895,12 +2895,12 @@ ${lines.join("\n")}
   });
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i6164926c34715ab39455948b647cbb0e.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i6164926c34715ab39455948b647cbb0e.ts
 async function i6164926c34715ab39455948b647cbb0e(ctx) {
   return i01a1c72ba0e174878930a64e361790a6(ctx);
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0d2794783de8f2dd490283a.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0d2794783de8f2dd490283a.ts
 async function i01a1c72ba0d2794783de8f2dd490283a(call) {
   switch (call.usage) {
     case "u6164926c34715ab39455948b647cbb0e": {
@@ -2914,7 +2914,7 @@ async function i01a1c72ba0d2794783de8f2dd490283a(call) {
   }
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i98e9ab6e1535570abad65bf95895aa3d.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i98e9ab6e1535570abad65bf95895aa3d.ts
 var metaOf2 = (state) => state.fm.meta ?? {};
 async function i98e9ab6e1535570abad65bf95895aa3d(ctx) {
   const { before, after } = ctx;
@@ -2944,7 +2944,7 @@ async function i98e9ab6e1535570abad65bf95895aa3d(ctx) {
   }
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i7c5c26ef056c5803a6607b86db00c4d0.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i7c5c26ef056c5803a6607b86db00c4d0.ts
 async function i7c5c26ef056c5803a6607b86db00c4d0(ctx) {
   const { before, after, doc, bridge: hero } = ctx;
   if (!after) return;
@@ -2971,7 +2971,7 @@ async function i7c5c26ef056c5803a6607b86db00c4d0(ctx) {
   if (after.fm.name !== name2 && !old) ctx.crud(doc.id, "name", name2);
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0f07508a3987c47eef04568.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1c72ba0f07508a3987c47eef04568.ts
 async function i01a1c72ba0f07508a3987c47eef04568(call) {
   switch (call.usage) {
     case "u98e9ab6e1535570abad65bf95895aa3d":
@@ -2983,7 +2983,7 @@ async function i01a1c72ba0f07508a3987c47eef04568(call) {
   }
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1cb89380779298b9fa95284af753a.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/src/01a1b13e-111d-73de-8f7d-41b47af07703/src/i01a1cb89380779298b9fa95284af753a.ts
 var QUID7 = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
 function stateOf(dive) {
   const outcome = dive.fm.meta?.outcome;
@@ -3029,7 +3029,7 @@ function i01a1cb89380779298b9fa95284af753a(dir, ctx) {
   return [...changed2].map((doc) => doc.path);
 }
 
-// ../nosedive-bundle-3EesYk/hero/.nosedive/capes/5a323832-e3a4-5cee-9b6d-0b0b80323242.js.build/entry.ts
+// ../nosedive-bundle-Kfrb5s/hero/.nosedive/capes/5a323832-e3a4-5cee-9b6d-0b0b80323242.js.build/entry.ts
 var id = "5a323832-e3a4-5cee-9b6d-0b0b80323242";
 var owner = "01a1b128-2c08-790f-80f4-e2c40a98bfcc";
 var shortName = "nosedive-legacy";
