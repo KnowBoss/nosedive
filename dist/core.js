@@ -10336,7 +10336,7 @@ var require_compile = __commonJS({
       const schOrFunc = root.refs[ref];
       if (schOrFunc)
         return schOrFunc;
-      let _sch = resolve17.call(this, root, ref);
+      let _sch = resolve18.call(this, root, ref);
       if (_sch === void 0) {
         const schema = (_a = root.localRefs) === null || _a === void 0 ? void 0 : _a[ref];
         const { schemaId } = this.opts;
@@ -10363,7 +10363,7 @@ var require_compile = __commonJS({
     function sameSchemaEnv(s1, s2) {
       return s1.schema === s2.schema && s1.root === s2.root && s1.baseId === s2.baseId;
     }
-    function resolve17(root, ref) {
+    function resolve18(root, ref) {
       let sch;
       while (typeof (sch = this.refs[ref]) == "string")
         ref = sch;
@@ -11193,7 +11193,7 @@ var require_fast_uri = __commonJS({
       }
       return uri;
     }
-    function resolve17(baseURI, relativeURI, options) {
+    function resolve18(baseURI, relativeURI, options) {
       const schemelessOptions = options ? Object.assign({ scheme: "null" }, options) : { scheme: "null" };
       const {
         parsed: baseParsed,
@@ -11562,7 +11562,7 @@ var require_fast_uri = __commonJS({
     var fastUri = {
       SCHEMES,
       normalize,
-      resolve: resolve17,
+      resolve: resolve18,
       resolveComponent,
       equal,
       serialize,
@@ -14811,7 +14811,7 @@ var require__ = __commonJS({
 
 // src/i01a1336a958f71c7beec4db3195c7966.ts
 import { existsSync as existsSync13, statSync as statSync3 } from "node:fs";
-import { basename as basename3, isAbsolute as isAbsolute4, relative as relative6, resolve as resolve6 } from "node:path";
+import { basename as basename3, isAbsolute as isAbsolute4, relative as relative6, resolve as resolve7 } from "node:path";
 
 // src/i01a1335480147d0686528aee80f8ee34.ts
 import { createHash } from "node:crypto";
@@ -15257,7 +15257,7 @@ function i01a14fb092177d36a478d40a47166c97(usage) {
 
 // src/i01a14fb79db47f8b94d5196027008697.ts
 import { createHash as createHash5 } from "node:crypto";
-import { existsSync as existsSync12, readdirSync as readdirSync5, readFileSync as readFileSync9, rmSync as rmSync2, statSync as statSync2 } from "node:fs";
+import { existsSync as existsSync12, readdirSync as readdirSync5, readFileSync as readFileSync9, rmSync, statSync as statSync2 } from "node:fs";
 import { join as join15 } from "node:path";
 import { pathToFileURL as pathToFileURL2 } from "node:url";
 
@@ -15635,9 +15635,8 @@ function i01a151913e5772088ae93b14a4a3f120(dir) {
 }
 
 // src/i01a14fb7a14b7f85b7dc8bb894d6e76b.ts
-import { mkdirSync as mkdirSync2, rmSync, writeFileSync as writeFileSync3 } from "node:fs";
 import { readFile } from "node:fs/promises";
-import { join as join13, relative as relative5, sep as sep2 } from "node:path";
+import { join as join13, relative as relative5, resolve as resolve6, sep as sep2 } from "node:path";
 
 // src/i01a133588c7971b5b116d9c8c1706e04.ts
 function i01a133588c7971b5b116d9c8c1706e04(source, capeId) {
@@ -15655,24 +15654,18 @@ var TEXT = /* @__PURE__ */ new Set([".html", ".css", ".svg", ".md", ".txt"]);
 var REQUIRE = 'import { createRequire as __nosediveRequire } from "node:module"; const require = __nosediveRequire(import.meta.url);';
 async function i01a14fb7a14b7f85b7dc8bb894d6e76b(repoDir, source, exports, sources, outfile) {
   const { names, entries: entries2 } = i01a133588c7971b5b116d9c8c1706e04(source, exports.id);
-  const buildDir = `${outfile}.build`;
-  rmSync(buildDir, { recursive: true, force: true });
-  mkdirSync2(buildDir, { recursive: true });
-  const toEntry = (file) => `./${relative5(buildDir, file).replace(/\\/g, "/")}`;
-  writeFileSync3(
-    `${buildDir}/entry.ts`,
-    [
-      ...Object.values(entries2).map((entry) => `import { ${entry.name} } from ${JSON.stringify(toEntry(entry.file))};`),
-      ...Object.entries(exports).map(([key, value]) => `export const ${key} = ${JSON.stringify(value)};`),
-      `export const docs = ${JSON.stringify(source.docs)};`,
-      `export const kinds = ${JSON.stringify(source.kinds)};`,
-      "export const index = {",
-      ...Object.entries(names).map(([key, docId]) => `	${JSON.stringify(key)}: ${JSON.stringify(docId)},`),
-      ...Object.entries(entries2).map(([key, entry]) => `	${JSON.stringify(key)}: ${entry.name},`),
-      "};",
-      ""
-    ].join("\n")
-  );
+  const toEntry = (file) => `./${relative5(repoDir, file).replace(/\\/g, "/")}`;
+  const entry = [
+    ...Object.values(entries2).map((each) => `import { ${each.name} } from ${JSON.stringify(toEntry(each.file))};`),
+    ...Object.entries(exports).map(([key, value]) => `export const ${key} = ${JSON.stringify(value)};`),
+    `export const docs = ${JSON.stringify(source.docs)};`,
+    `export const kinds = ${JSON.stringify(source.kinds)};`,
+    "export const index = {",
+    ...Object.entries(names).map(([key, docId]) => `	${JSON.stringify(key)}: ${JSON.stringify(docId)},`),
+    ...Object.entries(entries2).map(([key, each]) => `	${JSON.stringify(key)}: ${each.name},`),
+    "};",
+    ""
+  ].join("\n");
   const esbuild = await import("esbuild").catch(() => {
     throw new Error("building capes needs esbuild: install it next to nosedive (`npm install esbuild`)");
   });
@@ -15684,30 +15677,27 @@ async function i01a14fb7a14b7f85b7dc8bb894d6e76b(repoDir, source, exports, sourc
     ...[...named2].map((name2) => `export const ${name2} = from.named[${JSON.stringify(name2)}];`),
     ...[...ids].map((docId) => `export const i${docId.replace(/-/g, "")} = from.index[${JSON.stringify(i01a1335480147d0686528aee80f8ee34(docId, from))}];`)
   ].join("\n");
-  try {
-    await esbuild.build({
-      entryPoints: [`${buildDir}/entry.ts`],
-      bundle: true,
-      platform: "node",
-      format: "esm",
-      target: "node24",
-      outfile,
-      logLevel: "warning",
-      banner: { js: REQUIRE },
-      plugins: [
-        assets(esbuild, join13(repoDir, "assets") + sep2),
-        {
-          name: "nosedive-capes",
-          setup(build) {
-            build.onResolve({ filter: /^[^./]/ }, (args) => bySpecifier.has(args.path) ? { path: args.path, namespace: "cape" } : void 0);
-            build.onLoad({ filter: /.*/, namespace: "cape" }, (args) => ({ contents: shim(bySpecifier.get(args.path)), loader: "js" }));
-          }
+  await esbuild.build({
+    stdin: { contents: entry, sourcefile: "entry.ts", resolveDir: repoDir, loader: "ts" },
+    absWorkingDir: repoDir,
+    bundle: true,
+    platform: "node",
+    format: "esm",
+    target: "node24",
+    outfile,
+    logLevel: "warning",
+    banner: { js: REQUIRE },
+    plugins: [
+      assets(esbuild, join13(repoDir, "assets") + sep2),
+      {
+        name: "nosedive-capes",
+        setup(build) {
+          build.onResolve({ filter: /^[^./]/ }, (args) => bySpecifier.has(args.path) ? { path: args.path, namespace: "cape" } : void 0);
+          build.onLoad({ filter: /.*/, namespace: "cape" }, (args) => ({ contents: shim(bySpecifier.get(args.path)), loader: "js" }));
         }
-      ]
-    });
-  } finally {
-    rmSync(buildDir, { recursive: true, force: true });
-  }
+      }
+    ]
+  });
 }
 function assets(esbuild, dir) {
   return {
@@ -15716,7 +15706,7 @@ function assets(esbuild, dir) {
       build.onLoad({ filter: /.*/, namespace: "file" }, async (args) => {
         if (!args.path.toLowerCase().startsWith(dir.toLowerCase())) return void 0;
         if (args.path.endsWith(".client.ts")) {
-          const client = await esbuild.build({ entryPoints: [args.path], bundle: true, platform: "browser", format: "esm", target: "es2022", write: false, logLevel: "warning" });
+          const client = await esbuild.build({ entryPoints: [args.path], absWorkingDir: resolve6(dir, ".."), bundle: true, platform: "browser", format: "esm", target: "es2022", write: false, logLevel: "warning" });
           return { contents: client.outputFiles[0].text, loader: "text" };
         }
         const ext = args.path.slice(args.path.lastIndexOf(".")).toLowerCase();
@@ -15729,7 +15719,7 @@ function assets(esbuild, dir) {
 // src/i01a1337c81b57799820f96a757b791d0.ts
 import { spawnSync as spawnSync3 } from "node:child_process";
 import { createHash as createHash4 } from "node:crypto";
-import { copyFileSync, existsSync as existsSync11, mkdirSync as mkdirSync3, readdirSync as readdirSync4, readFileSync as readFileSync8 } from "node:fs";
+import { copyFileSync, existsSync as existsSync11, mkdirSync as mkdirSync2, readdirSync as readdirSync4, readFileSync as readFileSync8 } from "node:fs";
 import { dirname as dirname5, join as join14 } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -15839,7 +15829,7 @@ function takeShipped(bridgeDir, repoId, commit2, core) {
   };
   if (!gather(wanted) || !all.every((build) => existsSync11(join14(dir, `${build.id}.js`)))) return void 0;
   const builds = join14(bridgeDir, ".nosedive", "capes");
-  mkdirSync3(builds, { recursive: true });
+  mkdirSync2(builds, { recursive: true });
   const fresh = !existsSync11(join14(builds, `${wanted.id}.js`));
   for (const build of all) {
     if (!existsSync11(join14(builds, `${build.id}.js`))) copyFileSync(join14(dir, `${build.id}.js`), join14(builds, `${build.id}.js`));
@@ -15954,7 +15944,7 @@ async function i01a14fb79db47f8b94d5196027008697(bridge, core) {
   ${problems.join("\n  ")}`);
     i01a151913e5772088ae93b14a4a3f120(bridge.dir);
     await i01a14fb7a14b7f85b7dc8bb894d6e76b(bridge.dir, source, { id: id2, owner: bridge.id, shortName: name2, name: name2, commit: "", version: "working tree", core: core.id, needs }, sources, outfile);
-    for (const file of readdirSync5(capes)) if (file.startsWith("base-") && file !== `base-${id2}.js`) rmSync2(join15(capes, file), { recursive: true, force: true });
+    for (const file of readdirSync5(capes)) if (file.startsWith("base-") && file !== `base-${id2}.js`) rmSync(join15(capes, file), { recursive: true, force: true });
   }
   globalThis.__nosediveCore = core;
   loaded[outfile] = await import(pathToFileURL2(outfile).href);
@@ -15965,6 +15955,7 @@ async function i01a14fb79db47f8b94d5196027008697(bridge, core) {
 async function i01a1336a958f71c7beec4db3195c7966(argv, ctx) {
   const base = process.env.NOSEDIVE_AT;
   try {
+    if (argv[0] === "pre-push.hook") return 0;
     const inside = process.env.NOSEDIVE_HERO ? void 0 : insideWorkspace(ctx.cwd);
     if (inside) {
       const name3 = basename3(inside.checkout);
@@ -15974,7 +15965,7 @@ async function i01a1336a958f71c7beec4db3195c7966(argv, ctx) {
       const wanted = argv[1];
       const bridge2 = i01a1335485c67c95b7efdf2f0e03cfd6(ctx.cwd);
       if (!wanted || !bridge2) throw new Error(`--at names one of the hero's roots or a directory in it, and ${wanted ?? "nothing"} is none`);
-      const dir = resolve6(ctx.cwd, wanted);
+      const dir = resolve7(ctx.cwd, wanted);
       const inHero2 = [bridge2.dir, bridge2.workspace].some((parent) => parent !== void 0 && !relative6(parent, dir).startsWith("..") && !isAbsolute4(relative6(parent, dir)));
       if (selectRoot(bridge2.roots, wanted)) process.env.NOSEDIVE_AT = wanted;
       else if (inHero2 && (existsSync13(dir) && statSync3(dir).isDirectory() || argv[2] === "seed" && !existsSync13(dir))) process.env.NOSEDIVE_AT = dir;
@@ -16035,7 +16026,7 @@ ${await renderActions(ctx, false)}`);
 }
 function consoleCtx(capes) {
   return {
-    cwd: process.env.NOSEDIVE_HERO ? resolve6(process.env.NOSEDIVE_HERO) : process.cwd(),
+    cwd: process.env.NOSEDIVE_HERO ? resolve7(process.env.NOSEDIVE_HERO) : process.cwd(),
     capes,
     out: (text2) => process.stdout.write(`${text2}
 `),
@@ -16149,17 +16140,17 @@ ${names(matches)}`);
 // src/i01a1335487317576a0afd03506ef5555.ts
 var import_yaml3 = __toESM(require_dist(), 1);
 import { readFileSync as readFileSync10 } from "node:fs";
-import { resolve as resolve7 } from "node:path";
+import { resolve as resolve8 } from "node:path";
 async function i01a1335487317576a0afd03506ef5555(value, ctx) {
-  const text2 = value === "-" ? await ctx.stdin() : readFileSync10(resolve7(ctx.cwd, value), "utf8");
+  const text2 = value === "-" ? await ctx.stdin() : readFileSync10(resolve8(ctx.cwd, value), "utf8");
   return (0, import_yaml3.parse)(text2);
 }
 
 // src/i01a1471723807d6e8ef228ad9472fff7.ts
 import { readFileSync as readFileSync11 } from "node:fs";
-import { resolve as resolve8 } from "node:path";
+import { resolve as resolve9 } from "node:path";
 async function i01a1471723807d6e8ef228ad9472fff7(source, ctx) {
-  return source === "-" ? ctx.stdin() : readFileSync11(resolve8(ctx.cwd, source), "utf8");
+  return source === "-" ? ctx.stdin() : readFileSync11(resolve9(ctx.cwd, source), "utf8");
 }
 
 // src/i01a14ab1d36771eea2bc6f13bdeb0526.ts
@@ -16168,7 +16159,7 @@ import { relative as relative9 } from "node:path";
 
 // src/i01a1335483aa776cb84df698b04adc06.ts
 var import_yaml4 = __toESM(require_dist(), 1);
-import { writeFileSync as writeFileSync4 } from "node:fs";
+import { writeFileSync as writeFileSync3 } from "node:fs";
 var FIRST = ["kind", "id", "name", "gist", "scopes", "meta"];
 function kingsmetal(yaml) {
   const map = yaml.contents;
@@ -16203,7 +16194,7 @@ ${head.commentBefore}` : header;
 }
 function i01a1335483aa776cb84df698b04adc06(path, yaml, body) {
   kingsmetal(yaml);
-  writeFileSync4(path, `---
+  writeFileSync3(path, `---
 ${yaml.toString({ lineWidth: 0 })}---
 ${body}`);
 }
@@ -16728,20 +16719,20 @@ function docFile(repoDir, quid2) {
 
 // src/ibccbde44f93254e0bb6a2af910bc03d9.ts
 import { existsSync as existsSync22 } from "node:fs";
-import { dirname as dirname10, relative as relative11, resolve as resolve10 } from "node:path";
+import { dirname as dirname10, relative as relative11, resolve as resolve11 } from "node:path";
 
 // src/i9dfd0b735ec95af1948f2b3311749c52.ts
 var import_yaml5 = __toESM(require_dist(), 1);
 import { spawnSync as spawnSync11 } from "node:child_process";
-import { existsSync as existsSync21, mkdirSync as mkdirSync5, realpathSync } from "node:fs";
+import { existsSync as existsSync21, mkdirSync as mkdirSync4, realpathSync } from "node:fs";
 import { dirname as dirname9, join as join22, posix } from "node:path";
 
 // src/i01a15baf13e27bd88dc880d4871f2210.ts
 import { spawnSync as spawnSync10 } from "node:child_process";
 import { createHash as createHash6 } from "node:crypto";
-import { existsSync as existsSync20, mkdirSync as mkdirSync4, renameSync, rmSync as rmSync3 } from "node:fs";
+import { existsSync as existsSync20, mkdirSync as mkdirSync3, renameSync, rmSync as rmSync2 } from "node:fs";
 import { homedir } from "node:os";
-import { dirname as dirname8, isAbsolute as isAbsolute5, join as join21, relative as relative10, resolve as resolve9 } from "node:path";
+import { dirname as dirname8, isAbsolute as isAbsolute5, join as join21, relative as relative10, resolve as resolve10 } from "node:path";
 var BRANCHES = "+refs/heads/*:refs/remotes/origin/*";
 var PACKED = "+refs/nosedive/*:refs/nosedive/*";
 var URL_SHAPED = /^[a-z][a-z0-9+.-]*:\/\/|^git@/i;
@@ -16802,7 +16793,7 @@ function remoteKey(url2) {
 }
 function cacheKey(remote) {
   if (URL_SHAPED.test(remote)) return remoteKey(remote);
-  const key = remoteKey(resolve9(remote));
+  const key = remoteKey(resolve10(remote));
   return process.platform === "win32" ? key.toLowerCase() : key;
 }
 function cachePath(remote) {
@@ -16821,7 +16812,7 @@ function cacheOf(bridge, doc, ctx) {
     return keyed;
   }
   try {
-    mkdirSync4(dirname8(keyed), { recursive: true });
+    mkdirSync3(dirname8(keyed), { recursive: true });
     renameSync(legacy, keyed);
   } catch (error) {
     ctx.err(`nosedive: cannot move ${name2}'s cache from ${legacy} to ${keyed}, so it is used where it is: ${error instanceof Error ? error.message : String(error)}`);
@@ -16837,7 +16828,7 @@ function fetchCache(bridge, doc, ctx) {
   const remote = origin(bridge, doc);
   const made = !existsSync20(cache);
   if (made) {
-    mkdirSync4(cache, { recursive: true });
+    mkdirSync3(cache, { recursive: true });
     cacheGit(cache, "init", "-q", "--bare");
   }
   const key = cacheKey(remote);
@@ -16850,7 +16841,7 @@ function fetchCache(bridge, doc, ctx) {
   const fetched = cacheGit(cache, "fetch", "-q", "--prune", "origin");
   if (!fetched.ok) {
     if (made) {
-      rmSync3(cache, { recursive: true, force: true });
+      rmSync2(cache, { recursive: true, force: true });
       throw new Error(`cannot fetch ${name2} from ${remote}, and there is no cache of it: ${fetched.text}`);
     }
     ctx.err(`nosedive: cannot fetch ${name2} from ${remote}, so its cache is used as it is: ${fetched.text}`);
@@ -16875,7 +16866,7 @@ function origin(bridge, doc) {
   const remotes = doc.fm.meta?.remotes ?? {};
   const url2 = remotes.origin;
   if (typeof url2 !== "string" || !url2) throw new Error(`${String(doc.fm.name)} has no meta.remotes.origin to fetch from`);
-  return URL_SHAPED.test(url2) || isAbsolute5(url2) ? url2 : resolve9(bridge.dir, url2);
+  return URL_SHAPED.test(url2) || isAbsolute5(url2) ? url2 : resolve10(bridge.dir, url2);
 }
 function git3(cwd, ...args) {
   const result = spawnSync10("git", args, { cwd, encoding: "utf8" });
@@ -17025,7 +17016,7 @@ nosedive seed there builds its capes`);
 }
 function add(cache, at, name2, args) {
   cacheGit(cache, "worktree", "prune");
-  mkdirSync5(dirname9(at), { recursive: true });
+  mkdirSync4(dirname9(at), { recursive: true });
   must(cacheGit(cache, "worktree", "add", "-q", ...args), `cannot check ${name2} out at ${at}`);
   if (cacheGit(cache, "config", "--bool", "extensions.worktreeConfig").text === "true") git4(at, "config", "--worktree", "core.bare", "false");
 }
@@ -17098,14 +17089,14 @@ function retarget(target, from, to) {
   if (KEPT.test(raw)) return target;
   const hash = raw.indexOf("#");
   const path = hash === -1 ? raw : raw.slice(0, hash);
-  const moved = `${(relative11(to, resolve10(from, path)) || ".").replace(/\\/g, "/")}${hash === -1 ? "" : raw.slice(hash)}`;
+  const moved = `${(relative11(to, resolve11(from, path)) || ".").replace(/\\/g, "/")}${hash === -1 ? "" : raw.slice(hash)}`;
   return angled || /\s/.test(moved) ? `<${moved}>` : moved;
 }
 
 // src/ie9ce704f3ee25e028d2fbff7cd47bfc8.ts
 import { spawnSync as spawnSync13 } from "node:child_process";
 import { existsSync as existsSync24 } from "node:fs";
-import { isAbsolute as isAbsolute6, join as join24, relative as relative13, resolve as resolve11 } from "node:path";
+import { isAbsolute as isAbsolute6, join as join24, relative as relative13, resolve as resolve12 } from "node:path";
 
 // src/i01a138b2b8ef7e8097e19d599ba39bcc.ts
 var import__ = __toESM(require__(), 1);
@@ -17152,7 +17143,7 @@ function checkDocMeta(doc, hero, capes, pending) {
 
 // src/i01a141f869c07c4da8288927a559c8ae.ts
 var import_yaml6 = __toESM(require_dist(), 1);
-import { existsSync as existsSync23, mkdirSync as mkdirSync6, writeFileSync as writeFileSync5 } from "node:fs";
+import { existsSync as existsSync23, mkdirSync as mkdirSync5, writeFileSync as writeFileSync4 } from "node:fs";
 import { join as join23 } from "node:path";
 
 // src/i01a1335480c776ba8945020d0af333eb.ts
@@ -17174,8 +17165,8 @@ function i01a141f869c07c4da8288927a559c8ae(kbDir, doc) {
   if (existsSync23(path)) throw new Error(`${path} already exists`);
   const scopes = doc.scopes?.length ? (0, import_yaml6.stringify)({ scopes: doc.scopes }, { lineWidth: 0 }) : "";
   const meta = doc.meta && Object.keys(doc.meta).length > 0 ? (0, import_yaml6.stringify)({ meta: doc.meta }, { lineWidth: 0 }) : "";
-  mkdirSync6(kbDir, { recursive: true });
-  writeFileSync5(path, `---
+  mkdirSync5(kbDir, { recursive: true });
+  writeFileSync4(path, `---
 kind: ${doc.kind}
 id: ${id2}
 name: ${name2}
@@ -17729,7 +17720,7 @@ function checkRepo(bridge, kbDir, name2, meta) {
   if (existsSync24(kbDir) && i01a13354850c7ba3ba5b8ac41a7b6b11(kbDir).some((doc) => doc.fm.name === name2)) throw new Error(`a repo named ${name2} is registered already`);
   const origin2 = (meta.remotes ?? {}).origin;
   if (typeof origin2 !== "string" || !origin2) throw new Error("a repo needs meta.remotes.origin, where its checkouts fetch from and push to");
-  const url2 = /^[a-z][a-z0-9+.-]*:\/\/|^git@/i.test(origin2) || isAbsolute6(origin2) ? origin2 : resolve11(bridge.dir, origin2);
+  const url2 = /^[a-z][a-z0-9+.-]*:\/\/|^git@/i.test(origin2) || isAbsolute6(origin2) ? origin2 : resolve12(bridge.dir, origin2);
   const reached = spawnSync13("git", ["ls-remote", "-q", url2, "HEAD"], { encoding: "utf8", env: { ...process.env, GIT_TERMINAL_PROMPT: "0" } });
   if (reached.status !== 0) throw new Error(`cannot reach ${origin2}, so no repo was registered: ${(reached.stderr || reached.stdout).trim()}`);
 }
@@ -17778,7 +17769,7 @@ async function i2ad1fc06c83d538e8d38e574e99974af(source, ctx) {
 
 // src/i01a1480bf8327315b11347f5e5f118a1.ts
 import { spawnSync as spawnSync14 } from "node:child_process";
-import { existsSync as existsSync25, readdirSync as readdirSync8, rmSync as rmSync4 } from "node:fs";
+import { existsSync as existsSync25, readdirSync as readdirSync8, rmSync as rmSync3 } from "node:fs";
 import { basename as basename5, relative as relative15 } from "node:path";
 
 // src/i01a14a5504467ef08586b828ebabc148.ts
@@ -17969,7 +17960,7 @@ A ${name2} is dropped when:
   for (const [other, { repoDir }] of unlinks) add2(repoDir, other.path);
   for (const id2 of rerender) add2(bridge.dir, rendered.get(id2).path);
   const subjects = new Map([...byRepo.keys()].map((repoDir) => [repoDir, i01a19005c109715583553072f4e38dc4(bridge, "crud", "drop", [...dropping], capes)]));
-  for (const entry of docs2) rmSync4(entry.doc.path);
+  for (const entry of docs2) rmSync3(entry.doc.path);
   for (const [other, { at: positions }] of unlinks) {
     for (const position of positions.sort((a, b) => b - a)) other.yaml.deleteIn(["links", position]);
     if (other.yaml.get("links")?.items?.length === 0) other.yaml.delete("links");
@@ -18170,14 +18161,14 @@ function optionalSlug(value) {
 // src/ie4a628f20d785d3a941ca681bf26e3cf.ts
 var import_yaml13 = __toESM(require_dist(), 1);
 import { spawnSync as spawnSync16 } from "node:child_process";
-import { existsSync as existsSync37, mkdirSync as mkdirSync9, readFileSync as readFileSync22, renameSync as renameSync3, writeFileSync as writeFileSync14 } from "node:fs";
-import { basename as basename8, dirname as dirname15, isAbsolute as isAbsolute7, join as join35, relative as relative19, resolve as resolve13 } from "node:path";
+import { existsSync as existsSync37, mkdirSync as mkdirSync8, readFileSync as readFileSync22, renameSync as renameSync3, writeFileSync as writeFileSync13 } from "node:fs";
+import { basename as basename8, dirname as dirname15, isAbsolute as isAbsolute7, join as join35, relative as relative19, resolve as resolve14 } from "node:path";
 import { fileURLToPath as fileURLToPath4 } from "node:url";
 
 // src/i01a19f5c60f879c28541aa6759d2b221.ts
 import { spawnSync as spawnSync15 } from "node:child_process";
 import { createHash as createHash7 } from "node:crypto";
-import { existsSync as existsSync26, readFileSync as readFileSync13, writeFileSync as writeFileSync6 } from "node:fs";
+import { existsSync as existsSync26, readFileSync as readFileSync13, writeFileSync as writeFileSync5 } from "node:fs";
 import { basename as basename6, dirname as dirname13, join as join26 } from "node:path";
 import { fileURLToPath as fileURLToPath3 } from "node:url";
 var INSTRUCTION_FILES = ["AGENTS.md", "CLAUDE.md", "GEMINI.md", ".github/copilot-instructions.md"];
@@ -18233,7 +18224,7 @@ function i01a19f5c60f879c28541aa6759d2b221(dir, surface, version2) {
   const present = INSTRUCTION_FILES.filter((file) => existsSync26(join26(dir, file)));
   if (present.length === 0) {
     const path = join26(dir, "AGENTS.md");
-    writeFileSync6(path, [SURFACE_BEGIN, ...lines, SURFACE_END, ""].join("\n"));
+    writeFileSync5(path, [SURFACE_BEGIN, ...lines, SURFACE_END, ""].join("\n"));
     return { changed: [path] };
   }
   const changed2 = [];
@@ -18247,7 +18238,7 @@ function i01a19f5c60f879c28541aa6759d2b221(dir, surface, version2) {
     const eol = text2.includes("\r\n") ? "\r" : "";
     const next = [...found.lines.slice(0, found.begin + 1), ...lines.map((line) => `${line}${eol}`), ...found.lines.slice(found.end)].join("\n");
     if (next === text2) continue;
-    writeFileSync6(path, next);
+    writeFileSync5(path, next);
     changed2.push(path);
   }
   if (marked > 0) return { changed: changed2 };
@@ -18287,12 +18278,12 @@ async function surfaceDrift(dir, render) {
 
 // src/i01a175dbf4517dafa3a9048ecd98ab84.ts
 var import_yaml11 = __toESM(require_dist(), 1);
-import { existsSync as existsSync34, readFileSync as readFileSync19, writeFileSync as writeFileSync11 } from "node:fs";
+import { existsSync as existsSync34, readFileSync as readFileSync19, writeFileSync as writeFileSync10 } from "node:fs";
 import { join as join32 } from "node:path";
 
 // src/i01a1b14c48f277e79466d8ed690da136.ts
 var import_yaml8 = __toESM(require_dist(), 1);
-import { existsSync as existsSync27, readFileSync as readFileSync14, writeFileSync as writeFileSync7 } from "node:fs";
+import { existsSync as existsSync27, readFileSync as readFileSync14, writeFileSync as writeFileSync6 } from "node:fs";
 import { join as join27, relative as relative16 } from "node:path";
 var LEGACY_CAPES = [
   {
@@ -18300,7 +18291,7 @@ var LEGACY_CAPES = [
     name: "nosedive-legacy",
     gist: "The cape holding jump, pack, land, bail and legacy nosedive's test, hydrate-repo.workspace, dehydrate-repo.workspace, record.gate and note",
     origin: "https://github.com/KnowBoss/nosedive-legacy.git",
-    commit: "11f106bb8f71c7205781e081cf81ff1953dfad1c"
+    commit: "d34e03edcbab1563e6469c76f63314777cbf0c2b"
   }
 ];
 function i01a1b14c48f277e79466d8ed690da136(dir, ctx) {
@@ -18318,7 +18309,7 @@ function i01a1b14c48f277e79466d8ed690da136(dir, ctx) {
   for (const cape of LEGACY_CAPES) {
     const path = join27(kbDir, `${cape.id}.md`);
     if (!existsSync27(path) && !existsSync27(join27(dir, ".nosedive", "repos", `${cape.id}.md`))) {
-      writeFileSync7(path, `---
+      writeFileSync6(path, `---
 kind: repo
 id: ${cape.id}
 name: ${cape.name}
@@ -18347,7 +18338,7 @@ meta:
 
 // src/i01a175dbf8d67926b24029e8caa38e94.ts
 var import_yaml9 = __toESM(require_dist(), 1);
-import { existsSync as existsSync28, mkdirSync as mkdirSync7, readdirSync as readdirSync9, readFileSync as readFileSync15, renameSync as renameSync2, writeFileSync as writeFileSync8 } from "node:fs";
+import { existsSync as existsSync28, mkdirSync as mkdirSync6, readdirSync as readdirSync9, readFileSync as readFileSync15, renameSync as renameSync2, writeFileSync as writeFileSync7 } from "node:fs";
 import { join as join28, relative as relative17 } from "node:path";
 var PLAIN = ["memo", "base"];
 function i01a175dbf8d67926b24029e8caa38e94(dir) {
@@ -18373,7 +18364,7 @@ function i01a175dbf8d67926b24029e8caa38e94(dir) {
     const kind = i01a1335482f876d6808aec457f512e80(readFileSync15(path, "utf8")).fm.kind;
     if (kind !== "kind" && kind !== "repo") continue;
     const to = join28(dir, ".nosedive", kind === "kind" ? "kinds" : "repos", file);
-    mkdirSync7(join28(to, ".."), { recursive: true });
+    mkdirSync6(join28(to, ".."), { recursive: true });
     renameSync2(path, to);
     changed2.push(path, to);
   }
@@ -18382,12 +18373,12 @@ function i01a175dbf8d67926b24029e8caa38e94(dir) {
   config.set("id", root);
   if (workspace !== void 0) config.set("workspace", workspace);
   config.set("roots", [`${relative17(dir, kbDir).replace(/\\/g, "/")}/${root}.md`]);
-  writeFileSync8(configPath, config.toString({ lineWidth: 0 }));
+  writeFileSync7(configPath, config.toString({ lineWidth: 0 }));
   return changed2;
 }
 
 // src/i01a18e8044c97daeb0498ee7ad07bf43.ts
-import { existsSync as existsSync29, readFileSync as readFileSync16, writeFileSync as writeFileSync9 } from "node:fs";
+import { existsSync as existsSync29, readFileSync as readFileSync16, writeFileSync as writeFileSync8 } from "node:fs";
 import { join as join29 } from "node:path";
 var STRUCTURAL = ["action", "function", "cape", "migration", "base", "hero"];
 var MANAGED = ["kind", "repo"];
@@ -18504,7 +18495,7 @@ function mintKind(hero, name2, named2, declared) {
   const dropWhen = declared ? declared.dropWhen : "Not yet defined: ask the pilot.";
   const fields2 = seen.size > 0 ? [...seen].map(([field, value]) => `- \`${field}\`: \`${sample(value)}\``).join("\n") : "No doc of it carries meta.";
   const text2 = readFileSync16(minted.path, "utf8");
-  writeFileSync9(minted.path, `${text2}
+  writeFileSync8(minted.path, `${text2}
 The canonical-kinds migration found docs of kind ${name2} in this repo and no kind declaring it, so it declared this one, ${declared ? "as core declares it" : "with an open schema"}, to keep them valid. Pilot: say what ${name2} is for${declared ? "." : ", and close its schema."}
 
 ## Meta seen in use
@@ -18644,7 +18635,7 @@ function i01a1b15ad92b7f44ae1b3f41e24eb3ef(dir, ctx) {
 
 // src/i01a1b3c3531177d3a3b89d851c6b456c.ts
 var import_yaml10 = __toESM(require_dist(), 1);
-import { existsSync as existsSync33, readFileSync as readFileSync18, writeFileSync as writeFileSync10 } from "node:fs";
+import { existsSync as existsSync33, readFileSync as readFileSync18, writeFileSync as writeFileSync9 } from "node:fs";
 import { join as join31 } from "node:path";
 var FENCE2 = 3;
 function i01a1b3c3531177d3a3b89d851c6b456c(dir, ctx) {
@@ -18654,7 +18645,7 @@ function i01a1b3c3531177d3a3b89d851c6b456c(dir, ctx) {
   const level = config.get("compatibility-level");
   if (typeof level !== "number" || level >= FENCE2) return [];
   config.set("compatibility-level", FENCE2);
-  writeFileSync10(path, config.toString());
+  writeFileSync9(path, config.toString());
   ctx.out(`legacy-fence: compatibility-level ${level} raised to ${FENCE2}, so legacy nosedive will not seed this hero`);
   return [path];
 }
@@ -18716,7 +18707,7 @@ function listMigrations(configPath, ran) {
   const config = (0, import_yaml11.parseDocument)(readFileSync19(configPath, "utf8"));
   config.delete("last-migration");
   config.set("migrations", ran);
-  writeFileSync11(configPath, config.toString({ lineWidth: 0 }));
+  writeFileSync10(configPath, config.toString({ lineWidth: 0 }));
 }
 function dirName(dir) {
   return dir.replace(/[\\/]+$/, "").split(/[\\/]/).at(-1) ?? dir;
@@ -18724,7 +18715,7 @@ function dirName(dir) {
 
 // src/i01a1b30d4b537775a4e1260cd7fb9067.ts
 var import_yaml12 = __toESM(require_dist(), 1);
-import { existsSync as existsSync35, readFileSync as readFileSync20, writeFileSync as writeFileSync12 } from "node:fs";
+import { existsSync as existsSync35, readFileSync as readFileSync20, writeFileSync as writeFileSync11 } from "node:fs";
 import { join as join33 } from "node:path";
 function capeMigrations(cape) {
   const all = Object.entries(cape.docs).flatMap(([id2, doc]) => {
@@ -18782,7 +18773,7 @@ async function i01a1b30d4b537775a4e1260cd7fb9067(dir, ctx) {
       if (!files) break;
       const config = (0, import_yaml12.parseDocument)(readFileSync20(configPath, "utf8"));
       config.set("migrations", [...listed(configPath), entry]);
-      writeFileSync12(configPath, config.toString({ lineWidth: 0 }));
+      writeFileSync11(configPath, config.toString({ lineWidth: 0 }));
       i01a13354894273b1be253424511ba82c(dir, [.../* @__PURE__ */ new Set([...files, configPath])], `migrate: ${worn.name}:${migration.name}`, core.version);
       if (files.length > 0) changed2.push(`${worn.name}:${migration.name}`);
     }
@@ -18795,15 +18786,15 @@ function listed(configPath) {
 }
 
 // src/i01a133547f5f7c45a3fb2ac0e3a7678e.ts
-import { existsSync as existsSync36, mkdirSync as mkdirSync8, readdirSync as readdirSync10, readFileSync as readFileSync21, statSync as statSync4, writeFileSync as writeFileSync13 } from "node:fs";
-import { basename as basename7, dirname as dirname14, join as join34, relative as relative18, resolve as resolve12 } from "node:path";
+import { existsSync as existsSync36, mkdirSync as mkdirSync7, readdirSync as readdirSync10, readFileSync as readFileSync21, statSync as statSync4, writeFileSync as writeFileSync12 } from "node:fs";
+import { basename as basename7, dirname as dirname14, join as join34, relative as relative18, resolve as resolve13 } from "node:path";
 var UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/;
 var QUIDS = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/g;
 var CODE_KINDS = /* @__PURE__ */ new Set(["action", "function", "migration"]);
 function i01a133547f5f7c45a3fb2ac0e3a7678e(repoDir) {
   const group = { kbs: /* @__PURE__ */ new Map(), notes: [] };
   const rel = (path) => relative18(repoDir, path).replace(/\\/g, "/");
-  const ours = (path) => resolve12(holdingRepo2(path) ?? "\0") === resolve12(repoDir);
+  const ours = (path) => resolve13(holdingRepo2(path) ?? "\0") === resolve13(repoDir);
   const found = walk(repoDir);
   for (const path of found.docs) {
     if (!ours(path)) continue;
@@ -18828,8 +18819,8 @@ function scaffold(repoDir, group) {
     owned.add(file);
     const path = join34(repoDir, file);
     if (existsSync36(path)) return;
-    mkdirSync8(dirname14(path), { recursive: true });
-    writeFileSync13(path, text2);
+    mkdirSync7(dirname14(path), { recursive: true });
+    writeFileSync12(path, text2);
     created.push(file);
   };
   const updated = [];
@@ -18996,15 +18987,15 @@ var NOSEDIVE_IGNORES = ["cache/", "capes/", "local/"];
 var LOCKFILE = "!package-lock.json";
 function placeWorkspace(dir, workspace) {
   const record = join35(dir, ".nosedive", "local", "workspace");
-  const previous = existsSync37(record) ? resolve13(dir, readFileSync22(record, "utf8").trim()) : void 0;
+  const previous = existsSync37(record) ? resolve14(dir, readFileSync22(record, "utf8").trim()) : void 0;
   if (previous && previous !== workspace && existsSync37(previous) && !existsSync37(workspace)) {
-    mkdirSync9(dirname15(workspace), { recursive: true });
+    mkdirSync8(dirname15(workspace), { recursive: true });
     renameSync3(previous, workspace);
   }
-  mkdirSync9(workspace, { recursive: true });
-  if (!existsSync37(join35(workspace, ".gitignore"))) writeFileSync14(join35(workspace, ".gitignore"), "*\n");
-  mkdirSync9(dirname15(record), { recursive: true });
-  writeFileSync14(record, `${relative19(dir, workspace).replace(/\\/g, "/")}
+  mkdirSync8(workspace, { recursive: true });
+  if (!existsSync37(join35(workspace, ".gitignore"))) writeFileSync13(join35(workspace, ".gitignore"), "*\n");
+  mkdirSync8(dirname15(record), { recursive: true });
+  writeFileSync13(record, `${relative19(dir, workspace).replace(/\\/g, "/")}
 `);
 }
 function localCapeDir(cwd, at) {
@@ -19012,7 +19003,7 @@ function localCapeDir(cwd, at) {
   const refuse = (why) => new Error(`seed --at ${at}: ${why}`);
   if (!hero) throw refuse("this is no hero to hold a cape");
   if (selectRoot(hero.roots, at)) throw refuse("that names one of the hero's roots, which is seeded already");
-  const dir = resolve13(cwd, at);
+  const dir = resolve14(cwd, at);
   const inside = (parent, path) => !relative19(parent, path).startsWith("..") && !isAbsolute7(relative19(parent, path)) && relative19(parent, path) !== "";
   if (!inside(hero.dir, dir)) throw refuse("a local cape lies inside the hero");
   if (hero.workspace !== void 0 && (dir === hero.workspace || inside(hero.workspace, dir))) throw refuse("a local cape lies outside the hero's workspace");
@@ -19026,7 +19017,7 @@ function localCapeDir(cwd, at) {
   const holder2 = i01a1335485c67c95b7efdf2f0e03cfd6(above);
   if (!holder2 || relative19(holder2.dir, hero.dir) !== "") throw refuse(`that lies inside ${holder2?.dir ?? "another repo"}, which is seeded on its own`);
   if (!seeded) {
-    mkdirSync9(dir, { recursive: true });
+    mkdirSync8(dir, { recursive: true });
     return { dir, hero };
   }
   const own = i01a13dee4b1d78f7a699c3777bf63587(dir);
@@ -19040,7 +19031,7 @@ function listRoot(hero, rootPath) {
   const path = relative19(hero.dir, rootPath).replace(/\\/g, "/");
   if (!(0, import_yaml13.isSeq)(roots)) throw new Error(`${hero.configPath} lists no roots`);
   roots.add(path);
-  writeFileSync14(hero.configPath, config.toString({ lineWidth: 0 }));
+  writeFileSync13(hero.configPath, config.toString({ lineWidth: 0 }));
   return hero.configPath;
 }
 function nearestRepo(cwd, top) {
@@ -19079,12 +19070,12 @@ async function ie4a628f20d785d3a941ca681bf26e3cf(options, ctx) {
     if (core.kinds[rootKind] === void 0) throw new Error(`no kind ${rootKind} is declared, so it cannot be the root's kind`);
     const kind = { ...core.kinds[rootKind], name: rootKind, owner: CORE_OWNER, repoDir: core.repoDir };
     const pin = pinOf(kind, { roots: [] });
-    mkdirSync9(join35(dir, ".nosedive"), { recursive: true });
+    mkdirSync8(join35(dir, ".nosedive"), { recursive: true });
     const scopes = [{ [CORE_OWNER]: { canonical: true, ...pin } }];
     const home = workspace && rootKind !== "cape" ? "self" : "kb";
     const root2 = i01a141f869c07c4da8288927a559c8ae(join35(dir, home), { kind: rootKind, name: repo, gist: `What ${repo} holds`, title: repo, scopes });
     const config = { id: root2.id, migrations: MIGRATIONS.map((migration) => migration.id), ...workspace ? { workspace: "./workspace" } : {}, roots: [`${home}/${root2.id}.md`] };
-    writeFileSync14(configPath, new import_yaml13.Document(config).toString({ lineWidth: 0 }));
+    writeFileSync13(configPath, new import_yaml13.Document(config).toString({ lineWidth: 0 }));
     changed2.push(root2.path, configPath);
   } else {
     const config = (0, import_yaml13.parseDocument)(readFileSync22(configPath, "utf8"));
@@ -19097,7 +19088,7 @@ async function ie4a628f20d785d3a941ca681bf26e3cf(options, ctx) {
       config.set("migrations", listed2.filter((id2) => id2 !== heroSelf.id));
     }
     if (config.toString({ lineWidth: 0 }) !== before) {
-      writeFileSync14(configPath, config.toString({ lineWidth: 0 }));
+      writeFileSync13(configPath, config.toString({ lineWidth: 0 }));
       changed2.push(configPath);
     }
   }
@@ -19105,7 +19096,7 @@ async function ie4a628f20d785d3a941ca681bf26e3cf(options, ctx) {
   const ignore = existsSync37(ignorePath) ? readFileSync22(ignorePath, "utf8") : "";
   const missing = NOSEDIVE_IGNORES.filter((line) => !ignore.split(/\r?\n/).includes(line));
   if (missing.length > 0) {
-    writeFileSync14(ignorePath, `${ignore}${ignore && !ignore.endsWith("\n") ? "\n" : ""}${missing.map((line) => `${line}
+    writeFileSync13(ignorePath, `${ignore}${ignore && !ignore.endsWith("\n") ? "\n" : ""}${missing.map((line) => `${line}
 `).join("")}`);
     changed2.push(ignorePath);
   }
@@ -19114,7 +19105,7 @@ async function ie4a628f20d785d3a941ca681bf26e3cf(options, ctx) {
     const repoIgnore = join35(dir, ".gitignore");
     const text2 = existsSync37(repoIgnore) ? readFileSync22(repoIgnore, "utf8") : "";
     if (!text2.split(/\r?\n/).includes(LOCKFILE)) {
-      writeFileSync14(repoIgnore, `${text2}${text2 && !text2.endsWith("\n") ? "\n" : ""}${LOCKFILE}
+      writeFileSync13(repoIgnore, `${text2}${text2 && !text2.endsWith("\n") ? "\n" : ""}${LOCKFILE}
 `);
       changed2.push(repoIgnore);
     }
@@ -19123,7 +19114,7 @@ async function ie4a628f20d785d3a941ca681bf26e3cf(options, ctx) {
   const readme = join35(dir, "README.md");
   if (!existsSync37(readme) && own.root) {
     const primary = own.roots.find((root2) => root2.id === own.root);
-    writeFileSync14(readme, `# [${repo}](${relative19(dir, primary.path).replace(/\\/g, "/")})
+    writeFileSync13(readme, `# [${repo}](${relative19(dir, primary.path).replace(/\\/g, "/")})
 `);
     changed2.push(readme);
   }
@@ -19245,7 +19236,7 @@ async function i01a133547ea87883b6acc99ddff5d5a8(call) {
 }
 
 // src/i01a135419cdf7f3ba72a31c4092c5bb5.ts
-import { existsSync as existsSync38, mkdtempSync, writeFileSync as writeFileSync15 } from "node:fs";
+import { existsSync as existsSync38, mkdtempSync, writeFileSync as writeFileSync14 } from "node:fs";
 import { tmpdir } from "node:os";
 import { join as join36 } from "node:path";
 import { pathToFileURL as pathToFileURL3 } from "node:url";
@@ -19264,7 +19255,7 @@ async function i01a135419cdf7f3ba72a31c4092c5bb5(repoDir, id2, name2) {
     for (const value of values) named2[value] = module[value];
   }
   const url2 = join36(mkdtempSync(join36(tmpdir(), "nosedive-source-")), "exports.mjs");
-  writeFileSync15(url2, present.map((entry) => `export { ${entry.name} } from ${JSON.stringify(pathToFileURL3(entry.file).href)};`).join("\n"));
+  writeFileSync14(url2, present.map((entry) => `export { ${entry.name} } from ${JSON.stringify(pathToFileURL3(entry.file).href)};`).join("\n"));
   const root = i01a13a6aba3a763595bd67a4ee4d47bf(repoDir);
   const shortName2 = root ? String(root.fm.name) : void 0;
   return { id: id2, owner: i01a13dee4b1d78f7a699c3777bf63587(repoDir)?.id, name: name2, shortName: shortName2, repoDir, commit: "source", version: "source", docs: source.docs, index: index2, kinds: source.kinds, named: named2, url: pathToFileURL3(url2).href };
@@ -19294,9 +19285,9 @@ async function i01a13565d94b745886f9e2909a9aae2a(call) {
 
 // src/i01a138b2b8f175bc95242dc33d92138b.ts
 import { spawnSync as spawnSync17 } from "node:child_process";
-import { existsSync as existsSync39, mkdtempSync as mkdtempSync2, readdirSync as readdirSync11, rmSync as rmSync5, writeFileSync as writeFileSync16 } from "node:fs";
+import { existsSync as existsSync39, mkdtempSync as mkdtempSync2, readdirSync as readdirSync11, rmSync as rmSync4, writeFileSync as writeFileSync15 } from "node:fs";
 import { tmpdir as tmpdir2 } from "node:os";
-import { basename as basename9, join as join37, resolve as resolve14, sep as sep3 } from "node:path";
+import { basename as basename9, join as join37, resolve as resolve15, sep as sep3 } from "node:path";
 import { pathToFileURL as pathToFileURL4 } from "node:url";
 function i01a138b2b8f175bc95242dc33d92138b(ctx) {
   if (!ctx.core.url) throw new Error(`core ${ctx.core.version} has no module the tests can import`);
@@ -19310,12 +19301,12 @@ function i01a138b2b8f175bc95242dc33d92138b(ctx) {
     for (const [name2, repoDir] of workspaceCapes(ctx).filter(([name3]) => name3 !== ctx.core.name)) {
       const file = join37(dir, `${name2}.mjs`);
       const { entries: entries2 } = i01a1335487e477549d84a6fc2c901bf6(repoDir);
-      writeFileSync16(file, entries2.map((entry) => `export { ${entry.name} } from ${JSON.stringify(pathToFileURL4(entry.file).href)};`).join("\n"));
+      writeFileSync15(file, entries2.map((entry) => `export { ${entry.name} } from ${JSON.stringify(pathToFileURL4(entry.file).href)};`).join("\n"));
       modules[name2] = pathToFileURL4(file).href;
     }
     const resolver = join37(dir, "resolve.mjs");
     const assets2 = pathToFileURL4(join37(ctx.repoDir, "assets") + sep3).href;
-    writeFileSync16(
+    writeFileSync15(
       resolver,
       [
         'import { readFileSync } from "node:fs";',
@@ -19341,7 +19332,7 @@ function i01a138b2b8f175bc95242dc33d92138b(ctx) {
     if (output) ctx.out(output);
     if (run.status !== 0) throw new Error(`the tests of ${basename9(ctx.repoDir)} failed`);
   } finally {
-    rmSync5(dir, { recursive: true, force: true });
+    rmSync4(dir, { recursive: true, force: true });
   }
 }
 function workspaceCapes(ctx) {
@@ -19349,7 +19340,7 @@ function workspaceCapes(ctx) {
   if (bridge?.workspace === void 0) return [];
   const workspace = bridge.workspace;
   if (!existsSync39(workspace)) return [];
-  return readdirSync11(workspace, { withFileTypes: true }).filter((entry) => entry.isDirectory() && resolve14(workspace, entry.name) !== resolve14(ctx.repoDir)).map((entry) => [entry.name, join37(workspace, entry.name)]).filter(([, repoDir]) => existsSync39(i01a13dee4b1d78f7a699c3777bf63587(repoDir)?.kbDir ?? join37(repoDir, "kb")) && i01a1335487e477549d84a6fc2c901bf6(repoDir).entries.length > 0);
+  return readdirSync11(workspace, { withFileTypes: true }).filter((entry) => entry.isDirectory() && resolve15(workspace, entry.name) !== resolve15(ctx.repoDir)).map((entry) => [entry.name, join37(workspace, entry.name)]).filter(([, repoDir]) => existsSync39(i01a13dee4b1d78f7a699c3777bf63587(repoDir)?.kbDir ?? join37(repoDir, "kb")) && i01a1335487e477549d84a6fc2c901bf6(repoDir).entries.length > 0);
 }
 
 // src/ie912ca03bb41549d86d709f98260400c.ts
@@ -19371,7 +19362,7 @@ async function i01a138b2b8f37d3282d2274fae0f5007(call) {
 // src/ib4959fbe2cef5f0ba22879fe0bbd5c00.ts
 import { spawnSync as spawnSync18 } from "node:child_process";
 import { existsSync as existsSync40, statSync as statSync5 } from "node:fs";
-import { relative as relative20, resolve as resolve15 } from "node:path";
+import { relative as relative20, resolve as resolve16 } from "node:path";
 var ANY = "any doc";
 var QUID9 = /[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}/;
 async function ib4959fbe2cef5f0ba22879fe0bbd5c00(argv, ctx) {
@@ -19521,7 +19512,7 @@ function groupedListing(usages, bridge, capes, more) {
   return names.map((name2) => [name2, ...[...groups.get(name2)].sort(([a], [b]) => a < b ? -1 : a > b ? 1 : 0).flatMap(([, usage]) => usageHelp.lines(usage, more))].join("\n")).join("\n\n");
 }
 function sectValue(given, cwd, bridge) {
-  const dir = resolve15(cwd, given);
+  const dir = resolve16(cwd, given);
   if (!existsSync40(dir) || !statSync5(dir).isDirectory()) return given;
   const root = i01a1934563e77ed886f06d04416385ef(bridge).find((cape) => relative20(cape.dir, dir) === "")?.id;
   if (!root) throw new Error(`${given} is a directory, but no local cape of the hero (a cape root its config roots list): seed one with \`nosedive --at ${given} seed --root-kind cape\``);
@@ -19611,7 +19602,7 @@ async function ib1271b71723d57c39b4dd36252311704(ctx) {
   const worn = wornCapes(bridge).find((cape) => cape.id === doc.id);
   const repo = i01a1337d2c14754f9772dc22c1f2edfc(bridge, name2);
   const ref = typeof ctx.args.ref === "string" ? ctx.args.ref : worn?.follow ?? "";
-  const commit2 = resolve16(bridge.dir, repo.remote, ref);
+  const commit2 = resolve17(bridge.dir, repo.remote, ref);
   const built = await i01a1337c81b57799820f96a757b791d0(bridge, repo, commit2, ctx.core, [], ctx.out);
   const root = i01a13a6aba3a763595bd67a4ee4d47bf(`${bridge.dir}/.nosedive/capes/src/${repo.id}`, "cape");
   if (!root) throw new Error(`${name2} is no cape: it has no cape root`);
@@ -19620,7 +19611,7 @@ async function ib1271b71723d57c39b4dd36252311704(ctx) {
   ctx.crud(bridge.activeRoot, "links", { ...moved, [key]: { ...moved[key], ...worn ? {} : { rel: ".cape" }, ...ref ? { ref } : {}, commit: commit2 } });
   ctx.out(`${worn ? "re-attached" : "attached"} ${ref ? `${name2}@${ref}` : name2} ${built.version} (${commit2.slice(0, 7)})`);
 }
-function resolve16(cwd, remote, ref) {
+function resolve17(cwd, remote, ref) {
   if (COMMIT3.test(ref)) return ref;
   const wanted = ref ? [`refs/heads/${ref}`, `refs/tags/${ref}^{}`, `refs/tags/${ref}`] : ["HEAD"];
   const result = spawnSync20("git", ["ls-remote", remote, ...wanted], { cwd, encoding: "utf8" });
@@ -19673,7 +19664,7 @@ async function i01a185168bb079b8be334b6d86dba95a(call) {
 
 // src/ibc5113a84ba55195add71cac33f0bf20.ts
 import { spawnSync as spawnSync21 } from "node:child_process";
-import { existsSync as existsSync42, mkdirSync as mkdirSync10, readFileSync as readFileSync23, writeFileSync as writeFileSync17 } from "node:fs";
+import { existsSync as existsSync42, mkdirSync as mkdirSync9, readFileSync as readFileSync23, writeFileSync as writeFileSync16 } from "node:fs";
 import { dirname as dirname16, join as join38, relative as relative24 } from "node:path";
 async function ibc5113a84ba55195add71cac33f0bf20(_args, ctx) {
   const bridge = i01a1335485c67c95b7efdf2f0e03cfd6(ctx.cwd);
@@ -19789,8 +19780,8 @@ async function newerCore2(dir, running) {
       return void 0;
     }
     try {
-      mkdirSync10(dirname16(record), { recursive: true });
-      writeFileSync17(record, `${JSON.stringify({ checked: (/* @__PURE__ */ new Date()).toISOString(), version: published })}
+      mkdirSync9(dirname16(record), { recursive: true });
+      writeFileSync16(record, `${JSON.stringify({ checked: (/* @__PURE__ */ new Date()).toISOString(), version: published })}
 `);
     } catch {
     }
@@ -19832,12 +19823,12 @@ async function i01a1bd8370eb761d998cc4d957a14cfd(call) {
 }
 
 // build/entry.ts
-var id = "bcf25a29-0a83-5367-a8be-db53ee877cf8";
+var id = "a5dfcab2-dab7-585c-ace2-77055e2b41bc";
 var owner = "01a1336b-c0b8-7cde-b7c6-285196062297";
 var name = "nosedive-core";
 var shortName = "core";
-var commit = "b732f51f1e0aab2f8ef1229630707059be5a4100";
-var version = "2026.11.13-1794592832931";
+var commit = "ba0726e3944107cbe30d01c8259a8b4571153c06";
+var version = "2026.11.13-1794613842976";
 var docs = { "01a13354-7dea-7604-b903-b94a5aca2b83": { "kind": "action", "name": "crud", "gist": "Reads, mints and edits kb docs", "usages": [{ "id": "5d22a1166ca0519c8dcb58f8989f3ac0", "text": "crud", "description": { "summary": "Lists the kinds a doc can be minted as.", "body": "Prints a group for each owner of kinds the hero reads, and under it the kinds it declares, each spelled as `crud <kind> <gist>` takes it: bare for the hero's own kinds, `<owner>:<kind>` for any other.", "params": [{ "name": "ctx", "text": "Where it runs, and how it reads and prints." }], "returns": "Nothing; it prints the groups.", "attributes": [{ "key": "feat", "value": "01a1336b-c0b8-7cde-b7c6-285196062297" }] } }, { "id": "f4a09298430355a2a473394fbb5103f2", "text": "crud <quid>", "description": { "summary": "Prints a doc whole, its front matter included.", "body": "Looks in the hero's kb, then the repos checked out in its workspace, then the docs of the loaded capes, then those of every cape the hero wears that has a build, so a cape's doc is readable wherever the cape is worn. Refuses a quid none of them holds.", "params": [{ "name": "quid", "text": "The doc to print: its quid, or a path ending `<quid>.md`." }, { "name": "ctx", "text": "Where it runs, and how it reads and prints." }], "returns": "Nothing; it prints the doc.", "attributes": [{ "key": "feat", "value": "01a1336b-c0b8-7cde-b7c6-285196062297" }] } }, { "id": "bccbde44f93254e0bb6a2af910bc03d9", "text": "crud --read <quid>", "description": { "summary": "Prints a doc to be read: its title and body, with its links made relative to where you are.", "body": "Leaves out the front matter and rewrites each relative markdown link so it resolves from the current directory. A cape's doc that has no file is looked up in its repo's dock at the commit the cape was built at, docked first if need be; when that cannot be done, the links print as written and stderr says why.", "params": [{ "name": "quid", "text": "The doc to print: its quid, or a path ending `<quid>.md`." }, { "name": "ctx", "text": "Where it runs, and how it reads and prints." }], "returns": "Nothing; it prints the body.", "attributes": [{ "key": "feat", "value": "01a1336b-c0b8-7cde-b7c6-285196062297" }] } }, { "id": "e9ce704f3ee25e028d2fbff7cd47bfc8", "text": "crud <kind> <gist>... [--name <name>] [--meta <source>] [--meta:<path> <value>]... [--section:<path> <source>]...", "description": { "summary": "Mints a new doc of a kind from a gist, and commits it.", "body": "The doc is written to the target, the hero's kb unless `--at` names another directory (kinds and repos always go where the hero reads them), with a new id. Its meta is checked against its kind's schema, its sections are written, its kind's crud gates may shape it, and it is committed; whatever fails leaves nothing behind. A repo needs a name and a reachable `meta.remotes.origin`.", "params": [{ "name": "doc", "text": "What to mint: its kind, its gist, and optionally its name, its `--meta` source, its `--meta:<path>` values and its `--section:<path>` texts." }, { "name": "ctx", "text": "Where it runs, and how it reads and prints." }], "returns": "Nothing; it prints the new doc's path from the hero.", "attributes": [{ "key": "feat", "value": "01a1336b-c0b8-7cde-b7c6-285196062297" }] } }, { "id": "3ac641d4a9d757a48df1f1de031be120", "text": "crud <quid> --meta <source>", "description": { "summary": "Merges a mapping into a doc's meta.", "body": "The keys merge onto the doc's meta, and a null removes one. The result is checked against the schema of the doc's kind, and a mismatch is a warning on stderr. A doc held by no seeded repo keeps the meta in a scope entry for its kind instead of in its own.", "params": [{ "name": "edit", "text": "The edit this change is made in, which the caller commits." }, { "name": "quid", "text": "The doc to change: its quid, or a path ending `<quid>.md`." }, { "name": "patch", "text": "The mapping, read from its source." }, { "name": "ctx", "text": "Where it runs, and how it reads and prints." }], "returns": "Nothing; the change is in the edit.", "attributes": [{ "key": "feat", "value": "01a1336b-c0b8-7cde-b7c6-285196062297" }] } }, { "id": "4566acc2e53a5c9cb2f745468d21fa5b", "text": "crud <quid> --meta:<path> <value>... [--section:<path> <source>]...", "description": { "summary": "Sets values in a doc's meta by dot path, and writes sections, in one edit.", "body": "Each value is read as YAML, a null removing the key, and merged as `--meta` does; each section text is written as `--section:<path>` does.", "params": [{ "name": "edit", "text": "The edit this change is made in, which the caller commits." }, { "name": "quid", "text": "The doc to change: its quid, or a path ending `<quid>.md`." }, { "name": "meta", "text": "Each dot path to the value as typed." }, { "name": "sections", "text": "Each section path to its text." }, { "name": "ctx", "text": "Where it runs, and how it reads and prints." }], "returns": "Nothing; the change is in the edit.", "attributes": [{ "key": "feat", "value": "01a1336b-c0b8-7cde-b7c6-285196062297" }] } }, { "id": "7820a39cffb9511493085038a7e19447", "text": "crud <quid> --scopes <source>", "description": { "summary": "Merges a mapping into a doc's scopes.", "body": "The entries are keyed by repo: a value merges onto its key's entry, a new key is appended, and a null removes the entry. A scope that carries a kind is refused, since its kind is the root's.", "params": [{ "name": "edit", "text": "The edit this change is made in, which the caller commits." }, { "name": "quid", "text": "The doc to change: its quid, or a path ending `<quid>.md`." }, { "name": "patch", "text": "The mapping, read from its source." }], "returns": "Nothing; the change is in the edit.", "attributes": [{ "key": "feat", "value": "01a1336b-c0b8-7cde-b7c6-285196062297" }] } }, { "id": "21be7cc759fb5c758e11cffdb2630902", "text": "crud <quid> --links <source>", "description": { "summary": "Merges a mapping into a doc's links.", "body": "The keys are link targets, a doc of another repo keyed `<repo>:<path>`: a value merges onto its key's entry, a new key is appended, and a null removes the link. A link the kb's durable-link rule forbids is refused when the edit is committed.", "params": [{ "name": "edit", "text": "The edit this change is made in, which the caller commits." }, { "name": "quid", "text": "The doc to change: its quid, or a path ending `<quid>.md`." }, { "name": "patch", "text": "The mapping, read from its source." }], "returns": "Nothing; the change is in the edit.", "attributes": [{ "key": "feat", "value": "01a1336b-c0b8-7cde-b7c6-285196062297" }] } }, { "id": "112fbf4a4c7153da8d321f828607a1d0", "text": "crud <quid> --parent <parent>", "description": { "summary": "Makes one doc the only parent of another.", "body": "The doc's other `parent.feat` links go, with those parents' `child.feat` links back to it, and the parent gains a `child.feat` link to it. Refuses a parent that is the doc itself, is under it, or lies in another kb.", "params": [{ "name": "edit", "text": "The edit this change is made in, which the caller commits." }, { "name": "quid", "text": "The doc to change: its quid, or a path ending `<quid>.md`." }, { "name": "parent", "text": "The doc to make its parent." }], "returns": "Nothing; the change is in the edit.", "attributes": [{ "key": "feat", "value": "01a1336b-c0b8-7cde-b7c6-285196062297" }] } }, { "id": "933f159845875010ad6ed3569414a651", "text": "crud <quid> --title <title>", "description": { "summary": "Sets a doc's title, the heading that opens its body.", "body": "The rest of the body is kept.", "params": [{ "name": "edit", "text": "The edit this change is made in, which the caller commits." }, { "name": "quid", "text": "The doc to change: its quid, or a path ending `<quid>.md`." }, { "name": "title", "text": "The new title; an empty one is refused." }], "returns": "Nothing; the change is in the edit.", "attributes": [{ "key": "feat", "value": "01a1336b-c0b8-7cde-b7c6-285196062297" }] } }, { "id": "ecbd59b3160b5626840a2de9f49fb01f", "text": "crud <quid> --body <source>", "description": { "summary": "Replaces a doc's body under its title.", "body": "A source that opens with a `# ` heading sets the title too, and the rest is the body; otherwise the doc keeps its title, and one with no title is refused.", "params": [{ "name": "edit", "text": "The edit this change is made in, which the caller commits." }, { "name": "quid", "text": "The doc to change: its quid, or a path ending `<quid>.md`." }, { "name": "text", "text": "The source's text." }], "returns": "Nothing; the change is in the edit.", "attributes": [{ "key": "feat", "value": "01a1336b-c0b8-7cde-b7c6-285196062297" }] } }, { "id": "794ab6e0060f5ede8b0148203fe6df81", "text": "crud <quid> --section <heading> <source>", "description": { "summary": "Writes the section a heading names in a doc's body.", "body": "The heading is found in any case, and the section is added at the end of the body when the doc lacks it. An empty source removes the section, its subsections with it.", "params": [{ "name": "edit", "text": "The edit this change is made in, which the caller commits." }, { "name": "quid", "text": "The doc to change: its quid, or a path ending `<quid>.md`." }, { "name": "heading", "text": "The section's `##` heading." }, { "name": "source", "text": "The section's text, read from its source." }], "returns": "Nothing; the change is in the edit.", "attributes": [{ "key": "feat", "value": "01a1336b-c0b8-7cde-b7c6-285196062297" }] } }, { "id": "a2855cb936b2597b8666125991f0d31a", "text": "crud <quid> --section:<path> <source>...", "description": { "summary": "Writes the sections that dot paths name in a doc's body.", "body": "In a path `a.b`, `b` is a `###` section under the `##` section `a`; each heading the doc lacks is made, and an empty text removes the last section.", "params": [{ "name": "edit", "text": "The edit this change is made in, which the caller commits." }, { "name": "quid", "text": "The doc to change: its quid, or a path ending `<quid>.md`." }, { "name": "sections", "text": "Each section path to its text." }], "returns": "Nothing; the change is in the edit.", "attributes": [{ "key": "feat", "value": "01a1336b-c0b8-7cde-b7c6-285196062297" }] } }, { "id": "e9dc0e8d57db5875868f19e35aa40379", "text": "crud <quid> --replace <old> <new>", "description": { "summary": "Replaces the one place a text occurs under a doc's title.", "body": "Each text loses one trailing newline, which a file almost always ends with. Text found nowhere, or in more than one place, is refused.", "params": [{ "name": "edit", "text": "The edit this change is made in, which the caller commits." }, { "name": "quid", "text": "The doc to change: its quid, or a path ending `<quid>.md`." }, { "name": "oldText", "text": "The text to find." }, { "name": "newText", "text": "The text to put there." }], "returns": "Nothing; the change is in the edit.", "attributes": [{ "key": "feat", "value": "01a1336b-c0b8-7cde-b7c6-285196062297" }] } }, { "id": "7713e1ddd9c454948ec7f940be7ffe6f", "text": "crud <quid> --gist <gist>", "description": { "summary": "Sets a doc's gist.", "body": "A gist is the one line that says what the doc is.", "params": [{ "name": "edit", "text": "The edit this change is made in, which the caller commits." }, { "name": "quid", "text": "The doc to change: its quid, or a path ending `<quid>.md`." }, { "name": "gist", "text": "The new gist; an empty one is refused." }], "returns": "Nothing; the change is in the edit.", "attributes": [{ "key": "feat", "value": "01a1336b-c0b8-7cde-b7c6-285196062297" }] } }, { "id": "971c8e5c145b560390e48ad4702e2fa5", "text": "crud <quid> --name <name>", "description": { "summary": "Sets a doc's name.", "body": "A name holds lowercase letters, digits, dots and dashes.", "params": [{ "name": "edit", "text": "The edit this change is made in, which the caller commits." }, { "name": "quid", "text": "The doc to change: its quid, or a path ending `<quid>.md`." }, { "name": "name", "text": "The new name." }], "returns": "Nothing; the change is in the edit.", "attributes": [{ "key": "feat", "value": "01a1336b-c0b8-7cde-b7c6-285196062297" }] } }, { "id": "5225ca8db7b85be197b4b22ee341b5f1", "text": "crud <quid> --kind <kind>", "description": { "summary": "Changes a doc's kind.", "body": "Its scopes are written as a mint would write them: the canonical scope naming the kind's owner is added, unless the owner is the repo holding the doc, and the one for its old kind goes. Its meta is then checked against the new kind's schema, a mismatch being a warning.", "params": [{ "name": "edit", "text": "The edit this change is made in, which the caller commits." }, { "name": "quid", "text": "The doc to change: its quid, or a path ending `<quid>.md`." }, { "name": "kind", "text": "The new kind, spelled as crud mints one." }, { "name": "ctx", "text": "Where it runs, and how it reads and prints." }], "returns": "Nothing; the change is in the edit.", "attributes": [{ "key": "feat", "value": "01a1336b-c0b8-7cde-b7c6-285196062297" }] } }, { "id": "2ad1fc06c83d538e8d38e574e99974af", "text": "crud --batch <source>", "description": { "summary": "Applies a list of edits to docs, committing once per repo.", "body": "Each item names a doc by `quid` and one edit, keyed as its flag, with its text inline. A doc's meta is checked once, against its final kind, so kind and meta can change together. An item that refuses, or a gate that fails, writes nothing.", "params": [{ "name": "source", "text": "Where the YAML list is read from: a file, or `-` for stdin." }, { "name": "ctx", "text": "Where it runs, and how it reads and prints." }], "returns": "Nothing; it prints the paths it committed.", "attributes": [{ "key": "feat", "value": "01a1336b-c0b8-7cde-b7c6-285196062297" }] } }, { "id": "717f85b924b35f32b24a8cfaf9c0241f", "text": "crud --drop <quid> [--hard]", "description": { "summary": "Drops a doc, which the doc it hangs from records.", "body": "The doc must be droppable under its kind's Drop when, and hang from a doc that records what it held. A durable doc is refused unless `--hard`. A dropped doc is still in git.", "params": [{ "name": "quid", "text": "The doc to drop." }, { "name": "hard", "text": "Whether to drop a durable doc too." }, { "name": "ctx", "text": "Where it runs, and how it reads and prints." }], "returns": "Nothing; it prints what it dropped.", "attributes": [{ "key": "feat", "value": "01a1336b-c0b8-7cde-b7c6-285196062297" }] } }, { "id": "859f923b4af35dfe968bad37c2bbdfe1", "text": "crud --drop <quid> --sure [--hard]", "description": { "summary": "Drops a doc though it hangs from no doc.", "body": "None then records what it held; otherwise it is `crud --drop`.", "params": [{ "name": "quid", "text": "The doc to drop." }, { "name": "hard", "text": "Whether to drop a durable doc too." }, { "name": "ctx", "text": "Where it runs, and how it reads and prints." }], "returns": "Nothing; it prints what it dropped.", "attributes": [{ "key": "feat", "value": "01a1336b-c0b8-7cde-b7c6-285196062297" }] } }, { "id": "4d86421616655ccebfcb884e0f35ff56", "text": "crud --drop-list <source> [--hard]", "description": { "summary": "Drops every doc a list names, together.", "body": "The source holds one quid per line, a path ending `<quid>.md` as `next` prints it counting as its quid. Only links and mentions from docs outside the list count, so docs that mention each other go at once, in one commit per repo.", "params": [{ "name": "source", "text": "Where the list is read from: a file, or `-` for stdin." }, { "name": "hard", "text": "Whether to drop durable docs too." }, { "name": "ctx", "text": "Where it runs, and how it reads and prints." }, { "name": "sure", "text": "Whether to drop docs that hang from no doc too." }], "returns": "Nothing; it prints what it dropped.", "attributes": [{ "key": "feat", "value": "01a1336b-c0b8-7cde-b7c6-285196062297" }] } }, { "id": "d9fb53df0d40519da77bfe4bc92d4355", "text": "crud --drop-list <source> --sure [--hard]", "description": { "summary": "Drops every doc a list names though some hang from no doc.", "body": "None of those then records what it held; otherwise it is `crud --drop-list`.", "params": [{ "name": "source", "text": "Where the list is read from: a file, or `-` for stdin." }, { "name": "hard", "text": "Whether to drop durable docs too." }, { "name": "ctx", "text": "Where it runs, and how it reads and prints." }], "returns": "Nothing; it prints what it dropped.", "attributes": [{ "key": "feat", "value": "01a1336b-c0b8-7cde-b7c6-285196062297" }] } }], "top": true, "text": "---\nkind: action\nid: 01a13354-7dea-7604-b903-b94a5aca2b83\nname: crud\ngist: \"Reads, mints and edits kb docs\"\nmeta:\n  usages:\n    - crud\n    - crud <quid>\n    - crud --read <quid>\n    - crud <kind> <gist>... [--name <name>] [--meta <source>] [--meta:<path> <value>]... [--section:<path> <source>]...\n    - crud <quid> --meta <source>\n    - crud <quid> --meta:<path> <value>... [--section:<path> <source>]...\n    - crud <quid> --scopes <source>\n    - crud <quid> --links <source>\n    - crud <quid> --parent <parent>\n    - crud <quid> --title <title>\n    - crud <quid> --body <source>\n    - crud <quid> --section <heading> <source>\n    - crud <quid> --section:<path> <source>...\n    - crud <quid> --replace <old> <new>\n    - crud <quid> --gist <gist>\n    - crud <quid> --name <name>\n    - crud <quid> --kind <kind>\n    - crud --batch <source>\n    - crud --drop <quid> [--hard]\n    - crud --drop <quid> --sure [--hard]\n    - crud --drop-list <source> [--hard]\n    - crud --drop-list <source> --sure [--hard]\nlinks:\n  - kb/01a1336b-c0b8-7cde-b7c6-285196062297.md:\n      rel: parent.feat\n  - kb/01a13354-8731-7576-a0af-d03506ef5555.md:\n      rel: child.feat\n  - kb/01a13358-8b1f-7d4e-a13f-1b5e79f02e4c.md:\n      rel: child.feat\n  - kb/01a13358-8bcc-7f8b-ae72-5ff70d8f6800.md:\n      rel: child.feat\n  - kb/01a14717-207d-7277-a493-c7adb10ed32f.md:\n      rel: child.feat\n  - kb/01a14717-2214-79dd-bcac-26cce4b2a059.md:\n      rel: child.feat\n  - kb/01a14717-2380-7d6e-8ef2-28ad9472fff7.md:\n      rel: child.feat\n  - kb/01a1480b-f832-7315-b113-47f5e5f118a1.md:\n      rel: child.feat\n  - kb/01a14ab1-d367-71ee-a2bc-6f13bdeb0526.md:\n      rel: child.feat\n  - kb/01a14b30-ecc0-7ea1-8999-d6255d636e39.md:\n      rel: child.feat\n  - kb/01a19005-c109-7155-8355-3072f4e38dc4.md:\n      rel: child.feat\n  - kb/01a1b453-a16c-799b-b9ce-20fad1a9075b.md:\n      rel: child.feat\n---\n\n# Crud\n\n## Usage\n\n`crud` alone lists the kinds there are, as list-kinds finds them: the repo's own kinds, bare, then each cape it wears that declares kinds, core first, with every spelling that reaches each of its kinds.\n\n```text\nmy-hero\n  idea\n\ncore\n  (core|nosedive-core|01a1336b-c0b8-7cde-b7c6-285196062297):memo\n```\n\nWherever crud takes a `<quid>`, a `--drop-list` line included, a path ending `<quid>.md` is that quid, so the path `next` prints beside a doc names it (listed-paths-accepted).\n\n`crud <quid>` prints a doc: from the bridge's kb, then the repos checked out in its workspace (see locate-kb-doc), then the docs of the capes that are loaded, then those of every cape the bridge wears that has a build for this core, so a cape's own docs, its migrations' included, can be read anywhere it is worn. `crud --read <quid>` finds the doc the same way and prints it to be read (crud-read): its title and body, without its front matter, with each relative markdown link, `[text](target)` or a `[label]: target` definition, rewritten relative to where crud runs, with forward slashes, so it opens from there. A `#fragment` is kept; a target with a scheme (`https:`, or a cross-repo `<repo>:<path>`), an absolute path, a bare `#anchor`, and anything in a code span or a fenced block are left as written. A doc with a file on disk (the hero's, a workspace's, a local cape's, a cape's that runs from a checkout) is rewritten from that file and nothing is docked. A cape's doc with no file, as one from a shipped build or built from a clone is, has its repo docked as `dock` does (read-docks-capes): the hero's repo doc named as the cape, at `~/.nosedive/docks/<docker>/<repo doc name>`, read-only and detached at the commit the cape was built at, and the links are rewritten relative to the doc's file there. A dock already there is used as it is and never moved, whatever its head, since the pilot may have docked it elsewhere; only where there is none is one placed, at the build's commit, `dock`'s refusals kept. `dock`'s own report goes to stderr, so stdout is the doc. The text printed is still the build's, what the hero runs; only its links resolve into the dock. Where the repo cannot be docked (the hero has no repo doc of that name, the fetch fails, `dock` refuses, or the dock, one already there included, does not hold the doc), the links are printed as written and one line on stderr says why; the exit code stays 0. It writes nothing in the hero, but may fetch and check out under `~/.nosedive`.\n\nThe edits below find their doc the same way, and commit in the repo it lives in. They refuse a doc git does not track, such as a tool's local copy, before writing anything, since its change could never be committed.\n\n`crud <kind> <gist>...` mints a doc of that kind in the target (see launch's `--at`), the primary root's directory unless another is selected, and commits in the git repo holding it: `nosedive --at workspace/<repo> crud <kind> ...` writes into a checkout, at any directory of it, seeded or not. Docs of core's own kinds, `core:kind` and `core:repo`, go in the hero's `.nosedive/kinds/` and `.nosedive/repos/` instead, and refuse a selected target, since the hero reads its kinds and repos only from there.\n\nA kind is spelled as find-kind takes it. A bare kind is the repo's own and nothing else, so core's memo is `core:memo`; `<short>:<kind>`, `<long>:<kind>` and `<quid>:<kind>` are a cape's, by the name of its cape root doc, the name of the repo doc that registers it, or its owner's seeded id. A spelling no kind answers to is refused, naming those that reach a kind of that name; a bare kind the repo does not declare is refused, naming the kind and saying the hero can declare one of that name, and how a cape that declares it is spelled if one does. A kind doc named `kind` is refused: only core declares the kind of kinds. Its name is `--name`, or the gist's first words slugged with the id's last six characters; its title is made from `--name` when one is given, else the gist (see mint-kb-doc); and its meta is whatever `--meta <source>` reads, with each `--meta:<path> <value>` set over it, so a kind with required meta can be minted. Each `--section:<path> <source>` is written into its body before its kind's crud gates see it, and all of it is the mint's one commit, so `crud nosedive-legacy:dive <gist> --meta:feat <feat> --section:Brief -` mints a briefed dive in one command (keyed-flags).\n\n`crud core:repo <gist>... --name <name>` registers a repo, and refuses, writing nothing, unless `--name` is given and unique among the hero's repos, and `meta.remotes.origin` is given and `git ls-remote` reaches it. It makes nothing else: creating a bare repo somewhere is a cape's job.\n\nThe `--meta`, `--scopes` and `--links` usages read a YAML or JSON mapping from `<source>` (`-` for stdin) and merge it into that field, then commit:\n\n- `--meta`: a JSON merge patch onto `meta`. `--meta:<path> <value>`, given any number of times, sets one key at its dot path instead, its value read as YAML and `null` removing it (`--meta:feat <quid>`, `--meta:a.b 2`), with any `--section:<path> <source>` in the same commit (keyed-flags).\n- `--scopes` and `--links`: keyed by repo or link target, a link to a doc in another repo keyed `<repo>:<path>`, its path in that repo; each value is merged onto that entry, a new key is appended, and `null` removes the entry. An entry the patch does not name keeps its written form, and one left with no fields is written as `{}`.\n\n`--parent <parent>` makes `<parent>` the doc's only `parent.feat`: its other `parent.feat` links go, with those parents' `child.feat` links back to it, and `<parent>` gains a `child.feat` link to it, all in one commit. Both docs must be in the same kb, and a parent that is the doc itself or under it is refused, as is a non-durable parent of a durable doc that is no root (see kind). That rule holds for every edit that adds a `.feat` link, `--links` and `--batch` included (see edit-kb-docs). Each new link is keyed by its target's path from the repo root: `bridge/<id>.md` in a hero repo, `kb/<id>.md` in a cape.\n\nWhatever a doc's kind is, crud checks its `meta` against that kind's schema when it mints the doc, changes its meta, or changes its kind (`--kind <kind>`). The kind is the doc's own (see doc-kind), found in the terms of the repo that holds the doc when that is seeded (see Writing a doc). A kind nothing declares cannot be minted or changed to, and the meta of a doc whose kind nothing resolves is refused too, naming the kind and saying the hero can declare one of that name.\n\nA kind's schema can require a meta field to contain the quid of a doc of a particular kind. For example, `question: {type: string, kind: question}` under `properties` requires that `meta.question`, when present, is text containing a quid resolving to a doc whose frontmatter says `kind: question`; adding `question` to `required` makes the field mandatory. Crud searches the doc's kb and the bridge's kb first, then the hero and its workspace, then loaded capes. An invalid quid, missing doc or wrong kind refuses the write with an error at the field's path. This checks outgoing references when the owning doc's meta is validated; it does not revalidate incoming references when their target changes kind or is deleted.\n\nIn a batch, reference-kind validation sees every edited target's final kind, regardless of edit order. A failed reference check writes and commits nothing from the batch.\n\n`--gist <gist>` and `--name <name>` replace those fields; quote a gist of more than one word. `--kind <kind>` takes a kind spelled as a mint takes it, and writes the doc's scopes as a mint would: the canonical one names the kind's owner unless that is the repo that holds the doc, and a canonical one the doc had is gone.\n\nA doc's body is its title, the one `# ` heading that starts it, then everything under it, and crud keeps the title apart so no edit loses it:\n\n- `--title <title>` sets the title, adding one when the doc has none.\n- `--body <source>` replaces everything under the title with the text `<source>` holds (`-` for stdin, else a file), as text, not YAML. A source whose first non-blank line is a `# ` heading holds the doc whole: that heading becomes the title, as `--title` would set it, on a doc with none too, and the rest is written under it, so no title is doubled (body-source-title). An empty source leaves only the title.\n- `--section <heading> <source>` replaces the `## <heading>` section, up to the next `## `, with that text, or appends it when the doc has no such section; an empty source removes it. On a `kind` doc, `--section \"Drop when\"` decides the kind's durability: adding the section makes it passing work, removing it makes it durable, and crud says which (see kind).\n- `--section:<path> <source>`, given any number of times, writes the section at a dot path of headings, parent first, `##` and one level deeper each step: `--section:Dropped.<id>` is `### <id>` under `## Dropped`. Headings are found in any case, and each one missing is made as spelled, after its siblings. A section is everything under its heading, its subsections too, so writing one replaces them and an empty source removes it. At most one source of a command is stdin; a heading with a dot of its own cannot be named (keyed-flags).\n- `--replace <old> <new>` replaces the one place the text `<old>` holds occurs under the title with the text `<new>` holds. Both are sources (`-` for stdin, at most one of them), each losing one trailing newline; it refuses text found nowhere or more than once. They are sources rather than arguments because on Windows the global command is a `.cmd` shim, which cuts an argument at its first newline and mangles quotes; a file keeps every newline and backslash.\n\n`--section`, `--replace` and a `--body` whose source brings no title refuse a doc with no title, saying to set one first, rather than guessing where its body starts.\n\n`crud --batch <source>` applies a YAML list of edits in order and commits once per repo. Each item names a doc by `quid` and one edit keyed as its flag: `title`, `body`, `gist`, `name`, `kind`, `meta`, `scopes`, `links` and `parent` take the flag's value, `section` takes `{heading, text}` and `replace` takes `{old, new}`. Text is inline, so a block scalar carries any newline or backslash without a file; a `body` that starts with a `# ` heading sets the title, as `--body` does. Each edit refuses as its flag would, naming its item, and then nothing is written, with one difference: a doc's meta is checked against its kind once, after all of the batch's edits to it, so one batch can change a doc's kind and its meta together, as answering a question does. Its commit names the batch's edits (see Commits).\n\n`crud --drop <quid>` deletes a doc's file and, in the same commit, the links to it from the docs it hangs from, whichever kb of the bridge or its workspace holds them (drops-recorded, drop-takes-tree-links, drop-takes-declared-links). It refuses, naming each reason, and writes nothing:\n\n- until one of the docs it hangs from has a `### <id>` section under `## Dropped` saying what of it is kept, other than its gist. Whoever drops it writes that, having read it: the refusal names the doc to read and the command, `nosedive crud <parent> --section:Dropped.<id> -`. A doc whose parent is dropped with it needs no record of its own.\n- when it hangs from no doc, unless `--sure` is given, since none can record what it held.\n- while a doc hangs under it by `parent.feat`: drop that first.\n- while any other link names it (a rel that is neither a `.feat` rel nor one its kind names in `meta.next`), as a worn cape's or a spec's does, or a body links it (`<id>.md`), or a config names it as its root; those are removed by hand, since a drop must not undo them unasked. A root of the hero's own that links a `.feat`, whose body is the tree seed renders from its links (see render-tree), is the exception: the drop renders its tree again, in the same commit, once the docs and their links are gone (drops-rerender-tree). A bare id in a body, as a `### <id>` record is, is no link.\n\nThe docs a doc hangs from are any tracked doc that links it by a `.feat` rel other than `parent.feat`, or by a rel its kind names in `meta.next` (a non-durable kind's), whether `next` walks that doc or not, and those its own `parent.feat` links name. A drop that removes links reports each on stderr, once the drop has committed, as `unlinked <holder path>: <rel> <dropped doc path>` (paths relative to the bridge, forward slashes), so what changed outside the dropped files is on the record; stdout stays the dropped paths, one per line.\n\nRefusing a doc whose kind is droppable, it ends with that kind's Drop when, quoted whole, as what dropping it takes (drop-when). Once the drop is made, `## Dropped` entries may be pruned or moved freely. A dropped doc is read back from git: `git log --all -1 --diff-filter=D --format=%h --name-only -- '*<id>.md'` names the commit that dropped it and its path, and `git show <commit>^:<path>` prints it. A doc whose kind is durable (`meta.durable: true` on its kind doc) is refused even then, since its file is what keeps it findable to anyone holding its id; `--hard` deletes it anyway.\n\n`crud --drop-list <source>` drops every doc whose quid `<source>` lists, one per line (`-` for stdin), together in one commit per repo. Only links and mentions from docs outside the list count, and from docs git tracks (a doc git ignores, such as a tool's local copy, is no part of the kb's history), so a set of docs that all mention each other, which no single `--drop` could ever start on, goes at once. `--hard` works as for `--drop`, and it prints the links it removed as `--drop` does.\n\n## Commits\n\nA commit crud makes reads `feat(<feat name>): crud <what>` (see commit-subject): `<what>` is the kind for a mint, as spelled (`crud core:memo`), the edit's name for an edit (`crud links`), the distinct edits of a batch in order (`crud body, links`), and `drop` for a drop. An edit is named for its flag, so a `--body` that sets the title is still `crud body`. A doc with no feat to name gets `crud: <what>`; nothing refuses. Each commit ends with the nosedive co-author trailer (see commit-message).\n\n## Writing a doc\n\nA kind belongs to its owner, the repo that declares it, and a doc says whose kind it is. Any other repo that has something to say about the doc says it in its own scope entry.\n\n- **Mint**: a kind that is not that of the repo holding the doc writes `kind: <name>`, and a scope entry `<owner id>: { canonical: true, version: <version>, schema: <digest> }`. The repo's own kind writes no entry. Core's kinds and repos in `.nosedive/` need none, being core's by place; seed's root names core in the same way.\n- **Meta**: it belongs to the doc's kind, found in the terms of its holder when that repo is seeded and not the one acting, as seeded repos read their own docs (the holder-terms decision), else in the acting repo's. Docs in a repo that is not seeded are common, and are read as the acting repo reads them. When the doc's kind is its holder's own or the owner its canonical scope names, meta goes to the root's `meta`, checked against that kind's schema. A doc with no owner, in a repo that is not seeded, has its meta kept in this repo's own entry, keyed by its id and carrying the `version` and `schema` digest of the kind it is checked against, created if missing and gone with its meta. A kind that cannot be found refuses, naming it and saying the hero can declare one of that name.\n- **Entries**: one for each key; crud refuses a doc whose scopes repeat a key, as it would write it, and an entry that carries a `kind`, since an entry's kind is the root's. They carry `canonical`, `version`, `schema` and `meta`. Work scopes, keyed by a repo doc's quid with a `work-branch` and a `ref` that jump sets, are in the same list, and crud leaves them as they are and applies no version rule to them.\n- **Version**: the newest commit that changed the kind's schema in its owner, never one that changed its prose (see find-kind). crud writes a version only when it is on the owner's origin trunk or the work branch a feat's scope names for the owner's repo, and otherwise refuses, naming the kind and saying to land or push it first. It asks the owner's git history whenever it has it, and trusts a build's record that the version was published only where it has none. Every entry crud stamps with a `version` also gets `schema`, a short digest of the schema the version was written against (see find-kind), so that a version a force-push orphaned can later be re-pinned to the commit that now holds the same schema; crud does not re-pin.\n\n## Gates\n\nA kind whose docs must keep a shape links crud gates (see crud-gates). Every write of crud runs them: a mint, an edit, a kind change and a batch run the before gates and then the after gates of each doc they touch, with the doc as it was and as it will be, before committing; a drop runs the before gates of each doc it drops, before anything goes. A gate that refuses or fails stops crud, nothing is written, and a doc minted is removed again.\n\n## Code\n\n- Entrypoint: [src/i01a133547dea7604b903b94a5aca2b83.ts](../src/i01a133547dea7604b903b94a5aca2b83.ts)\n- `crud`: [impl](../src/i5d22a1166ca0519c8dcb58f8989f3ac0.ts), [tests](../src/i5d22a1166ca0519c8dcb58f8989f3ac0.test.ts)\n- `crud <quid>`: [impl](../src/if4a09298430355a2a473394fbb5103f2.ts), [tests](../src/if4a09298430355a2a473394fbb5103f2.test.ts)\n- `crud --read <quid>`: [impl](../src/ibccbde44f93254e0bb6a2af910bc03d9.ts), [tests](../src/ibccbde44f93254e0bb6a2af910bc03d9.test.ts)\n- `crud <kind> <gist>... [--name <name>] [--meta <source>] [--meta:<path> <value>]... [--section:<path> <source>]...`: [impl](../src/ie9ce704f3ee25e028d2fbff7cd47bfc8.ts), [tests](../src/ie9ce704f3ee25e028d2fbff7cd47bfc8.test.ts)\n- `crud <quid> --meta <source>`: [impl](../src/i3ac641d4a9d757a48df1f1de031be120.ts), [tests](../src/i3ac641d4a9d757a48df1f1de031be120.test.ts)\n- `crud <quid> --meta:<path> <value>... [--section:<path> <source>]...`: [impl](../src/i4566acc2e53a5c9cb2f745468d21fa5b.ts), [tests](../src/i4566acc2e53a5c9cb2f745468d21fa5b.test.ts)\n- `crud <quid> --scopes <source>`: [impl](../src/i7820a39cffb9511493085038a7e19447.ts), [tests](../src/i7820a39cffb9511493085038a7e19447.test.ts)\n- `crud <quid> --links <source>`: [impl](../src/i21be7cc759fb5c758e11cffdb2630902.ts), [tests](../src/i21be7cc759fb5c758e11cffdb2630902.test.ts)\n- `crud <quid> --parent <parent>`: [impl](../src/i112fbf4a4c7153da8d321f828607a1d0.ts), [tests](../src/i112fbf4a4c7153da8d321f828607a1d0.test.ts)\n- `crud <quid> --title <title>`: [impl](../src/i933f159845875010ad6ed3569414a651.ts), [tests](../src/i933f159845875010ad6ed3569414a651.test.ts)\n- `crud <quid> --body <source>`: [impl](../src/iecbd59b3160b5626840a2de9f49fb01f.ts), [tests](../src/iecbd59b3160b5626840a2de9f49fb01f.test.ts)\n- `crud <quid> --section <heading> <source>`: [impl](../src/i794ab6e0060f5ede8b0148203fe6df81.ts), [tests](../src/i794ab6e0060f5ede8b0148203fe6df81.test.ts)\n- `crud <quid> --section:<path> <source>...`: [impl](../src/ia2855cb936b2597b8666125991f0d31a.ts), [tests](../src/ia2855cb936b2597b8666125991f0d31a.test.ts)\n- `crud <quid> --replace <old> <new>`: [impl](../src/ie9dc0e8d57db5875868f19e35aa40379.ts), [tests](../src/ie9dc0e8d57db5875868f19e35aa40379.test.ts)\n- `crud <quid> --gist <gist>`: [impl](../src/i7713e1ddd9c454948ec7f940be7ffe6f.ts), [tests](../src/i7713e1ddd9c454948ec7f940be7ffe6f.test.ts)\n- `crud <quid> --name <name>`: [impl](../src/i971c8e5c145b560390e48ad4702e2fa5.ts), [tests](../src/i971c8e5c145b560390e48ad4702e2fa5.test.ts)\n- `crud <quid> --kind <kind>`: [impl](../src/i5225ca8db7b85be197b4b22ee341b5f1.ts), [tests](../src/i5225ca8db7b85be197b4b22ee341b5f1.test.ts)\n- `crud --batch <source>`: [impl](../src/i2ad1fc06c83d538e8d38e574e99974af.ts), [tests](../src/i2ad1fc06c83d538e8d38e574e99974af.test.ts)\n- `crud --drop <quid> [--hard]`: [impl](../src/i717f85b924b35f32b24a8cfaf9c0241f.ts), [tests](../src/i717f85b924b35f32b24a8cfaf9c0241f.test.ts)\n- `crud --drop <quid> --sure [--hard]`: [impl](../src/i859f923b4af35dfe968bad37c2bbdfe1.ts), [tests](../src/i859f923b4af35dfe968bad37c2bbdfe1.test.ts)\n- `crud --drop-list <source> [--hard]`: [impl](../src/i4d86421616655ccebfcb884e0f35ff56.ts), [tests](../src/i4d86421616655ccebfcb884e0f35ff56.test.ts)\n- `crud --drop-list <source> --sure [--hard]`: [impl](../src/id9fb53df0d40519da77bfe4bc92d4355.ts), [tests](../src/id9fb53df0d40519da77bfe4bc92d4355.test.ts)\n", "body": "# Crud\n\n## Usage\n\n`crud` alone lists the kinds there are, as list-kinds finds them: the repo's own kinds, bare, then each cape it wears that declares kinds, core first, with every spelling that reaches each of its kinds.\n\n```text\nmy-hero\n  idea\n\ncore\n  (core|nosedive-core|01a1336b-c0b8-7cde-b7c6-285196062297):memo\n```\n\nWherever crud takes a `<quid>`, a `--drop-list` line included, a path ending `<quid>.md` is that quid, so the path `next` prints beside a doc names it (listed-paths-accepted).\n\n`crud <quid>` prints a doc: from the bridge's kb, then the repos checked out in its workspace (see locate-kb-doc), then the docs of the capes that are loaded, then those of every cape the bridge wears that has a build for this core, so a cape's own docs, its migrations' included, can be read anywhere it is worn. `crud --read <quid>` finds the doc the same way and prints it to be read (crud-read): its title and body, without its front matter, with each relative markdown link, `[text](target)` or a `[label]: target` definition, rewritten relative to where crud runs, with forward slashes, so it opens from there. A `#fragment` is kept; a target with a scheme (`https:`, or a cross-repo `<repo>:<path>`), an absolute path, a bare `#anchor`, and anything in a code span or a fenced block are left as written. A doc with a file on disk (the hero's, a workspace's, a local cape's, a cape's that runs from a checkout) is rewritten from that file and nothing is docked. A cape's doc with no file, as one from a shipped build or built from a clone is, has its repo docked as `dock` does (read-docks-capes): the hero's repo doc named as the cape, at `~/.nosedive/docks/<docker>/<repo doc name>`, read-only and detached at the commit the cape was built at, and the links are rewritten relative to the doc's file there. A dock already there is used as it is and never moved, whatever its head, since the pilot may have docked it elsewhere; only where there is none is one placed, at the build's commit, `dock`'s refusals kept. `dock`'s own report goes to stderr, so stdout is the doc. The text printed is still the build's, what the hero runs; only its links resolve into the dock. Where the repo cannot be docked (the hero has no repo doc of that name, the fetch fails, `dock` refuses, or the dock, one already there included, does not hold the doc), the links are printed as written and one line on stderr says why; the exit code stays 0. It writes nothing in the hero, but may fetch and check out under `~/.nosedive`.\n\nThe edits below find their doc the same way, and commit in the repo it lives in. They refuse a doc git does not track, such as a tool's local copy, before writing anything, since its change could never be committed.\n\n`crud <kind> <gist>...` mints a doc of that kind in the target (see launch's `--at`), the primary root's directory unless another is selected, and commits in the git repo holding it: `nosedive --at workspace/<repo> crud <kind> ...` writes into a checkout, at any directory of it, seeded or not. Docs of core's own kinds, `core:kind` and `core:repo`, go in the hero's `.nosedive/kinds/` and `.nosedive/repos/` instead, and refuse a selected target, since the hero reads its kinds and repos only from there.\n\nA kind is spelled as find-kind takes it. A bare kind is the repo's own and nothing else, so core's memo is `core:memo`; `<short>:<kind>`, `<long>:<kind>` and `<quid>:<kind>` are a cape's, by the name of its cape root doc, the name of the repo doc that registers it, or its owner's seeded id. A spelling no kind answers to is refused, naming those that reach a kind of that name; a bare kind the repo does not declare is refused, naming the kind and saying the hero can declare one of that name, and how a cape that declares it is spelled if one does. A kind doc named `kind` is refused: only core declares the kind of kinds. Its name is `--name`, or the gist's first words slugged with the id's last six characters; its title is made from `--name` when one is given, else the gist (see mint-kb-doc); and its meta is whatever `--meta <source>` reads, with each `--meta:<path> <value>` set over it, so a kind with required meta can be minted. Each `--section:<path> <source>` is written into its body before its kind's crud gates see it, and all of it is the mint's one commit, so `crud nosedive-legacy:dive <gist> --meta:feat <feat> --section:Brief -` mints a briefed dive in one command (keyed-flags).\n\n`crud core:repo <gist>... --name <name>` registers a repo, and refuses, writing nothing, unless `--name` is given and unique among the hero's repos, and `meta.remotes.origin` is given and `git ls-remote` reaches it. It makes nothing else: creating a bare repo somewhere is a cape's job.\n\nThe `--meta`, `--scopes` and `--links` usages read a YAML or JSON mapping from `<source>` (`-` for stdin) and merge it into that field, then commit:\n\n- `--meta`: a JSON merge patch onto `meta`. `--meta:<path> <value>`, given any number of times, sets one key at its dot path instead, its value read as YAML and `null` removing it (`--meta:feat <quid>`, `--meta:a.b 2`), with any `--section:<path> <source>` in the same commit (keyed-flags).\n- `--scopes` and `--links`: keyed by repo or link target, a link to a doc in another repo keyed `<repo>:<path>`, its path in that repo; each value is merged onto that entry, a new key is appended, and `null` removes the entry. An entry the patch does not name keeps its written form, and one left with no fields is written as `{}`.\n\n`--parent <parent>` makes `<parent>` the doc's only `parent.feat`: its other `parent.feat` links go, with those parents' `child.feat` links back to it, and `<parent>` gains a `child.feat` link to it, all in one commit. Both docs must be in the same kb, and a parent that is the doc itself or under it is refused, as is a non-durable parent of a durable doc that is no root (see kind). That rule holds for every edit that adds a `.feat` link, `--links` and `--batch` included (see edit-kb-docs). Each new link is keyed by its target's path from the repo root: `bridge/<id>.md` in a hero repo, `kb/<id>.md` in a cape.\n\nWhatever a doc's kind is, crud checks its `meta` against that kind's schema when it mints the doc, changes its meta, or changes its kind (`--kind <kind>`). The kind is the doc's own (see doc-kind), found in the terms of the repo that holds the doc when that is seeded (see Writing a doc). A kind nothing declares cannot be minted or changed to, and the meta of a doc whose kind nothing resolves is refused too, naming the kind and saying the hero can declare one of that name.\n\nA kind's schema can require a meta field to contain the quid of a doc of a particular kind. For example, `question: {type: string, kind: question}` under `properties` requires that `meta.question`, when present, is text containing a quid resolving to a doc whose frontmatter says `kind: question`; adding `question` to `required` makes the field mandatory. Crud searches the doc's kb and the bridge's kb first, then the hero and its workspace, then loaded capes. An invalid quid, missing doc or wrong kind refuses the write with an error at the field's path. This checks outgoing references when the owning doc's meta is validated; it does not revalidate incoming references when their target changes kind or is deleted.\n\nIn a batch, reference-kind validation sees every edited target's final kind, regardless of edit order. A failed reference check writes and commits nothing from the batch.\n\n`--gist <gist>` and `--name <name>` replace those fields; quote a gist of more than one word. `--kind <kind>` takes a kind spelled as a mint takes it, and writes the doc's scopes as a mint would: the canonical one names the kind's owner unless that is the repo that holds the doc, and a canonical one the doc had is gone.\n\nA doc's body is its title, the one `# ` heading that starts it, then everything under it, and crud keeps the title apart so no edit loses it:\n\n- `--title <title>` sets the title, adding one when the doc has none.\n- `--body <source>` replaces everything under the title with the text `<source>` holds (`-` for stdin, else a file), as text, not YAML. A source whose first non-blank line is a `# ` heading holds the doc whole: that heading becomes the title, as `--title` would set it, on a doc with none too, and the rest is written under it, so no title is doubled (body-source-title). An empty source leaves only the title.\n- `--section <heading> <source>` replaces the `## <heading>` section, up to the next `## `, with that text, or appends it when the doc has no such section; an empty source removes it. On a `kind` doc, `--section \"Drop when\"` decides the kind's durability: adding the section makes it passing work, removing it makes it durable, and crud says which (see kind).\n- `--section:<path> <source>`, given any number of times, writes the section at a dot path of headings, parent first, `##` and one level deeper each step: `--section:Dropped.<id>` is `### <id>` under `## Dropped`. Headings are found in any case, and each one missing is made as spelled, after its siblings. A section is everything under its heading, its subsections too, so writing one replaces them and an empty source removes it. At most one source of a command is stdin; a heading with a dot of its own cannot be named (keyed-flags).\n- `--replace <old> <new>` replaces the one place the text `<old>` holds occurs under the title with the text `<new>` holds. Both are sources (`-` for stdin, at most one of them), each losing one trailing newline; it refuses text found nowhere or more than once. They are sources rather than arguments because on Windows the global command is a `.cmd` shim, which cuts an argument at its first newline and mangles quotes; a file keeps every newline and backslash.\n\n`--section`, `--replace` and a `--body` whose source brings no title refuse a doc with no title, saying to set one first, rather than guessing where its body starts.\n\n`crud --batch <source>` applies a YAML list of edits in order and commits once per repo. Each item names a doc by `quid` and one edit keyed as its flag: `title`, `body`, `gist`, `name`, `kind`, `meta`, `scopes`, `links` and `parent` take the flag's value, `section` takes `{heading, text}` and `replace` takes `{old, new}`. Text is inline, so a block scalar carries any newline or backslash without a file; a `body` that starts with a `# ` heading sets the title, as `--body` does. Each edit refuses as its flag would, naming its item, and then nothing is written, with one difference: a doc's meta is checked against its kind once, after all of the batch's edits to it, so one batch can change a doc's kind and its meta together, as answering a question does. Its commit names the batch's edits (see Commits).\n\n`crud --drop <quid>` deletes a doc's file and, in the same commit, the links to it from the docs it hangs from, whichever kb of the bridge or its workspace holds them (drops-recorded, drop-takes-tree-links, drop-takes-declared-links). It refuses, naming each reason, and writes nothing:\n\n- until one of the docs it hangs from has a `### <id>` section under `## Dropped` saying what of it is kept, other than its gist. Whoever drops it writes that, having read it: the refusal names the doc to read and the command, `nosedive crud <parent> --section:Dropped.<id> -`. A doc whose parent is dropped with it needs no record of its own.\n- when it hangs from no doc, unless `--sure` is given, since none can record what it held.\n- while a doc hangs under it by `parent.feat`: drop that first.\n- while any other link names it (a rel that is neither a `.feat` rel nor one its kind names in `meta.next`), as a worn cape's or a spec's does, or a body links it (`<id>.md`), or a config names it as its root; those are removed by hand, since a drop must not undo them unasked. A root of the hero's own that links a `.feat`, whose body is the tree seed renders from its links (see render-tree), is the exception: the drop renders its tree again, in the same commit, once the docs and their links are gone (drops-rerender-tree). A bare id in a body, as a `### <id>` record is, is no link.\n\nThe docs a doc hangs from are any tracked doc that links it by a `.feat` rel other than `parent.feat`, or by a rel its kind names in `meta.next` (a non-durable kind's), whether `next` walks that doc or not, and those its own `parent.feat` links name. A drop that removes links reports each on stderr, once the drop has committed, as `unlinked <holder path>: <rel> <dropped doc path>` (paths relative to the bridge, forward slashes), so what changed outside the dropped files is on the record; stdout stays the dropped paths, one per line.\n\nRefusing a doc whose kind is droppable, it ends with that kind's Drop when, quoted whole, as what dropping it takes (drop-when). Once the drop is made, `## Dropped` entries may be pruned or moved freely. A dropped doc is read back from git: `git log --all -1 --diff-filter=D --format=%h --name-only -- '*<id>.md'` names the commit that dropped it and its path, and `git show <commit>^:<path>` prints it. A doc whose kind is durable (`meta.durable: true` on its kind doc) is refused even then, since its file is what keeps it findable to anyone holding its id; `--hard` deletes it anyway.\n\n`crud --drop-list <source>` drops every doc whose quid `<source>` lists, one per line (`-` for stdin), together in one commit per repo. Only links and mentions from docs outside the list count, and from docs git tracks (a doc git ignores, such as a tool's local copy, is no part of the kb's history), so a set of docs that all mention each other, which no single `--drop` could ever start on, goes at once. `--hard` works as for `--drop`, and it prints the links it removed as `--drop` does.\n\n## Commits\n\nA commit crud makes reads `feat(<feat name>): crud <what>` (see commit-subject): `<what>` is the kind for a mint, as spelled (`crud core:memo`), the edit's name for an edit (`crud links`), the distinct edits of a batch in order (`crud body, links`), and `drop` for a drop. An edit is named for its flag, so a `--body` that sets the title is still `crud body`. A doc with no feat to name gets `crud: <what>`; nothing refuses. Each commit ends with the nosedive co-author trailer (see commit-message).\n\n## Writing a doc\n\nA kind belongs to its owner, the repo that declares it, and a doc says whose kind it is. Any other repo that has something to say about the doc says it in its own scope entry.\n\n- **Mint**: a kind that is not that of the repo holding the doc writes `kind: <name>`, and a scope entry `<owner id>: { canonical: true, version: <version>, schema: <digest> }`. The repo's own kind writes no entry. Core's kinds and repos in `.nosedive/` need none, being core's by place; seed's root names core in the same way.\n- **Meta**: it belongs to the doc's kind, found in the terms of its holder when that repo is seeded and not the one acting, as seeded repos read their own docs (the holder-terms decision), else in the acting repo's. Docs in a repo that is not seeded are common, and are read as the acting repo reads them. When the doc's kind is its holder's own or the owner its canonical scope names, meta goes to the root's `meta`, checked against that kind's schema. A doc with no owner, in a repo that is not seeded, has its meta kept in this repo's own entry, keyed by its id and carrying the `version` and `schema` digest of the kind it is checked against, created if missing and gone with its meta. A kind that cannot be found refuses, naming it and saying the hero can declare one of that name.\n- **Entries**: one for each key; crud refuses a doc whose scopes repeat a key, as it would write it, and an entry that carries a `kind`, since an entry's kind is the root's. They carry `canonical`, `version`, `schema` and `meta`. Work scopes, keyed by a repo doc's quid with a `work-branch` and a `ref` that jump sets, are in the same list, and crud leaves them as they are and applies no version rule to them.\n- **Version**: the newest commit that changed the kind's schema in its owner, never one that changed its prose (see find-kind). crud writes a version only when it is on the owner's origin trunk or the work branch a feat's scope names for the owner's repo, and otherwise refuses, naming the kind and saying to land or push it first. It asks the owner's git history whenever it has it, and trusts a build's record that the version was published only where it has none. Every entry crud stamps with a `version` also gets `schema`, a short digest of the schema the version was written against (see find-kind), so that a version a force-push orphaned can later be re-pinned to the commit that now holds the same schema; crud does not re-pin.\n\n## Gates\n\nA kind whose docs must keep a shape links crud gates (see crud-gates). Every write of crud runs them: a mint, an edit, a kind change and a batch run the before gates and then the after gates of each doc they touch, with the doc as it was and as it will be, before committing; a drop runs the before gates of each doc it drops, before anything goes. A gate that refuses or fails stops crud, nothing is written, and a doc minted is removed again.\n\n## Code\n\n- Entrypoint: [src/i01a133547dea7604b903b94a5aca2b83.ts](../src/i01a133547dea7604b903b94a5aca2b83.ts)\n- `crud`: [impl](../src/i5d22a1166ca0519c8dcb58f8989f3ac0.ts), [tests](../src/i5d22a1166ca0519c8dcb58f8989f3ac0.test.ts)\n- `crud <quid>`: [impl](../src/if4a09298430355a2a473394fbb5103f2.ts), [tests](../src/if4a09298430355a2a473394fbb5103f2.test.ts)\n- `crud --read <quid>`: [impl](../src/ibccbde44f93254e0bb6a2af910bc03d9.ts), [tests](../src/ibccbde44f93254e0bb6a2af910bc03d9.test.ts)\n- `crud <kind> <gist>... [--name <name>] [--meta <source>] [--meta:<path> <value>]... [--section:<path> <source>]...`: [impl](../src/ie9ce704f3ee25e028d2fbff7cd47bfc8.ts), [tests](../src/ie9ce704f3ee25e028d2fbff7cd47bfc8.test.ts)\n- `crud <quid> --meta <source>`: [impl](../src/i3ac641d4a9d757a48df1f1de031be120.ts), [tests](../src/i3ac641d4a9d757a48df1f1de031be120.test.ts)\n- `crud <quid> --meta:<path> <value>... [--section:<path> <source>]...`: [impl](../src/i4566acc2e53a5c9cb2f745468d21fa5b.ts), [tests](../src/i4566acc2e53a5c9cb2f745468d21fa5b.test.ts)\n- `crud <quid> --scopes <source>`: [impl](../src/i7820a39cffb9511493085038a7e19447.ts), [tests](../src/i7820a39cffb9511493085038a7e19447.test.ts)\n- `crud <quid> --links <source>`: [impl](../src/i21be7cc759fb5c758e11cffdb2630902.ts), [tests](../src/i21be7cc759fb5c758e11cffdb2630902.test.ts)\n- `crud <quid> --parent <parent>`: [impl](../src/i112fbf4a4c7153da8d321f828607a1d0.ts), [tests](../src/i112fbf4a4c7153da8d321f828607a1d0.test.ts)\n- `crud <quid> --title <title>`: [impl](../src/i933f159845875010ad6ed3569414a651.ts), [tests](../src/i933f159845875010ad6ed3569414a651.test.ts)\n- `crud <quid> --body <source>`: [impl](../src/iecbd59b3160b5626840a2de9f49fb01f.ts), [tests](../src/iecbd59b3160b5626840a2de9f49fb01f.test.ts)\n- `crud <quid> --section <heading> <source>`: [impl](../src/i794ab6e0060f5ede8b0148203fe6df81.ts), [tests](../src/i794ab6e0060f5ede8b0148203fe6df81.test.ts)\n- `crud <quid> --section:<path> <source>...`: [impl](../src/ia2855cb936b2597b8666125991f0d31a.ts), [tests](../src/ia2855cb936b2597b8666125991f0d31a.test.ts)\n- `crud <quid> --replace <old> <new>`: [impl](../src/ie9dc0e8d57db5875868f19e35aa40379.ts), [tests](../src/ie9dc0e8d57db5875868f19e35aa40379.test.ts)\n- `crud <quid> --gist <gist>`: [impl](../src/i7713e1ddd9c454948ec7f940be7ffe6f.ts), [tests](../src/i7713e1ddd9c454948ec7f940be7ffe6f.test.ts)\n- `crud <quid> --name <name>`: [impl](../src/i971c8e5c145b560390e48ad4702e2fa5.ts), [tests](../src/i971c8e5c145b560390e48ad4702e2fa5.test.ts)\n- `crud <quid> --kind <kind>`: [impl](../src/i5225ca8db7b85be197b4b22ee341b5f1.ts), [tests](../src/i5225ca8db7b85be197b4b22ee341b5f1.test.ts)\n- `crud --batch <source>`: [impl](../src/i2ad1fc06c83d538e8d38e574e99974af.ts), [tests](../src/i2ad1fc06c83d538e8d38e574e99974af.test.ts)\n- `crud --drop <quid> [--hard]`: [impl](../src/i717f85b924b35f32b24a8cfaf9c0241f.ts), [tests](../src/i717f85b924b35f32b24a8cfaf9c0241f.test.ts)\n- `crud --drop <quid> --sure [--hard]`: [impl](../src/i859f923b4af35dfe968bad37c2bbdfe1.ts), [tests](../src/i859f923b4af35dfe968bad37c2bbdfe1.test.ts)\n- `crud --drop-list <source> [--hard]`: [impl](../src/i4d86421616655ccebfcb884e0f35ff56.ts), [tests](../src/i4d86421616655ccebfcb884e0f35ff56.test.ts)\n- `crud --drop-list <source> --sure [--hard]`: [impl](../src/id9fb53df0d40519da77bfe4bc92d4355.ts), [tests](../src/id9fb53df0d40519da77bfe4bc92d4355.test.ts)" }, "01a13354-7ea8-7883-b6ac-c99ddff5d5a8": { "kind": "action", "name": "seed", "gist": "Makes the current git repo a bridge, or brings an existing bridge's setup up to date", "usages": [{ "id": "e4a628f20d785d3a941ca681bf26e3cf", "text": "seed [--no-capes] [--root-kind <kind>] [--workspace] [--migrate] [--no-migrate]", "description": { "summary": "Makes the current git repo a hero, or brings a seeded repo's setup up to date.", "body": "On a repo nosedive does not know it writes `.nosedive/config.yaml` and a root doc. On one it knows it runs the pending migrations, asking first unless `--migrate` or `--no-migrate` is given, builds the capes it wears, scaffolds a cape root's missing code files, and renders each root's tree, committing what changes. With `--at <dir>` it seeds a directory of the hero as a local cape.", "params": [{ "name": "options", "text": "The flags: noCapes, rootKind, workspace, migrate and noMigrate." }, { "name": "ctx", "text": "Where it runs, and how it reads and prints." }], "returns": "Nothing; it prints what it did.", "attributes": [{ "key": "feat", "value": "01a1336b-c0b8-7cde-b7c6-285196062297" }] } }], "top": true, "text": "---\nkind: action\nid: 01a13354-7ea8-7883-b6ac-c99ddff5d5a8\nname: seed\ngist: \"Makes the current git repo a bridge, or brings an existing bridge's setup up to date\"\nmeta:\n  usages:\n    - seed [--no-capes] [--root-kind <kind>] [--workspace] [--migrate] [--no-migrate]\nlinks:\n  - kb/01a1336b-c0b8-7cde-b7c6-285196062297.md:\n      rel: parent.feat\n  - kb/01a14a55-0446-7ef0-8586-b828ebabc148.md:\n      rel: child.feat\n  - kb/01a175db-f451-7daf-a3a9-048ecd98ab84.md:\n      rel: child.feat\n  - kb/01a13354-7f5f-7c45-a3fb-2ac0e3a7678e.md:\n      rel: child.feat\n---\n\n# Seed\n\n## Usage\n\nSeed runs every pending migration, core's and each worn cape's, unasked only on a repo it seeds for the first time: one with no config, or a legacy repo, whose config lists no `roots`, which it converts (seed-asks-before-migrating). On any other repo, while a migration is pending and it was given neither `--migrate` nor `--no-migrate`, seed changes nothing and exits 1, listing each pending migration by name and gist, with a markdown link to its doc relative to where seed runs, when that doc is on disk, and the `nosedive crud --read <quid>` that prints it to be read, and says to rerun with `--migrate` to run them all or `--no-migrate` to seed without them. `--no-migrate` runs none of them and leaves them out of config `migrations`, so the next seed asks again; one seed itself makes pending, as `--workspace` does hero-self, still runs. With nothing pending, either flag changes nothing; seed refuses the two together. Core's are checked before seed does anything, and a refusal for them also lists the capes' that their last builds hold. A cape's migrations are known once it is built, so on a repo it knows seed builds its capes (below) right after core's migrations and checks theirs then, before it writes anything else: a refusal leaves those builds in `.nosedive/capes`, which git ignores, and commits nothing. `--no-capes` runs no cape's migrations, so it asks about none.\n\nOn a repo it knows, seed first brings it to today's shape by running the migrations it has not run (see run-migrations), and runs them once more after it has built the capes and set up the rest, so a migration that waited for a cape to build (canonical-kinds) runs in the same seed, and then runs the migrations each worn cape ships (see run-cape-migrations). `--no-capes` builds none, so that second run is only a retry. On a repo nosedive does not know yet, seed writes `.nosedive/config.yaml` with `migrations` listing every migration there is, since a new repo is already in today's shape, and one root, `self/<quid>.md` with `--workspace` and `kb/<quid>.md` otherwise, named after the repo, whose quid is also config `id`: its primary root. The root's kind is one of core's, so its doc names core in a canonical scope, `canonical: true`, the version of that kind and the `schema` digest of its schema, as `pinOf` gives them (see find-kind). Seed refuses, writing nothing, when that version is not published. It is the kind `--root-kind` gives, else `hero` with `--workspace` and `base` without it; an explicit `cape` root stays in `kb/`, even with a workspace, and makes a repo that makes its own actions. Existing roots keep their configured directories; the hero-self migration changes only an existing hero primary root of core kind base to core kind hero. `--workspace` also adds `workspace: ./workspace`. When it enables work on an existing repo, it makes hero-self pending again, even if that migration previously ran as a no-op for a data repo; the retry after setup promotes a primary core base to hero while preserving its path and leaving a cape root untouched. It ignores `cache/`, `capes/` and `local/` in `.nosedive/.gitignore`, leaving the repo's own `.gitignore` alone but for one line in a repo with a cape root or a workspace, `!package-lock.json`: their packages build from the lockfile, which a user's global ignore could otherwise hide from every commit. A repo with no `README.md` gets one, its H1 the repo's name linking to its primary root. Then it commits. Seed makes a workspace's folder with a `.gitignore` of `*` inside it; if the path has changed since the last seed, it moves the folder there. On a repo it knows, it adds whatever of that is missing and leaves everything else alone.\n\nIn a repo with a cape root, core and local capes included, seed then writes each code file and `## Code` section its action docs call for and it lacks (see scaffold-cape), commits them as `seed: <repo> scaffolded`, and prints what it wrote and what is still to do, unless there was nothing to scaffold (seed-scaffolds-capes). A hero's own docs are never scaffolded; a local cape's are when seed runs on it.\n\nEach root's body, but a local cape's (the cape renders its own when seed runs in it), is its tree, which seed renders on every run and commits when it changed (`seed: <repo> tree rendered`): its title, then a `## ` section for each rel group of its `<group>.feat` links, and under each doc the docs it links as `child.feat`, to any depth, whatever their kinds. Only a root that links a `.feat` has a tree; any other root's body is left as its author wrote it. `--no-capes` does not skip it.\n\nSeed refuses, before it writes anything, a repo whose config lists a root whose directory lies outside the git checkout it commits in, naming the root's id and directory: it never writes into another checkout.\n\nRight after core's migrations, before the setup above, it builds every cape any of its roots wears (a new repo wears none), the target root's first and each once, that the bridge has not built for the core that is running, so a cape only another root wears, as a base's, is rebuilt too (seed-builds-every-roots-capes): a pinned commit once, an unpinned ref at whatever its remote has now, never a workspace checkout of its repo (see build-cape). `--no-capes` skips that. A new core means a new build of each cape; that is seed's job, and `pass --attach-cape` only builds the one it attaches. Seed builds every cape it can before failing on those it could not, naming each and why, and, when the manifest says which core last built one, how to get back to it: pin the cape at that commit with a `ref` on its `.cape` link, or run that core. It never goes back on its own. Capes may declare actions core or other capes declare: the launcher resolves shared names (see launch).\n\nLast, with or without `--no-capes`, and before it reports the capes it could not build, seed writes the hero's command surface, `help` as the hero now sees it, into every agent instruction file of its directory that holds the managed markers, stamped with the version an install names (see agent-surface), and commits what changed on its own, `seed: <repo> agent surface written` (see agent-surface). A file that also holds the pilot's uncommitted edits outside the block is written but not committed, and seed says so. A failure writing the surface is reported with the capes that failed to build, never in place of them. It creates `AGENTS.md` with the block when no instruction file exists, and when files exist but none is marked, it prints the hint naming the files and the two marker lines. Seed writes it only in a hero, a repo with a root of core's kind hero at the top of its own git checkout, so seeding a cape, core included, a base, or a local cape, with `--at` or from inside it, writes none: they are not worked in from their own roots.\n\n`--at <dir>` (see launch) seeds a directory of the hero in place of the hero: a local cape, as `nosedive --at capes/spec seed --root-kind cape` (seed-local-cape, local-cape-shape). Its config and its root are written inside that directory, which gets no `.git` of its own; the files are committed in the hero's git, as `seed: <directory name> set up`, together with the hero's config, whose `roots` gain the cape's root doc path from the hero (`<dir>/kb/<quid>.md`) (cape-roots). The directory is made when it does not exist. Seed refuses, writing nothing, an `--at` that names one of the hero's roots, a directory outside the hero, in its workspace or in its `.nosedive`, inside or holding another root's directory, or inside a directory seeded on its own (a nested repo or another cape), and a directory seeded and registered already. A directory already seeded whose cape root the hero's config does not list is registered by the same command instead: the root's path is appended to `roots` and committed as `seed: <name> registered`, which is how a cape made before roots listed it joins the hero. Without `--at`, seed acts on the nearest seeded repo above where it runs that lies inside the git checkout it runs in, so inside a seeded cape directory it acts on that directory, and an unseeded repo nested under a seeded one (a clone in a workspace) is seeded itself, never the outer hero. The new cape is worn by nothing yet: `pass --attach-cape <dir>` links it from the hero (see attach-cape).\n\nSeed's commits and its migrations' keep their `seed: ...` and `migrate: ...` subjects, since they change the repo, not a feat's work, and end with the nosedive co-author trailer like every commit nosedive makes (see commit-message).\n\n## Dropped\n\n### 01a1b846-c63c-7bca-81d0-01bcfc1019b7\n\nMinted for scaf's successor, then set aside: scaf's own doc became the scaffold-cape function instead, keeping its id and history; this one never held code.\n\n## Code\n\n- Entrypoint: [src/i01a133547ea87883b6acc99ddff5d5a8.ts](../src/i01a133547ea87883b6acc99ddff5d5a8.ts)\n- `seed [--no-capes] [--root-kind <kind>] [--workspace] [--migrate] [--no-migrate]`: [impl](../src/ie4a628f20d785d3a941ca681bf26e3cf.ts), [tests](../src/ie4a628f20d785d3a941ca681bf26e3cf.test.ts)\n", "body": "# Seed\n\n## Usage\n\nSeed runs every pending migration, core's and each worn cape's, unasked only on a repo it seeds for the first time: one with no config, or a legacy repo, whose config lists no `roots`, which it converts (seed-asks-before-migrating). On any other repo, while a migration is pending and it was given neither `--migrate` nor `--no-migrate`, seed changes nothing and exits 1, listing each pending migration by name and gist, with a markdown link to its doc relative to where seed runs, when that doc is on disk, and the `nosedive crud --read <quid>` that prints it to be read, and says to rerun with `--migrate` to run them all or `--no-migrate` to seed without them. `--no-migrate` runs none of them and leaves them out of config `migrations`, so the next seed asks again; one seed itself makes pending, as `--workspace` does hero-self, still runs. With nothing pending, either flag changes nothing; seed refuses the two together. Core's are checked before seed does anything, and a refusal for them also lists the capes' that their last builds hold. A cape's migrations are known once it is built, so on a repo it knows seed builds its capes (below) right after core's migrations and checks theirs then, before it writes anything else: a refusal leaves those builds in `.nosedive/capes`, which git ignores, and commits nothing. `--no-capes` runs no cape's migrations, so it asks about none.\n\nOn a repo it knows, seed first brings it to today's shape by running the migrations it has not run (see run-migrations), and runs them once more after it has built the capes and set up the rest, so a migration that waited for a cape to build (canonical-kinds) runs in the same seed, and then runs the migrations each worn cape ships (see run-cape-migrations). `--no-capes` builds none, so that second run is only a retry. On a repo nosedive does not know yet, seed writes `.nosedive/config.yaml` with `migrations` listing every migration there is, since a new repo is already in today's shape, and one root, `self/<quid>.md` with `--workspace` and `kb/<quid>.md` otherwise, named after the repo, whose quid is also config `id`: its primary root. The root's kind is one of core's, so its doc names core in a canonical scope, `canonical: true`, the version of that kind and the `schema` digest of its schema, as `pinOf` gives them (see find-kind). Seed refuses, writing nothing, when that version is not published. It is the kind `--root-kind` gives, else `hero` with `--workspace` and `base` without it; an explicit `cape` root stays in `kb/`, even with a workspace, and makes a repo that makes its own actions. Existing roots keep their configured directories; the hero-self migration changes only an existing hero primary root of core kind base to core kind hero. `--workspace` also adds `workspace: ./workspace`. When it enables work on an existing repo, it makes hero-self pending again, even if that migration previously ran as a no-op for a data repo; the retry after setup promotes a primary core base to hero while preserving its path and leaving a cape root untouched. It ignores `cache/`, `capes/` and `local/` in `.nosedive/.gitignore`, leaving the repo's own `.gitignore` alone but for one line in a repo with a cape root or a workspace, `!package-lock.json`: their packages build from the lockfile, which a user's global ignore could otherwise hide from every commit. A repo with no `README.md` gets one, its H1 the repo's name linking to its primary root. Then it commits. Seed makes a workspace's folder with a `.gitignore` of `*` inside it; if the path has changed since the last seed, it moves the folder there. On a repo it knows, it adds whatever of that is missing and leaves everything else alone.\n\nIn a repo with a cape root, core and local capes included, seed then writes each code file and `## Code` section its action docs call for and it lacks (see scaffold-cape), commits them as `seed: <repo> scaffolded`, and prints what it wrote and what is still to do, unless there was nothing to scaffold (seed-scaffolds-capes). A hero's own docs are never scaffolded; a local cape's are when seed runs on it.\n\nEach root's body, but a local cape's (the cape renders its own when seed runs in it), is its tree, which seed renders on every run and commits when it changed (`seed: <repo> tree rendered`): its title, then a `## ` section for each rel group of its `<group>.feat` links, and under each doc the docs it links as `child.feat`, to any depth, whatever their kinds. Only a root that links a `.feat` has a tree; any other root's body is left as its author wrote it. `--no-capes` does not skip it.\n\nSeed refuses, before it writes anything, a repo whose config lists a root whose directory lies outside the git checkout it commits in, naming the root's id and directory: it never writes into another checkout.\n\nRight after core's migrations, before the setup above, it builds every cape any of its roots wears (a new repo wears none), the target root's first and each once, that the bridge has not built for the core that is running, so a cape only another root wears, as a base's, is rebuilt too (seed-builds-every-roots-capes): a pinned commit once, an unpinned ref at whatever its remote has now, never a workspace checkout of its repo (see build-cape). `--no-capes` skips that. A new core means a new build of each cape; that is seed's job, and `pass --attach-cape` only builds the one it attaches. Seed builds every cape it can before failing on those it could not, naming each and why, and, when the manifest says which core last built one, how to get back to it: pin the cape at that commit with a `ref` on its `.cape` link, or run that core. It never goes back on its own. Capes may declare actions core or other capes declare: the launcher resolves shared names (see launch).\n\nLast, with or without `--no-capes`, and before it reports the capes it could not build, seed writes the hero's command surface, `help` as the hero now sees it, into every agent instruction file of its directory that holds the managed markers, stamped with the version an install names (see agent-surface), and commits what changed on its own, `seed: <repo> agent surface written` (see agent-surface). A file that also holds the pilot's uncommitted edits outside the block is written but not committed, and seed says so. A failure writing the surface is reported with the capes that failed to build, never in place of them. It creates `AGENTS.md` with the block when no instruction file exists, and when files exist but none is marked, it prints the hint naming the files and the two marker lines. Seed writes it only in a hero, a repo with a root of core's kind hero at the top of its own git checkout, so seeding a cape, core included, a base, or a local cape, with `--at` or from inside it, writes none: they are not worked in from their own roots.\n\n`--at <dir>` (see launch) seeds a directory of the hero in place of the hero: a local cape, as `nosedive --at capes/spec seed --root-kind cape` (seed-local-cape, local-cape-shape). Its config and its root are written inside that directory, which gets no `.git` of its own; the files are committed in the hero's git, as `seed: <directory name> set up`, together with the hero's config, whose `roots` gain the cape's root doc path from the hero (`<dir>/kb/<quid>.md`) (cape-roots). The directory is made when it does not exist. Seed refuses, writing nothing, an `--at` that names one of the hero's roots, a directory outside the hero, in its workspace or in its `.nosedive`, inside or holding another root's directory, or inside a directory seeded on its own (a nested repo or another cape), and a directory seeded and registered already. A directory already seeded whose cape root the hero's config does not list is registered by the same command instead: the root's path is appended to `roots` and committed as `seed: <name> registered`, which is how a cape made before roots listed it joins the hero. Without `--at`, seed acts on the nearest seeded repo above where it runs that lies inside the git checkout it runs in, so inside a seeded cape directory it acts on that directory, and an unseeded repo nested under a seeded one (a clone in a workspace) is seeded itself, never the outer hero. The new cape is worn by nothing yet: `pass --attach-cape <dir>` links it from the hero (see attach-cape).\n\nSeed's commits and its migrations' keep their `seed: ...` and `migrate: ...` subjects, since they change the repo, not a feat's work, and end with the nosedive co-author trailer like every commit nosedive makes (see commit-message).\n\n## Dropped\n\n### 01a1b846-c63c-7bca-81d0-01bcfc1019b7\n\nMinted for scaf's successor, then set aside: scaf's own doc became the scaffold-cape function instead, keeping its id and history; this one never held code.\n\n## Code\n\n- Entrypoint: [src/i01a133547ea87883b6acc99ddff5d5a8.ts](../src/i01a133547ea87883b6acc99ddff5d5a8.ts)\n- `seed [--no-capes] [--root-kind <kind>] [--workspace] [--migrate] [--no-migrate]`: [impl](../src/ie4a628f20d785d3a941ca681bf26e3cf.ts), [tests](../src/ie4a628f20d785d3a941ca681bf26e3cf.test.ts)" }, "01a13354-7f5f-7c45-a3fb-2ac0e3a7678e": { "kind": "function", "name": "scaffold-cape", "gist": "Writes the code files a cape repo's action docs call for and it lacks, and says what it could not", "usages": [], "top": false, "text": "---\nkind: function\nid: 01a13354-7f5f-7c45-a3fb-2ac0e3a7678e\nname: scaffold-cape\ngist: \"Writes the code files a cape repo's action docs call for and it lacks, and says what it could not\"\nlinks:\n  - kb/01a13354-7ea8-7883-b6ac-c99ddff5d5a8.md:\n      rel: parent.feat\n---\n\n# Scaffold cape\n\nSeed calls it on a repo with a cape root, core included, so a cape's code files exist as soon as its docs call for them (seed-scaffolds-capes); it was the scaf action until seed took it over.\n\n`scaffoldCape(repoDir)` walks the repo, never entering `node_modules`, `.git` or `.nosedive/capes`, and never following a symlink or junction, and takes each action doc it holds: one of core's action, function or migration kinds (see doc-kind), however the repo spells it. A seeded repo nested in it, as a local cape in a hero, is its own, and is scaffolded when it is seeded.\n\nFor each, it writes the missing entrypoint, usage impls and tests as stubs in the repo's `src/`, and never overwrites a file; a gate's usage gets an impl taking the pass's `GateCtx` and no test, a crud gate's a test too. It rewrites each doc's `## Code` section, which links those files (see code-section). The stubs throw or are marked todo, so a scaffolded action builds and fails loudly until it is written.\n\nA usage impl it creates opens its default export with a jsdoc block (usage-help-from-jsdoc), which describe-cape-source reads and help shows: a summary line, the action doc's gist; a body line asking the author to describe what the usage does; an `@param` for each argument of the stub, `args` (naming the placeholders the usage text has) and `ctx`, or just `ctx` for a gate; `@returns`; and `@nosedive-feat <quid>`, the quid a `parent.feat` link of the action doc names, left out when the doc has none. A file that exists is never touched, so a usage written before this has no block until someone writes one.\n\nIt returns the files it wrote, from the repo, and lines saying what it did: `created <file>`, `updated <doc>`, `error <doc>: <why it could not be read>` for a doc it named and left, `error: <why>` when the repo's docs cannot be read together, `not followed: <path>` for a symlink to a directory or named as a doc, then `still to do:` and what the cape check finds that it could not fix itself, as an entrypoint not yet calling one of its usage impls or a file no doc accounts for; `nothing to scaffold` stands alone when there is nothing to write, say or fix.\n\nA usage whose text changes changes its impl's file name, which is its id: the new file is written, and the old one is left for the check to name as a file no doc accounts for.\n\n## Code\n\n- Function: [src/i01a133547f5f7c45a3fb2ac0e3a7678e.ts](../src/i01a133547f5f7c45a3fb2ac0e3a7678e.ts)\n- Tests: [src/i01a133547f5f7c45a3fb2ac0e3a7678e.test.ts](../src/i01a133547f5f7c45a3fb2ac0e3a7678e.test.ts)\n", "body": "# Scaffold cape\n\nSeed calls it on a repo with a cape root, core included, so a cape's code files exist as soon as its docs call for them (seed-scaffolds-capes); it was the scaf action until seed took it over.\n\n`scaffoldCape(repoDir)` walks the repo, never entering `node_modules`, `.git` or `.nosedive/capes`, and never following a symlink or junction, and takes each action doc it holds: one of core's action, function or migration kinds (see doc-kind), however the repo spells it. A seeded repo nested in it, as a local cape in a hero, is its own, and is scaffolded when it is seeded.\n\nFor each, it writes the missing entrypoint, usage impls and tests as stubs in the repo's `src/`, and never overwrites a file; a gate's usage gets an impl taking the pass's `GateCtx` and no test, a crud gate's a test too. It rewrites each doc's `## Code` section, which links those files (see code-section). The stubs throw or are marked todo, so a scaffolded action builds and fails loudly until it is written.\n\nA usage impl it creates opens its default export with a jsdoc block (usage-help-from-jsdoc), which describe-cape-source reads and help shows: a summary line, the action doc's gist; a body line asking the author to describe what the usage does; an `@param` for each argument of the stub, `args` (naming the placeholders the usage text has) and `ctx`, or just `ctx` for a gate; `@returns`; and `@nosedive-feat <quid>`, the quid a `parent.feat` link of the action doc names, left out when the doc has none. A file that exists is never touched, so a usage written before this has no block until someone writes one.\n\nIt returns the files it wrote, from the repo, and lines saying what it did: `created <file>`, `updated <doc>`, `error <doc>: <why it could not be read>` for a doc it named and left, `error: <why>` when the repo's docs cannot be read together, `not followed: <path>` for a symlink to a directory or named as a doc, then `still to do:` and what the cape check finds that it could not fix itself, as an entrypoint not yet calling one of its usage impls or a file no doc accounts for; `nothing to scaffold` stands alone when there is nothing to write, say or fix.\n\nA usage whose text changes changes its impl's file name, which is its id: the new file is written, and the old one is left for the check to name as a file no doc accounts for.\n\n## Code\n\n- Function: [src/i01a133547f5f7c45a3fb2ac0e3a7678e.ts](../src/i01a133547f5f7c45a3fb2ac0e3a7678e.ts)\n- Tests: [src/i01a133547f5f7c45a3fb2ac0e3a7678e.test.ts](../src/i01a133547f5f7c45a3fb2ac0e3a7678e.test.ts)" }, "01a13354-8014-7d06-8652-8aee80f8ee34": { "kind": "function", "name": "namespaced-uuid", "gist": "uuidv5(name, namespace): the same uuid wherever the same name meets the same namespace", "usages": [], "top": true, "text": '---\nkind: function\nid: 01a13354-8014-7d06-8652-8aee80f8ee34\nname: namespaced-uuid\ngist: "uuidv5(name, namespace): the same uuid wherever the same name meets the same namespace"\nlinks:\n  - kb/01a14237-2b56-7302-a79c-fe6b14b98ea5.md:\n      rel: parent.feat\n---\n\n# Namespaced uuid\n\nCape ids, index keys and usage ids are all made this way, so anything that knows the inputs can find the thing again without a registry.\n\n## Code\n\n- Function: [src/i01a1335480147d0686528aee80f8ee34.ts](../src/i01a1335480147d0686528aee80f8ee34.ts)\n- Tests: [src/i01a1335480147d0686528aee80f8ee34.test.ts](../src/i01a1335480147d0686528aee80f8ee34.test.ts)\n', "body": "# Namespaced uuid\n\nCape ids, index keys and usage ids are all made this way, so anything that knows the inputs can find the thing again without a registry.\n\n## Code\n\n- Function: [src/i01a1335480147d0686528aee80f8ee34.ts](../src/i01a1335480147d0686528aee80f8ee34.ts)\n- Tests: [src/i01a1335480147d0686528aee80f8ee34.test.ts](../src/i01a1335480147d0686528aee80f8ee34.test.ts)" }, "01a13354-80c7-76ba-8945-020d0af333eb": { "kind": "function", "name": "mint-uuid", "gist": "A new time-ordered uuid (v7) for a doc that needs an id of its own", "usages": [], "top": true, "text": '---\nkind: function\nid: 01a13354-80c7-76ba-8945-020d0af333eb\nname: mint-uuid\ngist: "A new time-ordered uuid (v7) for a doc that needs an id of its own"\nlinks:\n  - kb/01a14237-2b56-7302-a79c-fe6b14b98ea5.md:\n      rel: parent.feat\n---\n\n# Mint uuid\n\nIds sort by when they were minted, so a kb listed by filename reads oldest first.\n\n## Code\n\n- Function: [src/i01a1335480c776ba8945020d0af333eb.ts](../src/i01a1335480c776ba8945020d0af333eb.ts)\n- Tests: [src/i01a1335480c776ba8945020d0af333eb.test.ts](../src/i01a1335480c776ba8945020d0af333eb.test.ts)\n', "body": "# Mint uuid\n\nIds sort by when they were minted, so a kb listed by filename reads oldest first.\n\n## Code\n\n- Function: [src/i01a1335480c776ba8945020d0af333eb.ts](../src/i01a1335480c776ba8945020d0af333eb.ts)\n- Tests: [src/i01a1335480c776ba8945020d0af333eb.test.ts](../src/i01a1335480c776ba8945020d0af333eb.test.ts)" }, "01a13354-8178-7393-9894-1123114401ad": { "kind": "function", "name": "usage-id", "gist": "The hex id of one usage of an action: uuidv5 of the usage text, whitespace collapsed, in the action doc's id", "usages": [], "top": false, "text": "---\nkind: function\nid: 01a13354-8178-7393-9894-1123114401ad\nname: usage-id\ngist: \"The hex id of one usage of an action: uuidv5 of the usage text, whitespace collapsed, in the action doc's id\"\nlinks:\n  - kb/01a13354-87e4-7754-9d84-a6fc2c901bf6.md:\n      rel: parent.feat\n---\n\n# Usage id\n\nNames the usage's impl (`src/i<id>.ts`) and test (`src/i<id>.test.ts`). Rewording a usage changes its id on purpose.\n\n## Code\n\n- Function: [src/i01a133548178739398941123114401ad.ts](../src/i01a133548178739398941123114401ad.ts)\n- Tests: [src/i01a133548178739398941123114401ad.test.ts](../src/i01a133548178739398941123114401ad.test.ts)\n", "body": "# Usage id\n\nNames the usage's impl (`src/i<id>.ts`) and test (`src/i<id>.test.ts`). Rewording a usage changes its id on purpose.\n\n## Code\n\n- Function: [src/i01a133548178739398941123114401ad.ts](../src/i01a133548178739398941123114401ad.ts)\n- Tests: [src/i01a133548178739398941123114401ad.test.ts](../src/i01a133548178739398941123114401ad.test.ts)" }, "01a13354-8243-7c9e-b145-885f65f12aa1": { "kind": "function", "name": "match-usage", "gist": "Which of an action's usages an argv matches, and the arguments it binds", "usages": [], "top": false, "text": '---\nkind: function\nid: 01a13354-8243-7c9e-b145-885f65f12aa1\nname: match-usage\ngist: "Which of an action\'s usages an argv matches, and the arguments it binds"\nlinks:\n  - kb/01a1336a-958f-71c7-beec-4db3195c7966.md:\n      rel: parent.feat\n---\n\n# Match usage\n\nTakes docopt-style usages and an argv (action name first). Options may come in any order, as `--opt value` or `--opt=value`; `-` alone is a value, not an option. Bound names are camelCased with brackets and dashes stripped: `<gist>...` binds `gist` to a list, `--name <name>` binds `name`, a bare `--flag` binds `flag` to true. A usage ending in `<argv>...`, with no options, takes the rest of the command line as it is, options included, for an action that matches it itself, as pass does. No match, or more than one, throws with the usages listed.\n\n## Code\n\n- Function: [src/i01a1335482437c9eb145885f65f12aa1.ts](../src/i01a1335482437c9eb145885f65f12aa1.ts)\n- Tests: [src/i01a1335482437c9eb145885f65f12aa1.test.ts](../src/i01a1335482437c9eb145885f65f12aa1.test.ts)\n', "body": "# Match usage\n\nTakes docopt-style usages and an argv (action name first). Options may come in any order, as `--opt value` or `--opt=value`; `-` alone is a value, not an option. Bound names are camelCased with brackets and dashes stripped: `<gist>...` binds `gist` to a list, `--name <name>` binds `name`, a bare `--flag` binds `flag` to true. A usage ending in `<argv>...`, with no options, takes the rest of the command line as it is, options included, for an action that matches it itself, as pass does. No match, or more than one, throws with the usages listed.\n\n## Code\n\n- Function: [src/i01a1335482437c9eb145885f65f12aa1.ts](../src/i01a1335482437c9eb145885f65f12aa1.ts)\n- Tests: [src/i01a1335482437c9eb145885f65f12aa1.test.ts](../src/i01a1335482437c9eb145885f65f12aa1.test.ts)" }, "01a13354-82f8-76d6-808a-ec457f512e80": { "kind": "function", "name": "read-kb-doc", "gist": "Splits a kb doc's text into its frontmatter and body", "usages": [], "top": true, "text": '---\nkind: function\nid: 01a13354-82f8-76d6-808a-ec457f512e80\nname: read-kb-doc\ngist: "Splits a kb doc\'s text into its frontmatter and body"\nlinks:\n  - kb/01a13565-d897-7af6-9458-c82ef6e77bee.md:\n      rel: parent.feat\n---\n\n# Read kb doc\n\nThe frontmatter is the YAML between the leading `---` lines; the body is everything after it. Text with no frontmatter throws.\n\n## Code\n\n- Function: [src/i01a1335482f876d6808aec457f512e80.ts](../src/i01a1335482f876d6808aec457f512e80.ts)\n- Tests: [src/i01a1335482f876d6808aec457f512e80.test.ts](../src/i01a1335482f876d6808aec457f512e80.test.ts)\n', "body": "# Read kb doc\n\nThe frontmatter is the YAML between the leading `---` lines; the body is everything after it. Text with no frontmatter throws.\n\n## Code\n\n- Function: [src/i01a1335482f876d6808aec457f512e80.ts](../src/i01a1335482f876d6808aec457f512e80.ts)\n- Tests: [src/i01a1335482f876d6808aec457f512e80.test.ts](../src/i01a1335482f876d6808aec457f512e80.test.ts)" }, "01a13354-83aa-776c-b84d-f698b04adc06": { "kind": "function", "name": "write-kb-doc", "gist": "Writes a kb doc's frontmatter and body back to its file", "usages": [], "top": true, "text": "---\nkind: function\nid: 01a13354-83aa-776c-b84d-f698b04adc06\nname: write-kb-doc\ngist: \"Writes a kb doc's frontmatter and body back to its file\"\nlinks:\n  - kb/01a13565-d897-7af6-9458-c82ef6e77bee.md:\n      rel: parent.feat\n---\n\n# Write kb doc\n\nTop-level frontmatter keys are written in KINGSMETAL order: `kind`, `id`, `name`, `gist`, `scopes`, `meta`, then any other key in its existing order, then `links` last. A doc takes that order the next time it is written; nothing rewrites docs that are otherwise untouched. A comment above the first key stays at the top, and no key is left with a blank line under the opening fence (a blank that led the new first key moves to the key under it); other blank lines travel with their key. A doc that uses YAML aliases keeps its order, since a move could put an alias before its anchor. Values, comments and nested order are untouched, so once a doc is in order a field an action changes is the only line in the diff. `kingsmetal(yaml)` applies the order alone, for crud's edit commit to compare what it would write.\n\n## Code\n\n- Function: [src/i01a1335483aa776cb84df698b04adc06.ts](../src/i01a1335483aa776cb84df698b04adc06.ts)\n- Tests: [src/i01a1335483aa776cb84df698b04adc06.test.ts](../src/i01a1335483aa776cb84df698b04adc06.test.ts)\n", "body": "# Write kb doc\n\nTop-level frontmatter keys are written in KINGSMETAL order: `kind`, `id`, `name`, `gist`, `scopes`, `meta`, then any other key in its existing order, then `links` last. A doc takes that order the next time it is written; nothing rewrites docs that are otherwise untouched. A comment above the first key stays at the top, and no key is left with a blank line under the opening fence (a blank that led the new first key moves to the key under it); other blank lines travel with their key. A doc that uses YAML aliases keeps its order, since a move could put an alias before its anchor. Values, comments and nested order are untouched, so once a doc is in order a field an action changes is the only line in the diff. `kingsmetal(yaml)` applies the order alone, for crud's edit commit to compare what it would write.\n\n## Code\n\n- Function: [src/i01a1335483aa776cb84df698b04adc06.ts](../src/i01a1335483aa776cb84df698b04adc06.ts)\n- Tests: [src/i01a1335483aa776cb84df698b04adc06.test.ts](../src/i01a1335483aa776cb84df698b04adc06.test.ts)" }, "01a13354-845c-7253-a55b-60bba87285d8": { "kind": "function", "name": "find-kb-doc", "gist": "The doc with a given id in a kb directory, or nothing", "usages": [], "top": true, "text": '---\nkind: function\nid: 01a13354-845c-7253-a55b-60bba87285d8\nname: find-kb-doc\ngist: "The doc with a given id in a kb directory, or nothing"\nlinks:\n  - kb/01a13565-d897-7af6-9458-c82ef6e77bee.md:\n      rel: parent.feat\n---\n\n# Find kb doc\n\nA doc lives at `<kb>/<id>.md`; nothing else is searched.\n\n## Code\n\n- Function: [src/i01a13354845c7253a55b60bba87285d8.ts](../src/i01a13354845c7253a55b60bba87285d8.ts)\n- Tests: [src/i01a13354845c7253a55b60bba87285d8.test.ts](../src/i01a13354845c7253a55b60bba87285d8.test.ts)\n', "body": "# Find kb doc\n\nA doc lives at `<kb>/<id>.md`; nothing else is searched.\n\n## Code\n\n- Function: [src/i01a13354845c7253a55b60bba87285d8.ts](../src/i01a13354845c7253a55b60bba87285d8.ts)\n- Tests: [src/i01a13354845c7253a55b60bba87285d8.test.ts](../src/i01a13354845c7253a55b60bba87285d8.test.ts)" }, "01a13354-850c-7ba3-ba5b-8ac41a7b6b11": { "kind": "function", "name": "list-kb-docs", "gist": "Every doc in a kb directory, with its path, frontmatter and body", "usages": [], "top": true, "text": '---\nkind: function\nid: 01a13354-850c-7ba3-ba5b-8ac41a7b6b11\nname: list-kb-docs\ngist: "Every doc in a kb directory, with its path, frontmatter and body"\nlinks:\n  - kb/01a13565-d897-7af6-9458-c82ef6e77bee.md:\n      rel: parent.feat\n---\n\n# List kb docs\n\nFiles that are not markdown, or have no frontmatter, are skipped.\n\n## Code\n\n- Function: [src/i01a13354850c7ba3ba5b8ac41a7b6b11.ts](../src/i01a13354850c7ba3ba5b8ac41a7b6b11.ts)\n- Tests: [src/i01a13354850c7ba3ba5b8ac41a7b6b11.test.ts](../src/i01a13354850c7ba3ba5b8ac41a7b6b11.test.ts)\n', "body": "# List kb docs\n\nFiles that are not markdown, or have no frontmatter, are skipped.\n\n## Code\n\n- Function: [src/i01a13354850c7ba3ba5b8ac41a7b6b11.ts](../src/i01a13354850c7ba3ba5b8ac41a7b6b11.ts)\n- Tests: [src/i01a13354850c7ba3ba5b8ac41a7b6b11.test.ts](../src/i01a13354850c7ba3ba5b8ac41a7b6b11.test.ts)" }, "01a13354-85c6-7c95-b7ef-df2f0e03cfd6": { "kind": "function", "name": "find-bridge", "gist": "The repo nosedive acts on: the nearest one above a directory with a nosedive config", "usages": [], "top": true, "text": '---\nkind: function\nid: 01a13354-85c6-7c95-b7ef-df2f0e03cfd6\nname: find-bridge\ngist: "The repo nosedive acts on: the nearest one above a directory with a nosedive config"\nlinks:\n  - kb/01a14237-2e96-7064-8c97-08c439c21590.md:\n      rel: parent.feat\n---\n\n# Find bridge\n\nThe bridge is the repo whose config nosedive resolves when it runs: the nearest repo above the directory with a `.nosedive/config.yaml`, read with read-repo-config: its id, its roots and kb, and its workspace. A workspace checkout is never a hero, and launch refuses to run from inside one; `insideWorkspace` names the hero and the checkout a directory sits in, for that refusal.\n\n## Code\n\n- Function: [src/i01a1335485c67c95b7efdf2f0e03cfd6.ts](../src/i01a1335485c67c95b7efdf2f0e03cfd6.ts)\n- Tests: [src/i01a1335485c67c95b7efdf2f0e03cfd6.test.ts](../src/i01a1335485c67c95b7efdf2f0e03cfd6.test.ts)\n', "body": "# Find bridge\n\nThe bridge is the repo whose config nosedive resolves when it runs: the nearest repo above the directory with a `.nosedive/config.yaml`, read with read-repo-config: its id, its roots and kb, and its workspace. A workspace checkout is never a hero, and launch refuses to run from inside one; `insideWorkspace` names the hero and the checkout a directory sits in, for that refusal.\n\n## Code\n\n- Function: [src/i01a1335485c67c95b7efdf2f0e03cfd6.ts](../src/i01a1335485c67c95b7efdf2f0e03cfd6.ts)\n- Tests: [src/i01a1335485c67c95b7efdf2f0e03cfd6.test.ts](../src/i01a1335485c67c95b7efdf2f0e03cfd6.test.ts)" }, "01a13354-867d-7a52-8cba-d55b80708e50": { "kind": "function", "name": "merge-patch", "gist": "Applies a JSON merge patch (RFC 7386) to a value", "usages": [], "top": true, "text": '---\nkind: function\nid: 01a13354-867d-7a52-8cba-d55b80708e50\nname: merge-patch\ngist: "Applies a JSON merge patch (RFC 7386) to a value"\nlinks:\n  - kb/01a13565-d897-7af6-9458-c82ef6e77bee.md:\n      rel: parent.feat\n---\n\n# Merge patch\n\nObjects merge key by key, `null` deletes a key, anything else replaces.\n\n## Code\n\n- Function: [src/i01a13354867d7a528cbad55b80708e50.ts](../src/i01a13354867d7a528cbad55b80708e50.ts)\n- Tests: [src/i01a13354867d7a528cbad55b80708e50.test.ts](../src/i01a13354867d7a528cbad55b80708e50.test.ts)\n', "body": "# Merge patch\n\nObjects merge key by key, `null` deletes a key, anything else replaces.\n\n## Code\n\n- Function: [src/i01a13354867d7a528cbad55b80708e50.ts](../src/i01a13354867d7a528cbad55b80708e50.ts)\n- Tests: [src/i01a13354867d7a528cbad55b80708e50.test.ts](../src/i01a13354867d7a528cbad55b80708e50.test.ts)" }, "01a13354-8731-7576-a0af-d03506ef5555": { "kind": "function", "name": "read-source", "gist": "Parses YAML or JSON from stdin when the value is `-`, or from the file the value names", "usages": [], "top": false, "text": '---\nkind: function\nid: 01a13354-8731-7576-a0af-d03506ef5555\nname: read-source\ngist: "Parses YAML or JSON from stdin when the value is `-`, or from the file the value names"\nlinks:\n  - kb/01a13354-7dea-7604-b903-b94a5aca2b83.md:\n      rel: parent.feat\n---\n\n# Read source\n\nHow an action reads a `<source>` argument.\n\n## Code\n\n- Function: [src/i01a1335487317576a0afd03506ef5555.ts](../src/i01a1335487317576a0afd03506ef5555.ts)\n- Tests: [src/i01a1335487317576a0afd03506ef5555.test.ts](../src/i01a1335487317576a0afd03506ef5555.test.ts)\n', "body": "# Read source\n\nHow an action reads a `<source>` argument.\n\n## Code\n\n- Function: [src/i01a1335487317576a0afd03506ef5555.ts](../src/i01a1335487317576a0afd03506ef5555.ts)\n- Tests: [src/i01a1335487317576a0afd03506ef5555.test.ts](../src/i01a1335487317576a0afd03506ef5555.test.ts)" }, "01a13354-87e4-7754-9d84-a6fc2c901bf6": { "kind": "function", "name": "describe-cape-source", "gist": "A cape repo's action docs, as the cape will export them, with the entrypoint file each one names", "usages": [], "top": true, "text": "---\nkind: function\nid: 01a13354-87e4-7754-9d84-a6fc2c901bf6\nname: describe-cape-source\ngist: \"A cape repo's action docs, as the cape will export them, with the entrypoint file each one names\"\nlinks:\n  - kb/01a14237-31b6-759f-8d20-b8a496ca5d97.md:\n      rel: parent.feat\n  - kb/01a13354-8178-7393-9894-1123114401ad.md:\n      rel: child.feat\n---\n\n# Describe cape source\n\nReads the repo's kb, the one its config names, else `kb/`, for its actions, functions and migrations, each with its usages and entrypoint, a migration's code read as a function's, and its kinds, each with its meta and links, from `.nosedive/kinds/` as well as the kb. A doc counts only when its kind, by doc-kind, is core's `action`, `function`, `migration` or `kind`: a cape's action docs say so in a canonical scope naming core, and a doc of a kind of the repo's own that is named `action` is another. It learns each doc's kind name from the head of its file with kb-doc-kind, and reads whole only the docs of those names; every doc in `.nosedive/kinds/` is a kind. Asked for another directory, as scaffold-cape is for a doc in one of the repo's other roots, it reads that in place of the kb. Asked to read from `src/`, as a hero's build and help are, it reads only the docs whose ids name a file there. Each kind is recorded with its `id`, its `file` in the repo, its `dropWhen` when its doc has a `## Drop when` section, or a legacy `## Done when`, its heading read in any case (that section's whole text, trimmed, empty when the section is, see kind; `dropWhenSlips` names a heading that looks like one but is not read as one, and an empty section) and, when asked for versions, its `version`: the newest commit that changed `meta.schema`, never one that changed its prose (see find-kind). The build asks, and the manifest and the bundle carry it, so a hero that wears a cape can name a kind's version in its docs without the cape's history; a kind whose schema is not committed has none. It records with the version whether it is on the repo's origin trunk, as last fetched, and with every kind, versioned or not, its `digest`: a short digest of the schema (`schemaDigest`, the first 12 hex characters of the sha256 of the schema with its keys in order), which scope entries keep as `schema` so a version a force-push orphaned can be re-pinned to a commit holding the same schema (see find-kind). `namedExports` lists, for each non-test file in `src/`, the values and types it exports besides its default `i<hex>` function, which core's build and load-source-cape hand to capes that import them. `uncanonicalDocs` counts the action, function and migration docs that do not name core as their kind's owner, which the build uses to refuse a cape written before canonical kinds, since those docs are otherwise left out without a word. Each usage also records its description, `description`, read from the jsdoc block that precedes the default export of its impl file, `src/i<usage id>.ts`, when it has one (usage-help-from-jsdoc): `usageDescription` takes the file's text and tolerates what it does not know. The summary is the block's first non-empty line; the body, the prose after it up to the first tag; each `@param <name> <text>` (a `{type}` and a `-` are ignored), `@returns <text>`, and `@nosedive-<key> <value>` is kept, in order, and any other tag is skipped. A file with no such block, or none, leaves the usage with no description. It goes into the build with the docs, so a cape taken from a build with no source on disk, core included, shows it in help; a build with no `description` loads as before. Used by the build, the checks, scaffold-cape, and tests that run a cape from source.\n\n## Code\n\n- Function: [src/i01a1335487e477549d84a6fc2c901bf6.ts](../src/i01a1335487e477549d84a6fc2c901bf6.ts)\n- Tests: [src/i01a1335487e477549d84a6fc2c901bf6.test.ts](../src/i01a1335487e477549d84a6fc2c901bf6.test.ts)\n", "body": "# Describe cape source\n\nReads the repo's kb, the one its config names, else `kb/`, for its actions, functions and migrations, each with its usages and entrypoint, a migration's code read as a function's, and its kinds, each with its meta and links, from `.nosedive/kinds/` as well as the kb. A doc counts only when its kind, by doc-kind, is core's `action`, `function`, `migration` or `kind`: a cape's action docs say so in a canonical scope naming core, and a doc of a kind of the repo's own that is named `action` is another. It learns each doc's kind name from the head of its file with kb-doc-kind, and reads whole only the docs of those names; every doc in `.nosedive/kinds/` is a kind. Asked for another directory, as scaffold-cape is for a doc in one of the repo's other roots, it reads that in place of the kb. Asked to read from `src/`, as a hero's build and help are, it reads only the docs whose ids name a file there. Each kind is recorded with its `id`, its `file` in the repo, its `dropWhen` when its doc has a `## Drop when` section, or a legacy `## Done when`, its heading read in any case (that section's whole text, trimmed, empty when the section is, see kind; `dropWhenSlips` names a heading that looks like one but is not read as one, and an empty section) and, when asked for versions, its `version`: the newest commit that changed `meta.schema`, never one that changed its prose (see find-kind). The build asks, and the manifest and the bundle carry it, so a hero that wears a cape can name a kind's version in its docs without the cape's history; a kind whose schema is not committed has none. It records with the version whether it is on the repo's origin trunk, as last fetched, and with every kind, versioned or not, its `digest`: a short digest of the schema (`schemaDigest`, the first 12 hex characters of the sha256 of the schema with its keys in order), which scope entries keep as `schema` so a version a force-push orphaned can be re-pinned to a commit holding the same schema (see find-kind). `namedExports` lists, for each non-test file in `src/`, the values and types it exports besides its default `i<hex>` function, which core's build and load-source-cape hand to capes that import them. `uncanonicalDocs` counts the action, function and migration docs that do not name core as their kind's owner, which the build uses to refuse a cape written before canonical kinds, since those docs are otherwise left out without a word. Each usage also records its description, `description`, read from the jsdoc block that precedes the default export of its impl file, `src/i<usage id>.ts`, when it has one (usage-help-from-jsdoc): `usageDescription` takes the file's text and tolerates what it does not know. The summary is the block's first non-empty line; the body, the prose after it up to the first tag; each `@param <name> <text>` (a `{type}` and a `-` are ignored), `@returns <text>`, and `@nosedive-<key> <value>` is kept, in order, and any other tag is skipped. A file with no such block, or none, leaves the usage with no description. It goes into the build with the docs, so a cape taken from a build with no source on disk, core included, shows it in help; a build with no `description` loads as before. Used by the build, the checks, scaffold-cape, and tests that run a cape from source.\n\n## Code\n\n- Function: [src/i01a1335487e477549d84a6fc2c901bf6.ts](../src/i01a1335487e477549d84a6fc2c901bf6.ts)\n- Tests: [src/i01a1335487e477549d84a6fc2c901bf6.test.ts](../src/i01a1335487e477549d84a6fc2c901bf6.test.ts)" }, "01a13354-8893-7f1c-8c39-83dd2950028e": { "kind": "function", "name": "check-cape-source", "gist": "Everything in a cape repo that its action docs do not account for, or that they name and is missing", "usages": [], "top": true, "text": "---\nkind: function\nid: 01a13354-8893-7f1c-8c39-83dd2950028e\nname: check-cape-source\ngist: \"Everything in a cape repo that its action docs do not account for, or that they name and is missing\"\nlinks:\n  - kb/01a14237-31b6-759f-8d20-b8a496ca5d97.md:\n      rel: parent.feat\n---\n\n# Check cape source\n\nDiagnostic doc paths come from the primary root directory the repo config lists, so a home/ root is named as home/ rather than kb/. An unconfigured repo keeps the kb/ fallback.\n\nOne line per problem: a usage that starts neither with its action's name nor with `pass --<sect> <kind>`, or an action whose usages do both, since it is a command or a gate; a pass gate's usage needs an impl but no test, being a check itself, while a crud gate's (`before crud <kind>`, `after crud <kind>`) needs both, being behaviour (see crud-gates); a missing entrypoint, impl or test; an entrypoint that never mentions one of its usage impls; a `## Code` section that is missing or stale; a file under `src/` or `test/` no doc names. Only `test/harness.ts` is exempt: tests live in `src/` beside their code, and `test/` holds only core's harness.\n\n## Code\n\n- Function: [src/i01a1335488937f1c8c3983dd2950028e.ts](../src/i01a1335488937f1c8c3983dd2950028e.ts)\n- Tests: [src/i01a1335488937f1c8c3983dd2950028e.test.ts](../src/i01a1335488937f1c8c3983dd2950028e.test.ts)\n", "body": "# Check cape source\n\nDiagnostic doc paths come from the primary root directory the repo config lists, so a home/ root is named as home/ rather than kb/. An unconfigured repo keeps the kb/ fallback.\n\nOne line per problem: a usage that starts neither with its action's name nor with `pass --<sect> <kind>`, or an action whose usages do both, since it is a command or a gate; a pass gate's usage needs an impl but no test, being a check itself, while a crud gate's (`before crud <kind>`, `after crud <kind>`) needs both, being behaviour (see crud-gates); a missing entrypoint, impl or test; an entrypoint that never mentions one of its usage impls; a `## Code` section that is missing or stale; a file under `src/` or `test/` no doc names. Only `test/harness.ts` is exempt: tests live in `src/` beside their code, and `test/` holds only core's harness.\n\n## Code\n\n- Function: [src/i01a1335488937f1c8c3983dd2950028e.ts](../src/i01a1335488937f1c8c3983dd2950028e.ts)\n- Tests: [src/i01a1335488937f1c8c3983dd2950028e.test.ts](../src/i01a1335488937f1c8c3983dd2950028e.test.ts)" }, "01a13354-8942-73b1-be25-3424511ba82c": { "kind": "function", "name": "commit-files", "gist": "Stages the given files in a repo and commits them with a message, once co-authored by nosedive", "usages": [], "top": true, "text": '---\nkind: function\nid: 01a13354-8942-73b1-be25-3424511ba82c\nname: commit-files\ngist: "Stages the given files in a repo and commits them with a message, once co-authored by nosedive"\nlinks:\n  - kb/01a14237-2e96-7064-8c97-08c439c21590.md:\n      rel: parent.feat\n  - kb/01a19005-c311-72b6-8871-d4842563d310.md:\n      rel: child.feat\n---\n\n# Commit files\n\nThe message ends with the nosedive co-author trailer for the core `version` it is given, unless it carries one already (see commit-message). Returns the sha of the commit it made. Throws with git\'s output when either step fails.\n\n## Code\n\n- Function: [src/i01a13354894273b1be253424511ba82c.ts](../src/i01a13354894273b1be253424511ba82c.ts)\n- Tests: [src/i01a13354894273b1be253424511ba82c.test.ts](../src/i01a13354894273b1be253424511ba82c.test.ts)\n', "body": "# Commit files\n\nThe message ends with the nosedive co-author trailer for the core `version` it is given, unless it carries one already (see commit-message). Returns the sha of the commit it made. Throws with git's output when either step fails.\n\n## Code\n\n- Function: [src/i01a13354894273b1be253424511ba82c.ts](../src/i01a13354894273b1be253424511ba82c.ts)\n- Tests: [src/i01a13354894273b1be253424511ba82c.test.ts](../src/i01a13354894273b1be253424511ba82c.test.ts)" }, "01a13358-8b1f-7d4e-a13f-1b5e79f02e4c": { "kind": "function", "name": "merge-keyed-entries", "gist": "Merges a mapping into a list of one-key entries, the shape of scopes and links", "usages": [], "top": false, "text": '---\nkind: function\nid: 01a13358-8b1f-7d4e-a13f-1b5e79f02e4c\nname: merge-keyed-entries\ngist: "Merges a mapping into a list of one-key entries, the shape of scopes and links"\nlinks:\n  - kb/01a13354-7dea-7604-b903-b94a5aca2b83.md:\n      rel: parent.feat\n---\n\n# Merge keyed entries\n\nEach key of the patch names an entry: its value is merged onto that entry\'s value (a JSON merge patch), a key with no entry is appended, and `null` removes the entry. A bare string entry counts as a key with no value.\n\n## Code\n\n- Function: [src/i01a133588b1f7d4ea13f1b5e79f02e4c.ts](../src/i01a133588b1f7d4ea13f1b5e79f02e4c.ts)\n- Tests: [src/i01a133588b1f7d4ea13f1b5e79f02e4c.test.ts](../src/i01a133588b1f7d4ea13f1b5e79f02e4c.test.ts)\n', "body": "# Merge keyed entries\n\nEach key of the patch names an entry: its value is merged onto that entry's value (a JSON merge patch), a key with no entry is appended, and `null` removes the entry. A bare string entry counts as a key with no value.\n\n## Code\n\n- Function: [src/i01a133588b1f7d4ea13f1b5e79f02e4c.ts](../src/i01a133588b1f7d4ea13f1b5e79f02e4c.ts)\n- Tests: [src/i01a133588b1f7d4ea13f1b5e79f02e4c.test.ts](../src/i01a133588b1f7d4ea13f1b5e79f02e4c.test.ts)" }, "01a13358-8bcc-7f8b-ae72-5ff70d8f6800": { "kind": "function", "name": "update-kb-doc-field", "gist": "Replaces one frontmatter field of a doc in an edit with a function of its current value", "usages": [], "top": false, "text": '---\nkind: function\nid: 01a13358-8bcc-7f8b-ae72-5ff70d8f6800\nname: update-kb-doc-field\ngist: "Replaces one frontmatter field of a doc in an edit with a function of its current value"\nlinks:\n  - kb/01a13354-7dea-7604-b903-b94a5aca2b83.md:\n      rel: parent.feat\n---\n\n# Update kb doc field\n\nOnly that field changes in the file. An empty result removes the field. Nothing is written until the edit commits, and later updates in the same edit see the new value.\n\n## Code\n\n- Function: [src/i01a133588bcc7f8bae725ff70d8f6800.ts](../src/i01a133588bcc7f8bae725ff70d8f6800.ts)\n- Tests: [src/i01a133588bcc7f8bae725ff70d8f6800.test.ts](../src/i01a133588bcc7f8bae725ff70d8f6800.test.ts)\n', "body": "# Update kb doc field\n\nOnly that field changes in the file. An empty result removes the field. Nothing is written until the edit commits, and later updates in the same edit see the new value.\n\n## Code\n\n- Function: [src/i01a133588bcc7f8bae725ff70d8f6800.ts](../src/i01a133588bcc7f8bae725ff70d8f6800.ts)\n- Tests: [src/i01a133588bcc7f8bae725ff70d8f6800.test.ts](../src/i01a133588bcc7f8bae725ff70d8f6800.test.ts)" }, "01a13358-8c79-71b5-b116-d9c8c1706e04": { "kind": "function", "name": "cape-index", "gist": "The index entries of a cape: each action's name keyed to its doc id, and its doc id keyed to its entrypoint", "usages": [], "top": true, "text": '---\nkind: function\nid: 01a13358-8c79-71b5-b116-d9c8c1706e04\nname: cape-index\ngist: "The index entries of a cape: each action\'s name keyed to its doc id, and its doc id keyed to its entrypoint"\nlinks:\n  - kb/01a14237-31b6-759f-8d20-b8a496ca5d97.md:\n      rel: parent.feat\n---\n\n# Cape index\n\nKeys are `uuidv5(<name>, <cape id>)` and `uuidv5(<doc id>, <cape id>)`. The build writes them into the cape; tests that run a cape from source build the same index at runtime.\n\n## Code\n\n- Function: [src/i01a133588c7971b5b116d9c8c1706e04.ts](../src/i01a133588c7971b5b116d9c8c1706e04.ts)\n- Tests: [src/i01a133588c7971b5b116d9c8c1706e04.test.ts](../src/i01a133588c7971b5b116d9c8c1706e04.test.ts)\n', "body": "# Cape index\n\nKeys are `uuidv5(<name>, <cape id>)` and `uuidv5(<doc id>, <cape id>)`. The build writes them into the cape; tests that run a cape from source build the same index at runtime.\n\n## Code\n\n- Function: [src/i01a133588c7971b5b116d9c8c1706e04.ts](../src/i01a133588c7971b5b116d9c8c1706e04.ts)\n- Tests: [src/i01a133588c7971b5b116d9c8c1706e04.test.ts](../src/i01a133588c7971b5b116d9c8c1706e04.test.ts)" }, "01a1336a-958f-71c7-beec-4db3195c7966": { "kind": "function", "name": "launch", "gist": "Runs one command line: finds the action it names in the loaded capes, matches a usage, and calls the action's entrypoint", "usages": [], "top": true, "text": "---\nkind: function\nid: 01a1336a-958f-71c7-beec-4db3195c7966\nname: launch\ngist: \"Runs one command line: finds the action it names in the loaded capes, matches a usage, and calls the action's entrypoint\"\nlinks:\n  - kb/01a1336b-c0b8-7cde-b7c6-285196062297.md:\n      rel: parent.feat\n  - kb/01a13354-8243-7c9e-b145-885f65f12aa1.md:\n      rel: child.feat\n  - kb/01a1337c-825f-7457-b879-d5c039ffeccd.md:\n      rel: child.feat\n  - kb/01a14b30-eb0e-72e2-8934-c918000a26ac.md:\n      rel: child.feat\n---\n\n# Launch\n\n`nosedive <cape>:<action>` runs the action of the cape named, `nosedive-core:<action>` core's and `<hero>:<action>` the hero's own, the hero named by its root, refusing when that cape has no such action: the same grammar as crud's `<cape>:<kind>`. A bare action runs core's whatever else declares the name, then the hero's own, then a worn cape's; a name two worn capes declare, and neither core nor the hero, runs the action of the cape that supersedes the other (see cape), and is otherwise refused, naming each as `<cape>:<action>`. Capes go by their full names. Errors print as `nosedive: <message>` with exit code 1.\n\n## Where it acts\n\nnosedive acts on the nearest repo above the directory it runs in (see find-bridge), or on the one `NOSEDIVE_HERO` names, from anywhere: actions then run as if from that repo's directory. A workspace checkout is never a hero: without `NOSEDIVE_HERO`, nosedive refuses to run from inside one, naming the hero whose workspace holds it and how to act from there, so neither a habit nor a git hook acts on the wrong repo. The workspace directory itself acts on its hero.\n\n`--at <target>`, before the action, selects the target: one of the hero's roots by its quid, its name or its directory's name, else any existing directory inside the hero or its workspace, relative to where nosedive acts; `seed` also takes one that does not exist yet, to make it (see seed). It sets `NOSEDIVE_AT` for everything the action reads; without it, the target is the directory of the primary root (see read-repo-config). It names the tree an action works in: crud writes new docs into it. The capes in use are those the target root wears, the primary root's when the target is a directory that is no root.\n\n```sh\nNOSEDIVE_HERO=~/mi nosedive --at kb jump <feat>\nnosedive --at workspace/notes crud idea \"Kept apart from the hero\"\n```\n\n## Help\n\n`help`, or no action, lists core's top-level commands under core's short name, then the hero's own under its root's name, then each worn cape's under its short name, the name of its cape root doc, as the manifest recorded them when it was built, or the cape as not built. No version is shown: plain help is the agent surface, which must read the same wherever the same commands are built and change only when they do (versions-behind-more). `--help --more` adds each cape's version beside its commit, where it was built from, and its repo's id. An action a worn cape supersedes is listed once, under the superseding cape; `--help --more` adds `, in place of <cape>'s` to its row, naming the cape it stands in for. An action under another action runs by name but is not listed. A gate is no command: help leaves it out, and naming one is refused with its usage.\n\n`<action> --help` prints the action's gist, then each usage with the summary of its jsdoc block, the first line of the block that opens the default export of its impl file (usage-help-from-jsdoc). A usage with no block shows nothing beside it: the gist above stands for it. `--help --more` adds under each usage its `@nosedive-<key> <value>` attributes as `<key>: <value>` lines and its hash, `u<first 8 hex of its id>`, then the doc's `## Usage` section, then says that `nosedive <action> --help --more <u-hash>` prints the rest. That form takes a hash or any prefix of it of at least 4 hex digits after the `u`, and prints the one usage's whole block: usage text, hash, summary, body, params, returns and attributes; a usage with no block prints its gist and says it has none. A prefix no usage has, or more than one does, is refused, naming the usages it matches (or all of them when none). An action whose usage takes the command line as it is (`<argv>...`) reads its own `--help`; pass does, and lists the same for its gates.\n\n```text\nseed [--no-capes] [--root-kind <kind>]\n  Makes the current git repo a bridge, or brings its setup up to date.\n  feat: 01a1336b-c0b8-7cde-b7c6-285196062297\n  hash: ue4a628f2\n```\n\nThe same file holds the types every cape is written against (`Ctx`, `ActionCall`, `Cape`, `GateCtx`; a `CapeDoc`'s usage carries its block as `description`, read when the cape is described, absent in a build that predates it; `GateCtx.committed` is optional, since it is absent for a crud gate and on a core that predates it, so a cape built after it checks it before calling it, and one built before it never does), `renderActions`, the help listing that agent-surface writes (plain, without `--more`), `usageHelp`, which renders usages and one usage's block for `<action> --help` and for pass, and `consoleCtx`, the ctx of a real command line, whose directory is `NOSEDIVE_HERO` when set.\n\n## Code\n\n- Function: [src/i01a1336a958f71c7beec4db3195c7966.ts](../src/i01a1336a958f71c7beec4db3195c7966.ts)\n- Tests: [src/i01a1336a958f71c7beec4db3195c7966.test.ts](../src/i01a1336a958f71c7beec4db3195c7966.test.ts)\n", "body": "# Launch\n\n`nosedive <cape>:<action>` runs the action of the cape named, `nosedive-core:<action>` core's and `<hero>:<action>` the hero's own, the hero named by its root, refusing when that cape has no such action: the same grammar as crud's `<cape>:<kind>`. A bare action runs core's whatever else declares the name, then the hero's own, then a worn cape's; a name two worn capes declare, and neither core nor the hero, runs the action of the cape that supersedes the other (see cape), and is otherwise refused, naming each as `<cape>:<action>`. Capes go by their full names. Errors print as `nosedive: <message>` with exit code 1.\n\n## Where it acts\n\nnosedive acts on the nearest repo above the directory it runs in (see find-bridge), or on the one `NOSEDIVE_HERO` names, from anywhere: actions then run as if from that repo's directory. A workspace checkout is never a hero: without `NOSEDIVE_HERO`, nosedive refuses to run from inside one, naming the hero whose workspace holds it and how to act from there, so neither a habit nor a git hook acts on the wrong repo. The workspace directory itself acts on its hero.\n\n`--at <target>`, before the action, selects the target: one of the hero's roots by its quid, its name or its directory's name, else any existing directory inside the hero or its workspace, relative to where nosedive acts; `seed` also takes one that does not exist yet, to make it (see seed). It sets `NOSEDIVE_AT` for everything the action reads; without it, the target is the directory of the primary root (see read-repo-config). It names the tree an action works in: crud writes new docs into it. The capes in use are those the target root wears, the primary root's when the target is a directory that is no root.\n\n```sh\nNOSEDIVE_HERO=~/mi nosedive --at kb jump <feat>\nnosedive --at workspace/notes crud idea \"Kept apart from the hero\"\n```\n\n## Help\n\n`help`, or no action, lists core's top-level commands under core's short name, then the hero's own under its root's name, then each worn cape's under its short name, the name of its cape root doc, as the manifest recorded them when it was built, or the cape as not built. No version is shown: plain help is the agent surface, which must read the same wherever the same commands are built and change only when they do (versions-behind-more). `--help --more` adds each cape's version beside its commit, where it was built from, and its repo's id. An action a worn cape supersedes is listed once, under the superseding cape; `--help --more` adds `, in place of <cape>'s` to its row, naming the cape it stands in for. An action under another action runs by name but is not listed. A gate is no command: help leaves it out, and naming one is refused with its usage.\n\n`<action> --help` prints the action's gist, then each usage with the summary of its jsdoc block, the first line of the block that opens the default export of its impl file (usage-help-from-jsdoc). A usage with no block shows nothing beside it: the gist above stands for it. `--help --more` adds under each usage its `@nosedive-<key> <value>` attributes as `<key>: <value>` lines and its hash, `u<first 8 hex of its id>`, then the doc's `## Usage` section, then says that `nosedive <action> --help --more <u-hash>` prints the rest. That form takes a hash or any prefix of it of at least 4 hex digits after the `u`, and prints the one usage's whole block: usage text, hash, summary, body, params, returns and attributes; a usage with no block prints its gist and says it has none. A prefix no usage has, or more than one does, is refused, naming the usages it matches (or all of them when none). An action whose usage takes the command line as it is (`<argv>...`) reads its own `--help`; pass does, and lists the same for its gates.\n\n```text\nseed [--no-capes] [--root-kind <kind>]\n  Makes the current git repo a bridge, or brings its setup up to date.\n  feat: 01a1336b-c0b8-7cde-b7c6-285196062297\n  hash: ue4a628f2\n```\n\nThe same file holds the types every cape is written against (`Ctx`, `ActionCall`, `Cape`, `GateCtx`; a `CapeDoc`'s usage carries its block as `description`, read when the cape is described, absent in a build that predates it; `GateCtx.committed` is optional, since it is absent for a crud gate and on a core that predates it, so a cape built after it checks it before calling it, and one built before it never does), `renderActions`, the help listing that agent-surface writes (plain, without `--more`), `usageHelp`, which renders usages and one usage's block for `<action> --help` and for pass, and `consoleCtx`, the ctx of a real command line, whose directory is `NOSEDIVE_HERO` when set.\n\n## Code\n\n- Function: [src/i01a1336a958f71c7beec4db3195c7966.ts](../src/i01a1336a958f71c7beec4db3195c7966.ts)\n- Tests: [src/i01a1336a958f71c7beec4db3195c7966.test.ts](../src/i01a1336a958f71c7beec4db3195c7966.test.ts)" }, "01a1336c-b234-701b-b033-8faf5183960c": { "kind": "function", "name": "code-section", "gist": "An action doc's body with its generated `## Code` section, which links the action's entrypoint, impls and tests", "usages": [], "top": true, "text": "---\nkind: function\nid: 01a1336c-b234-701b-b033-8faf5183960c\nname: code-section\ngist: \"An action doc's body with its generated `## Code` section, which links the action's entrypoint, impls and tests\"\nlinks:\n  - kb/01a14237-31b6-759f-8d20-b8a496ca5d97.md:\n      rel: parent.feat\n---\n\n# Code section\n\nAn action's doc has a `## Usage` section, what `--help --more` prints: what each usage does and what to watch for. When a body has none, everything between its title and its `## Code` section becomes it. A function has none.\n\nAny `## Code` section already in the body, up to the next `##` heading, is dropped, and the fresh one goes at the end. scaffold-cape writes both when seed runs, and the check refuses a doc whose sections differ, so following the root tree to an action always ends one click from its code.\n\n## Code\n\n- Function: [src/i01a1336cb234701bb0338faf5183960c.ts](../src/i01a1336cb234701bb0338faf5183960c.ts)\n- Tests: [src/i01a1336cb234701bb0338faf5183960c.test.ts](../src/i01a1336cb234701bb0338faf5183960c.test.ts)\n", "body": "# Code section\n\nAn action's doc has a `## Usage` section, what `--help --more` prints: what each usage does and what to watch for. When a body has none, everything between its title and its `## Code` section becomes it. A function has none.\n\nAny `## Code` section already in the body, up to the next `##` heading, is dropped, and the fresh one goes at the end. scaffold-cape writes both when seed runs, and the check refuses a doc whose sections differ, so following the root tree to an action always ends one click from its code.\n\n## Code\n\n- Function: [src/i01a1336cb234701bb0338faf5183960c.ts](../src/i01a1336cb234701bb0338faf5183960c.ts)\n- Tests: [src/i01a1336cb234701bb0338faf5183960c.test.ts](../src/i01a1336cb234701bb0338faf5183960c.test.ts)" }, "01a1337c-8060-75ca-96d6-37c9ece7316e": { "kind": "function", "name": "cape-id", "gist": "A cape's id: uuidv5 of its commit, the core cape's id and the ids of the capes it imports, in its repo's id", "usages": [], "top": false, "text": `---
 kind: function
 id: 01a1337c-8060-75ca-96d6-37c9ece7316e
@@ -19897,162 +19888,162 @@ var kinds = { "action": { "schema": { "type": "object", "additionalProperties": 
 var url = import.meta.url;
 var named = { kingsmetal, insideWorkspace, usageDescription, uncanonicalDocs, namedExports, kindVersion, schemaDigest, dropWhenOf, dropWhenSlips, onTrunk, consoleCtx, renderActions, usageHelp, shippedDir, capeImports, checkDocMeta, pathComponent, selectRoot, wornCapes, providers, isDurable, unknownKind, undeclaredKind, kindOfDoc, spellingOf, versionOf, digestOf, pinOf, assertPublished, rendersTree, userDir, remoteKey, cachePath, fetchCache, cacheGit, MIGRATIONS, pendingMigrations, CORE_OWNER, scopeEntries, subjectLine, featNameOf, coAuthor, isCoAuthor, hasCoAuthor, featTree, featRoot, linkedIds, nestedRoot, UNSAID_DONE_WHEN, INSTRUCTION_FILES, SURFACE_BEGIN, SURFACE_END, surfaceDigest, stampVersion, hasSurface, FENCE_LINE, DROPPED_LINE, ownChange, surfaceDrift, LEGACY_CAPES, capeMigrations, pendingCapeMigrations, changed, stateOf, stateWas, allCapes, discardMinted, gateEdit, gateDrop, keyedMeta, sectionPath, writeSection, readSection, heroOf, reposOf, dockPath, dockAt, readSections, relinked, findDoc, docFile };
 var index = {
-  "7642fb44-5801-5550-b25c-5f8f5b1e220f": "01a13354-7dea-7604-b903-b94a5aca2b83",
-  "3808fd59-45ef-51a7-906e-39f959fd05e4": "01a13354-7ea8-7883-b6ac-c99ddff5d5a8",
-  "1aeb3860-3a55-5cdb-b9f5-47409530dd6a": "01a13354-7f5f-7c45-a3fb-2ac0e3a7678e",
-  "e61ef4c9-f907-5216-9d8a-21d6b6973665": "01a13354-8014-7d06-8652-8aee80f8ee34",
-  "2b1d502b-3700-5f1f-a8b1-1830553a167a": "01a13354-80c7-76ba-8945-020d0af333eb",
-  "9bc0428f-3191-5f30-a7ec-423737109740": "01a13354-8178-7393-9894-1123114401ad",
-  "b22337dd-98e7-5d6d-a59e-376c35880382": "01a13354-8243-7c9e-b145-885f65f12aa1",
-  "880201d5-2fcb-5f04-a8c3-e093ad5acb54": "01a13354-82f8-76d6-808a-ec457f512e80",
-  "64420828-9db8-59eb-aac4-5d79e556ff7e": "01a13354-83aa-776c-b84d-f698b04adc06",
-  "5b82286f-607f-5d76-ac86-92164806fdd4": "01a13354-845c-7253-a55b-60bba87285d8",
-  "29bcbbbe-81b7-53c7-882b-f736a2566588": "01a13354-850c-7ba3-ba5b-8ac41a7b6b11",
-  "47199f34-491b-5a26-9151-be85672b999f": "01a13354-85c6-7c95-b7ef-df2f0e03cfd6",
-  "a03f3243-bad0-5f3f-8a12-148a247aa6be": "01a13354-867d-7a52-8cba-d55b80708e50",
-  "0a6e59ad-1050-5b35-9348-e3408f206bbe": "01a13354-8731-7576-a0af-d03506ef5555",
-  "a6a8438f-2867-52f3-a0b3-6f8c5664837b": "01a13354-87e4-7754-9d84-a6fc2c901bf6",
-  "5bb41f51-437c-5cb0-9168-6ac3076d6f9d": "01a13354-8893-7f1c-8c39-83dd2950028e",
-  "1daf3d85-b03d-51b2-9a56-bb17f2f31726": "01a13354-8942-73b1-be25-3424511ba82c",
-  "f096afd7-c8ef-5262-8625-11173cba9e42": "01a13358-8b1f-7d4e-a13f-1b5e79f02e4c",
-  "5a879766-d6cc-526f-bea0-839006da9ae2": "01a13358-8bcc-7f8b-ae72-5ff70d8f6800",
-  "d65e5504-5295-5c76-b7c0-94f9c193f4fb": "01a13358-8c79-71b5-b116-d9c8c1706e04",
-  "5e8744ee-536d-51b6-a0d5-0328950da750": "01a1336a-958f-71c7-beec-4db3195c7966",
-  "df20eb93-f2c6-5e57-900a-7bfd86c6b8a1": "01a1336c-b234-701b-b033-8faf5183960c",
-  "b9312029-1917-599e-8c5f-8457ee6c7194": "01a1337c-8060-75ca-96d6-37c9ece7316e",
-  "299a68e2-9a55-5161-95e8-c1b83c4a5ac3": "01a1337c-810a-7456-876b-831d0c873396",
-  "d2956d4e-cc87-5f3e-9a24-b7f158836ac4": "01a1337c-81b5-7799-820f-96a757b791d0",
-  "ab58d88e-3273-54e7-8723-f035eb950bd8": "01a1337c-825f-7457-b879-d5c039ffeccd",
-  "93938941-0e08-5a81-8540-67350fd0033e": "01a1337d-2c14-754f-9772-dc22c1f2edfc",
-  "7a713582-ad29-52e0-b10e-8fec056a84ba": "01a13541-9cdf-7f3b-a72a-31c4092c5bb5",
-  "2c1b91b9-41f6-563f-bf97-9ea612b37029": "01a13565-d94b-7458-86f9-e2909a9aae2a",
-  "9f75ef70-5ce6-51b6-ba7e-7f91fc87e525": "01a138b2-b8ed-7752-9797-3c2aad478c8f",
-  "b3885da2-a28f-577a-a8f7-4e14dda72898": "01a138b2-b8ee-703c-ab22-7b010f588b6a",
-  "da889499-14f4-5a42-8f4f-9344863a3395": "01a138b2-b8ef-7e80-97e1-9d599ba39bcc",
-  "adad7110-8e65-5a7b-a2fd-b57991417900": "01a138b2-b8f1-75bc-9524-2dc33d92138b",
-  "5b29526b-d4d1-58e9-be6c-da158bf858f8": "01a138b2-b8f3-7d32-82d2-274fae0f5007",
-  "04d689b6-53f1-5984-b0e8-4844a2396fa1": "01a13a6a-ba3a-7635-95bd-67a4ee4d47bf",
-  "e6964338-0b46-5fc4-afd9-d943d83c4130": "01a13c76-0de8-7562-b473-8946402010b8",
-  "84894ff1-dc89-5d40-8fb8-bd8516f916b0": "01a13dee-4b1d-78f7-a699-c3777bf63587",
-  "06db5122-0209-58c3-a079-1b411bf37a8e": "01a141f8-69bf-7f76-b5bc-81aa991ff9b9",
-  "05d2036a-2546-5568-92fe-f1577576418e": "01a141f8-69c0-7c4d-a828-8927a559c8ae",
-  "1d8cb38e-31d3-5081-bbf0-33fca718895a": "01a14717-1f05-7d01-9118-aaa1f269f5fd",
-  "02e83451-6626-5990-855e-d85286dd1cd1": "01a14717-207d-7277-a493-c7adb10ed32f",
-  "f9278e58-2199-5da2-a5d2-bbbfe20e4b9c": "01a14717-2214-79dd-bcac-26cce4b2a059",
-  "aac3cd88-f80e-5d32-8481-8cdcac88d965": "01a14717-2380-7d6e-8ef2-28ad9472fff7",
-  "656eb58e-f24b-5992-aeac-9357399495e5": "01a1480b-f832-7315-b113-47f5e5f118a1",
-  "9c669ad9-6656-55aa-9e8c-9a8c38c0c96d": "01a14a55-0446-7ef0-8586-b828ebabc148",
-  "e9622c1f-e3ec-5d59-a662-54492b8e4430": "01a14ab1-d367-71ee-a2bc-6f13bdeb0526",
-  "ecba237d-678b-5895-b6ea-298778edad34": "01a14b30-eb0e-72e2-8934-c918000a26ac",
-  "4de56212-19f5-5c06-a6f7-02087f375360": "01a14b30-ecc0-7ea1-8999-d6255d636e39",
-  "15a050b7-b0f5-598e-a099-d0b39b3f8afe": "01a14b30-ee4e-722f-961d-32bbb99bdb8a",
-  "93d00014-152f-5fc6-9e8f-64e4bf08b759": "01a14fb0-9217-7d36-a478-d40a47166c97",
-  "be71c54d-fe12-5014-bceb-006a9357228a": "01a14fb7-9db4-7f8b-94d5-196027008697",
-  "3885e526-ebb3-557d-9b89-51d4836f0138": "01a14fb7-a14b-7f85-b7dc-8bb894d6e76b",
-  "30f64b9b-95d6-56d1-b8d0-edbf839ba6dc": "01a14fdf-275b-70b4-8f86-f7f5c651719d",
-  "c0c895a1-f592-5491-a8c7-30c7c272679d": "01a15191-3e57-7208-8ae9-3b14a4a3f120",
-  "847d25a5-7e9f-5200-8e4c-05cc639aef59": "01a15baf-13e2-7bd8-8dc8-80d4871f2210",
-  "df31252b-7f94-59fa-a8ed-d536c1ddd53b": "01a175db-f451-7daf-a3a9-048ecd98ab84",
-  "a1b55f10-4734-5f3c-8985-9ae2d85b8459": "01a175db-f8d6-7926-b240-29e8caa38e94",
-  "3fd60276-cf92-5ada-8797-7de638fb8955": "01a17fba-20d6-73c5-b8dd-8551943369a2",
-  "2059c466-0c4c-5839-ba16-a95c4d3f4fb5": "01a18516-89bd-7d84-80ac-f2d1ed33f935",
-  "0c8e9b7b-fe03-58b4-8e8c-5a1ddd956635": "01a18516-8bb0-79b8-be33-4b6d86dba95a",
-  "f716c77d-b458-5cbc-a738-39f69c8ddc89": "01a18e2a-3b4b-798d-9806-8d4778a158e6",
-  "b30f9509-4966-5fd1-bbf2-fb1afacbb35b": "01a18e40-518e-7f15-a206-6909dca2be43",
-  "f2257035-ce64-5d3b-b50f-cb0c2bbd8cb8": "01a18e80-44c9-7dae-b049-8ee7ad07bf43",
-  "e99994da-f780-54d4-9766-9bee384a3244": "01a19005-c109-7155-8355-3072f4e38dc4",
-  "0bb6085e-2424-5eb7-8cb9-a2f10a2b5c5f": "01a19005-c311-72b6-8871-d4842563d310",
-  "6631b1fe-0c93-5032-8462-1d1be0337b8f": "01a1901e-263b-7209-a4b5-f39a71c568b3",
-  "1c217b3f-cd17-5ef2-8783-ace3cc1f0684": "01a1928d-0d68-7353-8e60-181957211490",
-  "1a34e907-eb38-5988-b8f2-d48709818d99": "01a19345-63e7-7ed8-86f0-6d04416385ef",
-  "ec7a87f6-6491-554d-92e1-c8a96f0ef327": "01a19eb4-7054-7ce5-935e-03ab6c97a715",
-  "00d5e835-01cd-5d51-9296-58b20546cb3a": "01a19f0c-888e-79b7-ae28-66e1e45a7493",
-  "fe91c48b-530c-51cb-be40-ad13529a9d57": "01a19f5c-60f8-79c2-8541-aa6759d2b221",
-  "c84d81bc-a3db-5876-992f-884427072a0c": "01a1a718-1a44-7bbb-991c-9a0f584f2549",
-  "b055bc5a-26bc-5e06-9164-6afb306d5ba8": "01a1b14c-48f2-77e7-9466-d8ed690da136",
-  "250b9628-6127-539c-a371-af0aa6a7bc1c": "01a1b15a-d92b-7f44-ae1b-3f41e24eb3ef",
-  "039f8c44-cf6e-5839-8430-666a9b73d8db": "01a1b30d-4b53-7775-a4e1-260cd7fb9067",
-  "2a3b29d4-fd5e-53ea-9169-364e13aaca9b": "01a1b3c3-5311-77d3-a3b8-9d851c6b456c",
-  "98eca599-8cef-5b1c-a691-f5d9e6ac610d": "01a1b453-a16c-799b-b9ce-20fad1a9075b",
-  "c37309c3-2c8c-5d15-add2-5ec0303ec586": "01a1bd83-70eb-761d-998c-c4d957a14cfd",
-  "de96511f-aaff-52e1-87cf-bf1a51b129d8": i01a133547dea7604b903b94a5aca2b83,
-  "c8525bfa-4b96-56da-a6ba-6bc7df16e94c": i01a133547ea87883b6acc99ddff5d5a8,
-  "e9520bf3-d784-5aa7-9ff1-e1b96389426d": i01a133547f5f7c45a3fb2ac0e3a7678e,
-  "08df502f-6de1-59cf-b48a-cbe1fcddec31": i01a1335480147d0686528aee80f8ee34,
-  "fb2e2f8b-3359-51d5-b6a1-e9aca37df82e": i01a1335480c776ba8945020d0af333eb,
-  "3e41a13b-0fab-5eee-866b-3620a50e049d": i01a133548178739398941123114401ad,
-  "127eb546-9d72-51f2-8ec3-90bfa76679af": i01a1335482437c9eb145885f65f12aa1,
-  "fc9f0adf-fbc5-5fb0-b9aa-e3f1e68a306c": i01a1335482f876d6808aec457f512e80,
-  "8f215847-1201-5424-a304-c9d4e302dd92": i01a1335483aa776cb84df698b04adc06,
-  "cb8ee86b-b4a3-5029-a950-09fb6e2ce23e": i01a13354845c7253a55b60bba87285d8,
-  "fa8c814f-271c-57a7-a9f8-6f3914e711fc": i01a13354850c7ba3ba5b8ac41a7b6b11,
-  "9916c5e3-cca2-5188-b5f6-a020232c1407": i01a1335485c67c95b7efdf2f0e03cfd6,
-  "6a0b2a3f-8945-50f2-9a30-230c56c63f56": i01a13354867d7a528cbad55b80708e50,
-  "70993dbd-2f41-5a01-86ab-ff43d46f3fd9": i01a1335487317576a0afd03506ef5555,
-  "b8a519b3-71be-52f8-9913-051e182e1b75": i01a1335487e477549d84a6fc2c901bf6,
-  "e94d30ed-2d1e-561f-b92a-22b1e1b1074e": i01a1335488937f1c8c3983dd2950028e,
-  "aeffdf0d-cf19-50df-b7f3-ceef31f8307e": i01a13354894273b1be253424511ba82c,
-  "a08ec27e-b360-5486-983b-05b1c1bb0ea8": i01a133588b1f7d4ea13f1b5e79f02e4c,
-  "67e1c3bf-0e69-5f95-9d7c-5fb81f0fe2e5": i01a133588bcc7f8bae725ff70d8f6800,
-  "803a0574-a019-590b-a3ba-df473822e6ce": i01a133588c7971b5b116d9c8c1706e04,
-  "a3893d41-456f-5c6a-99e0-0504f9843bf4": i01a1336a958f71c7beec4db3195c7966,
-  "d3dedfe3-9441-5a5b-b30d-3935a4a37066": i01a1336cb234701bb0338faf5183960c,
-  "f5345c6b-9c3d-5954-a462-33142b8e884c": i01a1337c806075ca96d637c9ece7316e,
-  "a3dfee5b-4298-5f1e-bf03-8100e2c72976": i01a1337c810a7456876b831d0c873396,
-  "e21a558f-63f6-5fad-8e4c-8d2ebbb24343": i01a1337c81b57799820f96a757b791d0,
-  "9fc713eb-c167-53a2-9820-77246b51c395": i01a1337c825f7457b879d5c039ffeccd,
-  "539490a1-d43f-53c3-a886-731ce33922f0": i01a1337d2c14754f9772dc22c1f2edfc,
-  "b24dc97a-3cb1-5803-b18a-2843cd0a0133": i01a135419cdf7f3ba72a31c4092c5bb5,
-  "4ca38825-feb0-5974-a018-89f22a06ba3a": i01a13565d94b745886f9e2909a9aae2a,
-  "3150c1b9-5533-546e-bf74-0ed7e08171b8": i01a138b2b8ed775297973c2aad478c8f,
-  "c34429fd-8304-5bc2-ac49-d680a15c042a": i01a138b2b8ee703cab227b010f588b6a,
-  "cdb90cca-3bd9-51e0-9214-5a610822682c": i01a138b2b8ef7e8097e19d599ba39bcc,
-  "d163a025-2fba-53f7-a707-a032ce7cdf39": i01a138b2b8f175bc95242dc33d92138b,
-  "9f39dcd4-66ea-53b0-853d-3aa498b14eca": i01a138b2b8f37d3282d2274fae0f5007,
-  "885b147e-a781-5542-9f3d-ae5745e15256": i01a13a6aba3a763595bd67a4ee4d47bf,
-  "408029cf-7bf1-5cc5-8061-d41b8351f0e9": i01a13c760de87562b4738946402010b8,
-  "cf81042c-8f35-54fe-9431-3537b0d3d036": i01a13dee4b1d78f7a699c3777bf63587,
-  "761052d7-4668-53ed-a1e8-1bcb97b2000c": i01a141f869bf7f76b5bc81aa991ff9b9,
-  "e6c68055-79d6-5650-a03c-ea0792c02be5": i01a141f869c07c4da8288927a559c8ae,
-  "d83f3a8d-df63-5ff9-82bd-7c33905b8be3": i01a147171f057d019118aaa1f269f5fd,
-  "45c1d9e3-42cd-5d8d-97e2-d0a1f25f1f3e": i01a14717207d7277a493c7adb10ed32f,
-  "997ed2c7-75b4-50f2-8bfa-fdf91056e082": i01a14717221479ddbcac26cce4b2a059,
-  "c85d452a-dd26-5962-a841-c702b323d1c9": i01a1471723807d6e8ef228ad9472fff7,
-  "de5dbed3-3a43-588b-aac6-684488321de9": i01a1480bf8327315b11347f5e5f118a1,
-  "eabd8b21-6afe-5729-ae9f-086711acc2f5": i01a14a5504467ef08586b828ebabc148,
-  "bcc3eb49-b56d-57b3-9a86-5805b887267b": i01a14ab1d36771eea2bc6f13bdeb0526,
-  "2c2ad8e6-a264-55b0-a1ad-c57596026e24": i01a14b30eb0e72e28934c918000a26ac,
-  "f79377db-15d0-5e53-beca-6c2764a8368d": i01a14b30ecc07ea18999d6255d636e39,
-  "bc70860b-beb8-5af4-9239-edb0fb902c22": i01a14b30ee4e722f961d32bbb99bdb8a,
-  "d3223272-92c7-5e5f-856a-9e6153b34382": i01a14fb092177d36a478d40a47166c97,
-  "6a261435-6761-591c-a0bc-cae819c212e5": i01a14fb79db47f8b94d5196027008697,
-  "176a90b2-22dc-5c83-be01-a2e3328674ba": i01a14fb7a14b7f85b7dc8bb894d6e76b,
-  "8661c133-be91-503d-9286-446413a7182e": i01a14fdf275b70b48f86f7f5c651719d,
-  "a9ad8dd8-dbcc-5e6a-b4c8-c36fa0a1106f": i01a151913e5772088ae93b14a4a3f120,
-  "52f7c63d-7a82-5fff-927d-4ec64f899f49": i01a15baf13e27bd88dc880d4871f2210,
-  "a1def02e-744f-540f-b66a-7c91f150bbab": i01a175dbf4517dafa3a9048ecd98ab84,
-  "70214f07-341c-5924-ac70-e4b769973e1d": i01a175dbf8d67926b24029e8caa38e94,
-  "1074dfa0-3d83-548c-a631-51454efdc2f3": i01a17fba20d673c5b8dd8551943369a2,
-  "efbc14da-45e8-5e27-8821-8c34d474a14d": i01a1851689bd7d8480acf2d1ed33f935,
-  "3b75d0f1-3f1c-56fb-bf97-7723deead579": i01a185168bb079b8be334b6d86dba95a,
-  "b809ff76-3cc8-50d4-a954-ca9a2a59caa8": i01a18e2a3b4b798d98068d4778a158e6,
-  "1a1927e8-21a6-5973-8b02-48059f16a73c": i01a18e40518e7f15a2066909dca2be43,
-  "f9634bda-2631-583d-9fa9-9dfed2870088": i01a18e8044c97daeb0498ee7ad07bf43,
-  "218fc826-10e4-5d6c-a045-2724dccfd1a0": i01a19005c109715583553072f4e38dc4,
-  "fc207e49-232e-5ddf-b7c9-62e15b2ce70d": i01a19005c31172b68871d4842563d310,
-  "85ef829b-c3d2-52b3-965b-0c2d8b765c1e": i01a1901e263b7209a4b5f39a71c568b3,
-  "d4d5b22d-39e9-560f-b220-5ab14040c028": i01a1928d0d6873538e60181957211490,
-  "540993c7-adaf-5faa-bb7b-d3ed4504c1d8": i01a1934563e77ed886f06d04416385ef,
-  "f07fa0fa-2036-51d4-b607-64783585ab65": i01a19eb470547ce5935e03ab6c97a715,
-  "880f205b-089d-57aa-98d9-e4adbae15997": i01a19f0c888e79b7ae2866e1e45a7493,
-  "9d299853-95ad-5900-80ea-118cb3bbd8a0": i01a19f5c60f879c28541aa6759d2b221,
-  "8a2e62b4-058a-5b0e-864c-2a8706e5877d": i01a1a7181a447bbb991c9a0f584f2549,
-  "759aebd6-3a0a-5ba5-a65f-6bb73f277ec4": i01a1b14c48f277e79466d8ed690da136,
-  "a8af5fb1-48b5-545b-af47-d16541683c6c": i01a1b15ad92b7f44ae1b3f41e24eb3ef,
-  "7dea996c-9dfd-5032-999a-6f8592e9bcc4": i01a1b30d4b537775a4e1260cd7fb9067,
-  "a48bc5a9-2902-5588-8f2b-7d519c70dc1d": i01a1b3c3531177d3a3b89d851c6b456c,
-  "9de60da6-7d92-5752-819b-eec0b1aab576": i01a1b453a16c799bb9ce20fad1a9075b,
-  "130c300e-7118-5198-a066-6e05c2a919f2": i01a1bd8370eb761d998cc4d957a14cfd
+  "471f2769-9ed7-5d10-b156-e19b6bacb335": "01a13354-7dea-7604-b903-b94a5aca2b83",
+  "377aa90d-aaf6-5865-a3ef-bb08452296e1": "01a13354-7ea8-7883-b6ac-c99ddff5d5a8",
+  "db61d8aa-3e58-52c4-8f4c-ff56a7273432": "01a13354-7f5f-7c45-a3fb-2ac0e3a7678e",
+  "ebab9216-e525-5187-8f62-d03a888d7861": "01a13354-8014-7d06-8652-8aee80f8ee34",
+  "9e7736c4-72c4-52a6-8188-efdd808f899e": "01a13354-80c7-76ba-8945-020d0af333eb",
+  "c871580b-6217-5084-b127-bcbf70e8fa0a": "01a13354-8178-7393-9894-1123114401ad",
+  "c4dd7eee-3d2a-5b1b-8307-54f4839d3eca": "01a13354-8243-7c9e-b145-885f65f12aa1",
+  "5cd7acc4-1f59-500d-83dc-b413f88d22d7": "01a13354-82f8-76d6-808a-ec457f512e80",
+  "37a56b1c-7a7f-5e21-bf6d-9e865d6e31a1": "01a13354-83aa-776c-b84d-f698b04adc06",
+  "3cf87b34-d9ee-5084-9faf-5ea061b4aecc": "01a13354-845c-7253-a55b-60bba87285d8",
+  "f46bfde7-40ab-5507-8415-0e6c3ddce297": "01a13354-850c-7ba3-ba5b-8ac41a7b6b11",
+  "8d2178f9-1c78-5f0c-a958-539b4789d416": "01a13354-85c6-7c95-b7ef-df2f0e03cfd6",
+  "1e78219d-6d81-506f-8273-6cb6561dac9f": "01a13354-867d-7a52-8cba-d55b80708e50",
+  "4d0308a0-77a4-5ef6-9f99-86a7228e0c93": "01a13354-8731-7576-a0af-d03506ef5555",
+  "f99dc153-4f75-57fb-833e-0e68daca08d6": "01a13354-87e4-7754-9d84-a6fc2c901bf6",
+  "dd051a7d-0f2f-564e-891f-fc7629821499": "01a13354-8893-7f1c-8c39-83dd2950028e",
+  "9d50a3c7-ffc4-59ad-aec5-51e63fbb97bb": "01a13354-8942-73b1-be25-3424511ba82c",
+  "a4099663-cf3b-5d98-a142-8b5a1f710b17": "01a13358-8b1f-7d4e-a13f-1b5e79f02e4c",
+  "c9a5e857-3d77-53aa-ae8b-186d7739a709": "01a13358-8bcc-7f8b-ae72-5ff70d8f6800",
+  "7b5c32e5-9d32-5b23-b63d-cce38199621e": "01a13358-8c79-71b5-b116-d9c8c1706e04",
+  "d1e47cd7-b89d-5c63-b430-660e0f967e8f": "01a1336a-958f-71c7-beec-4db3195c7966",
+  "319934de-9c77-54bd-aa20-45db44f08e47": "01a1336c-b234-701b-b033-8faf5183960c",
+  "0fbe8ec8-bbd2-5a03-a08c-5eb2e85dcfdf": "01a1337c-8060-75ca-96d6-37c9ece7316e",
+  "eaa13256-db6f-5632-a4e2-2250423b41e3": "01a1337c-810a-7456-876b-831d0c873396",
+  "89cc1e30-11a4-5965-a21f-404ef495dd19": "01a1337c-81b5-7799-820f-96a757b791d0",
+  "569089d8-efae-526a-976d-4af7f6cca75e": "01a1337c-825f-7457-b879-d5c039ffeccd",
+  "483d4b1b-fe48-53c5-8e61-b91bc9209828": "01a1337d-2c14-754f-9772-dc22c1f2edfc",
+  "ca42343b-bf84-5f1c-98bc-14a04ed5bc04": "01a13541-9cdf-7f3b-a72a-31c4092c5bb5",
+  "ae5ee819-2a78-5ce2-a620-079894f991a0": "01a13565-d94b-7458-86f9-e2909a9aae2a",
+  "601eb12d-bf6b-5966-aece-ffae8c7439d7": "01a138b2-b8ed-7752-9797-3c2aad478c8f",
+  "c84cd4ed-171e-508a-8119-336c452e3180": "01a138b2-b8ee-703c-ab22-7b010f588b6a",
+  "ee1e33e2-4c0a-5427-8524-fe00edf4eef8": "01a138b2-b8ef-7e80-97e1-9d599ba39bcc",
+  "a9553215-8ab7-50a3-8a3b-af16b52af13a": "01a138b2-b8f1-75bc-9524-2dc33d92138b",
+  "1d1569d1-aabb-5634-b8d9-699806c35bbd": "01a138b2-b8f3-7d32-82d2-274fae0f5007",
+  "9adbdd19-b2e1-55db-a77a-9691a3257680": "01a13a6a-ba3a-7635-95bd-67a4ee4d47bf",
+  "3ebba41e-a366-5a1f-8599-a1f75e3e7a72": "01a13c76-0de8-7562-b473-8946402010b8",
+  "9a937ac6-821a-567d-9b53-73fe9e49c5a2": "01a13dee-4b1d-78f7-a699-c3777bf63587",
+  "d984a94c-4c0d-534d-891a-18801f6a7698": "01a141f8-69bf-7f76-b5bc-81aa991ff9b9",
+  "42525fdd-3cda-5635-9370-cb940894ebda": "01a141f8-69c0-7c4d-a828-8927a559c8ae",
+  "8853f89a-aeed-5543-a888-52155171b2c4": "01a14717-1f05-7d01-9118-aaa1f269f5fd",
+  "a4934a4f-57df-5f29-bf00-43814acb07ea": "01a14717-207d-7277-a493-c7adb10ed32f",
+  "dc37f21e-acf1-56ed-9140-ad5fc1a2f069": "01a14717-2214-79dd-bcac-26cce4b2a059",
+  "72a99720-8578-5a5d-a936-20318c85080c": "01a14717-2380-7d6e-8ef2-28ad9472fff7",
+  "b4337473-fc43-5a70-b451-b49e70bf38fa": "01a1480b-f832-7315-b113-47f5e5f118a1",
+  "a22a6d92-3554-5537-8681-56f1573518d8": "01a14a55-0446-7ef0-8586-b828ebabc148",
+  "968bafc1-5fbb-5f82-a04b-24cb0f924d23": "01a14ab1-d367-71ee-a2bc-6f13bdeb0526",
+  "ba7f860c-4267-5652-bc42-5fdfd37ed1d4": "01a14b30-eb0e-72e2-8934-c918000a26ac",
+  "10a4ed62-3e24-5273-8110-8c8a48a0a1e6": "01a14b30-ecc0-7ea1-8999-d6255d636e39",
+  "c45000eb-cad8-5311-965c-a18ad910d673": "01a14b30-ee4e-722f-961d-32bbb99bdb8a",
+  "7b04b213-d400-506c-8f33-3ca347dcc1fa": "01a14fb0-9217-7d36-a478-d40a47166c97",
+  "8fc47837-64b4-55d6-85e2-00b018def275": "01a14fb7-9db4-7f8b-94d5-196027008697",
+  "e9d41b74-94d5-52e6-b48d-290b9f0a39bd": "01a14fb7-a14b-7f85-b7dc-8bb894d6e76b",
+  "15c2d387-2e17-53d3-ab6c-a11989e2a9fa": "01a14fdf-275b-70b4-8f86-f7f5c651719d",
+  "5aedb86a-41c3-59f4-b3f3-4b65de1d4fc7": "01a15191-3e57-7208-8ae9-3b14a4a3f120",
+  "585103a9-aa92-5b88-81ea-ab9b15c38680": "01a15baf-13e2-7bd8-8dc8-80d4871f2210",
+  "ea8c37a6-3235-51a1-8135-e4f7e1a92be9": "01a175db-f451-7daf-a3a9-048ecd98ab84",
+  "03408d78-690c-551f-b8dc-53807e7eee80": "01a175db-f8d6-7926-b240-29e8caa38e94",
+  "ae7ee159-f60a-5023-8dd5-04fbe618f12e": "01a17fba-20d6-73c5-b8dd-8551943369a2",
+  "ad00c0f4-2e43-5500-aa75-6d0d6d2ef205": "01a18516-89bd-7d84-80ac-f2d1ed33f935",
+  "68e9daa0-d2ce-51fc-adb8-3de90df5f3c4": "01a18516-8bb0-79b8-be33-4b6d86dba95a",
+  "bf0c4ac6-b696-5b35-8062-7fc20994da32": "01a18e2a-3b4b-798d-9806-8d4778a158e6",
+  "91fc3a7a-4098-55d1-8bac-37f6009a3eb6": "01a18e40-518e-7f15-a206-6909dca2be43",
+  "8245cf1b-39a1-52d7-96c4-f5f1da02e070": "01a18e80-44c9-7dae-b049-8ee7ad07bf43",
+  "56b92573-1f70-5f94-8494-b3f5498d2141": "01a19005-c109-7155-8355-3072f4e38dc4",
+  "73177f49-f261-5a28-b2e9-a686d8051d49": "01a19005-c311-72b6-8871-d4842563d310",
+  "e5ed5d6f-f295-50c0-a9c8-2058d8c169ea": "01a1901e-263b-7209-a4b5-f39a71c568b3",
+  "eb5b180b-fbf7-51a4-9cd8-c6238be5c827": "01a1928d-0d68-7353-8e60-181957211490",
+  "6a194402-5668-5d9b-aadf-e13275931a11": "01a19345-63e7-7ed8-86f0-6d04416385ef",
+  "b1238f74-5d5f-5733-9547-cab5308a9700": "01a19eb4-7054-7ce5-935e-03ab6c97a715",
+  "6ecf4dc6-a7f0-5f17-af1d-de8fa46627a8": "01a19f0c-888e-79b7-ae28-66e1e45a7493",
+  "f9c4c70f-b0df-5307-b6d2-44ed4297b899": "01a19f5c-60f8-79c2-8541-aa6759d2b221",
+  "3c9152c8-ccef-5ddb-afe4-b2bae668a82c": "01a1a718-1a44-7bbb-991c-9a0f584f2549",
+  "25637835-6fd2-5094-a861-4714ca4fcfce": "01a1b14c-48f2-77e7-9466-d8ed690da136",
+  "d3ae9238-38f1-507c-980c-376017d5d555": "01a1b15a-d92b-7f44-ae1b-3f41e24eb3ef",
+  "0e8081e3-6b9e-5efe-9aa0-3a76dc82d45e": "01a1b30d-4b53-7775-a4e1-260cd7fb9067",
+  "bd198434-f76d-5e59-975d-688c55432f05": "01a1b3c3-5311-77d3-a3b8-9d851c6b456c",
+  "0e84bb9a-824d-5fce-9017-c3620c320b03": "01a1b453-a16c-799b-b9ce-20fad1a9075b",
+  "2c2b9b83-ff65-5038-a542-146f6e2682b4": "01a1bd83-70eb-761d-998c-c4d957a14cfd",
+  "0914e240-b24b-5ccd-b21b-85dec848a144": i01a133547dea7604b903b94a5aca2b83,
+  "83b47b48-6e6f-5abb-aca2-ffcf4703c0a2": i01a133547ea87883b6acc99ddff5d5a8,
+  "1caadcc5-6571-573e-b6d2-290ed0197a82": i01a133547f5f7c45a3fb2ac0e3a7678e,
+  "d743fa9f-a285-503b-80a9-97165e76da1c": i01a1335480147d0686528aee80f8ee34,
+  "781f63da-91a1-54a3-bc9e-a695192534df": i01a1335480c776ba8945020d0af333eb,
+  "7e2410c7-70fc-5d10-a0e8-7d52377e26ef": i01a133548178739398941123114401ad,
+  "79bf4eda-3c8c-57e0-a86a-f2207fa76168": i01a1335482437c9eb145885f65f12aa1,
+  "70c03a3f-c3cf-5923-b237-d70226734f89": i01a1335482f876d6808aec457f512e80,
+  "f1610647-f4c5-5bd0-9871-19a6b5b27156": i01a1335483aa776cb84df698b04adc06,
+  "588456fb-cee1-507b-bda8-fca73a6d34bb": i01a13354845c7253a55b60bba87285d8,
+  "1f5cd986-3e0b-5a15-a722-d29ab28dcedd": i01a13354850c7ba3ba5b8ac41a7b6b11,
+  "6e4c7922-acce-5ee4-8796-749978cecf8e": i01a1335485c67c95b7efdf2f0e03cfd6,
+  "10d649d5-b8d3-5410-ac62-46a50fc4a964": i01a13354867d7a528cbad55b80708e50,
+  "c1988c8b-ffab-5ce6-8f10-0f00e7028ca1": i01a1335487317576a0afd03506ef5555,
+  "23f8af2b-9a7c-5100-8dad-0eb989322028": i01a1335487e477549d84a6fc2c901bf6,
+  "11feafab-e637-50e8-83e0-f15b25b53f07": i01a1335488937f1c8c3983dd2950028e,
+  "90485408-a1cd-590b-bd8e-af02bb0e5df8": i01a13354894273b1be253424511ba82c,
+  "430219f2-7178-52e7-9d02-265edfe5bb3a": i01a133588b1f7d4ea13f1b5e79f02e4c,
+  "100387aa-d4f3-5ad1-a7d8-b503b057db1c": i01a133588bcc7f8bae725ff70d8f6800,
+  "d7226ebb-833b-55e0-b7a6-efb332711d8e": i01a133588c7971b5b116d9c8c1706e04,
+  "02d05852-5e93-5aa3-a44c-735111df0be0": i01a1336a958f71c7beec4db3195c7966,
+  "578565ac-f646-5434-9429-6fe7d5426cae": i01a1336cb234701bb0338faf5183960c,
+  "375ac215-f39e-5004-9e38-79f0b8bab4c7": i01a1337c806075ca96d637c9ece7316e,
+  "52645b1c-8642-58bc-ac23-b78a1b407643": i01a1337c810a7456876b831d0c873396,
+  "7066487c-2d58-5bfd-b4a7-afe388843819": i01a1337c81b57799820f96a757b791d0,
+  "bec0ac8f-3a3a-55cf-bb53-7a7493b0221e": i01a1337c825f7457b879d5c039ffeccd,
+  "277f429e-0273-5246-b44c-4128ffe8708e": i01a1337d2c14754f9772dc22c1f2edfc,
+  "091a55b9-cc06-5295-8ef9-c30e2be5852d": i01a135419cdf7f3ba72a31c4092c5bb5,
+  "f644b540-6f4b-5736-a824-116aff51ec82": i01a13565d94b745886f9e2909a9aae2a,
+  "54a813bf-78ea-5efc-9d51-1832cf219484": i01a138b2b8ed775297973c2aad478c8f,
+  "6ffa4c4d-6d25-5d93-b167-4cf2a2a352e7": i01a138b2b8ee703cab227b010f588b6a,
+  "67bd1308-7c80-542f-9056-f608779db4a8": i01a138b2b8ef7e8097e19d599ba39bcc,
+  "72572f87-d4d5-51db-a9fc-f798e359488c": i01a138b2b8f175bc95242dc33d92138b,
+  "34bc0b60-a076-55cc-8299-f2220c1e7e42": i01a138b2b8f37d3282d2274fae0f5007,
+  "548aa212-fd28-5303-a471-7b7c53dbc157": i01a13a6aba3a763595bd67a4ee4d47bf,
+  "da7fd09c-007d-51f4-baea-64db57dc17c9": i01a13c760de87562b4738946402010b8,
+  "56df337d-bf67-59a4-9739-c8362c0d0e0c": i01a13dee4b1d78f7a699c3777bf63587,
+  "961a96b7-c8ce-5a00-926e-7e309bd49e77": i01a141f869bf7f76b5bc81aa991ff9b9,
+  "bf905f7e-aadd-57d8-acd5-f487223c9f08": i01a141f869c07c4da8288927a559c8ae,
+  "305f565d-5b78-581a-a5cc-4a3a49d0e5b9": i01a147171f057d019118aaa1f269f5fd,
+  "db2e534f-df6d-5bde-8f14-616a19ccf63c": i01a14717207d7277a493c7adb10ed32f,
+  "198e2a68-c5a1-5cd4-a260-28dd187b7f9f": i01a14717221479ddbcac26cce4b2a059,
+  "27cd7ee9-cc1b-52d8-83a2-f31ff4d4fd7e": i01a1471723807d6e8ef228ad9472fff7,
+  "64bf4b41-44ad-5d2c-9f20-34504675bcf8": i01a1480bf8327315b11347f5e5f118a1,
+  "a6665c1d-dc48-53ef-aa80-6fd3c6367184": i01a14a5504467ef08586b828ebabc148,
+  "0d439877-8fd4-5357-a945-b5ec6f8128ed": i01a14ab1d36771eea2bc6f13bdeb0526,
+  "a38964db-9e0a-58b4-85be-faffa7951d1a": i01a14b30eb0e72e28934c918000a26ac,
+  "151b334f-1e70-5f30-8970-5af056a90dd2": i01a14b30ecc07ea18999d6255d636e39,
+  "f14501e7-37d7-53fa-9842-a073ec7b1979": i01a14b30ee4e722f961d32bbb99bdb8a,
+  "b6caf12b-cb62-5c6a-89d3-157cb5dc065d": i01a14fb092177d36a478d40a47166c97,
+  "1330b3f7-6ec3-51e0-8b27-5052a8701e77": i01a14fb79db47f8b94d5196027008697,
+  "f38f932b-d625-5522-90c8-eee512b01db8": i01a14fb7a14b7f85b7dc8bb894d6e76b,
+  "6f4087c2-f1f1-5563-929b-f041e4fc64df": i01a14fdf275b70b48f86f7f5c651719d,
+  "ff8a7cf6-a22a-5ab5-a4ba-99c1833fba03": i01a151913e5772088ae93b14a4a3f120,
+  "313f910b-d305-59da-bd86-743c693b9047": i01a15baf13e27bd88dc880d4871f2210,
+  "cdcd1eca-7011-53bc-a7d2-4080a5d8f723": i01a175dbf4517dafa3a9048ecd98ab84,
+  "eb8228f4-f2a3-5ce2-8cc9-af2371b44d5d": i01a175dbf8d67926b24029e8caa38e94,
+  "ce734e25-c362-5cd9-a00c-eaefeda48af4": i01a17fba20d673c5b8dd8551943369a2,
+  "20e1c7a5-cd64-5ece-b10e-7c8b3dd78b57": i01a1851689bd7d8480acf2d1ed33f935,
+  "b6757ebf-3c31-5763-9605-93ef2f58267d": i01a185168bb079b8be334b6d86dba95a,
+  "5a8b106e-0e68-578d-ac08-323cad393cbf": i01a18e2a3b4b798d98068d4778a158e6,
+  "fbf08641-9998-5e39-9485-3b790cfd977c": i01a18e40518e7f15a2066909dca2be43,
+  "62046077-ffbc-5e7c-8b60-862f5246a8d7": i01a18e8044c97daeb0498ee7ad07bf43,
+  "19a1d621-d3a1-5689-9da9-98324e66784f": i01a19005c109715583553072f4e38dc4,
+  "35807e99-a0e2-53a0-8508-3f462956e944": i01a19005c31172b68871d4842563d310,
+  "184b6d0f-3b71-52db-be3e-7587c94a4f1e": i01a1901e263b7209a4b5f39a71c568b3,
+  "c6d659a7-77af-55f1-ba9f-ad0e0f23cff1": i01a1928d0d6873538e60181957211490,
+  "a988de81-5322-5079-bf22-8694e80c4c1b": i01a1934563e77ed886f06d04416385ef,
+  "ef3a182b-5fc2-5ff7-a9f6-5f266a2cd920": i01a19eb470547ce5935e03ab6c97a715,
+  "c80755d3-0e08-5f61-95ad-265959071721": i01a19f0c888e79b7ae2866e1e45a7493,
+  "2c5358d7-1fc7-51bc-b827-40ce73881f0a": i01a19f5c60f879c28541aa6759d2b221,
+  "39d5942a-2c40-5abf-aa44-1f38f4ee3462": i01a1a7181a447bbb991c9a0f584f2549,
+  "e02ed2b7-8e1e-5e26-beaa-2d5f90a7cfe6": i01a1b14c48f277e79466d8ed690da136,
+  "b694e5c7-12f9-5dc6-b2e1-1cba5b5b7bde": i01a1b15ad92b7f44ae1b3f41e24eb3ef,
+  "2c14880c-c09a-54e2-b9f8-c300be349cca": i01a1b30d4b537775a4e1260cd7fb9067,
+  "8c281e2f-6596-53fc-a3ff-4043045cc6cf": i01a1b3c3531177d3a3b89d851c6b456c,
+  "d7584f17-e74f-5b1c-84b2-9833e4e945c2": i01a1b453a16c799bb9ce20fad1a9075b,
+  "06a27b6e-3298-5d11-8138-1c940feb5ef8": i01a1bd8370eb761d998cc4d957a14cfd
 };
 async function main(argv = process.argv.slice(2)) {
   process.exitCode = await i01a1336a958f71c7beec4db3195c7966(argv, consoleCtx([{ id, owner, name, shortName, commit, version, docs, index, kinds, named, url }]));
