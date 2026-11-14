@@ -1,13 +1,13 @@
 [
 	{
-		"id": "a0d6ede7-b18f-52bd-a5a7-73ac3dcb3389",
+		"id": "8cd7d9bf-52a8-5061-abbf-d61998e39af5",
 		"owner": "01a1b128-2c08-790f-80f4-e2c40a98bfcc",
 		"shortName": "nosedive-legacy",
 		"repo": "01a1b13e-111d-73de-8f7d-41b47af07703",
-		"ref": "d34e03edcbab1563e6469c76f63314777cbf0c2b",
-		"commit": "d34e03edcbab1563e6469c76f63314777cbf0c2b",
-		"core": "a5dfcab2-dab7-585c-ace2-77055e2b41bc",
-		"coreVersion": "2026.11.13-1794613842976",
+		"ref": "5bc552199b1851f87c5f6c163d8e951d978a21fd",
+		"commit": "5bc552199b1851f87c5f6c163d8e951d978a21fd",
+		"core": "987f72f1-1bd4-5f7e-8025-e4656b2d0aee",
+		"coreVersion": "2026.11.14-1794616157407",
 		"actions": {
 			"test": "Runs gates as a check on the dive on deck, or the gates named, streaming each and exiting 1 if any gate that is not flaky failed",
 			"hydrate-repo.workspace": "Checks one registered repo out into the workspace, detached at trunk or at a ref",
@@ -72,7 +72,7 @@
 			}
 		},
 		"needs": {},
-		"version": "2026.11.13-1794613483380",
-		"builtAt": "2026-11-13T18:44:43-05:00"
+		"version": "2026.11.14-1794615810468",
+		"builtAt": "2026-11-13T19:23:30-05:00"
 	}
 ]
