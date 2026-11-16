@@ -1,9 +1,9 @@
 {
 	"core": {
 		"origin": "https://github.com/KnowBoss/nosedive-core.git",
-		"commit": "57fd926a92163daa18fe068d5b70195334d22d8f",
-		"id": "987f72f1-1bd4-5f7e-8025-e4656b2d0aee",
-		"version": "2026.11.14-1794616157407"
+		"commit": "852856f0d75d618c136f1dcfc7e55ddc06359506",
+		"id": "0cee9851-7843-58ee-a057-ed9c4ab06bd8",
+		"version": "2026.11.15-1794757011130"
 	},
 	"capes": [
 		{
@@ -11,7 +11,7 @@
 			"repo": "01a1b13e-111d-73de-8f7d-41b47af07703",
 			"origin": "https://github.com/KnowBoss/nosedive-legacy.git",
 			"commit": "5bc552199b1851f87c5f6c163d8e951d978a21fd",
-			"build": "8cd7d9bf-52a8-5061-abbf-d61998e39af5",
+			"build": "5ab6494c-45a1-5091-8ef5-4574c2269e98",
 			"version": "2026.11.14-1794615810468"
 		}
 	],
