@@ -104,7 +104,7 @@ export { coAuthor, isCoAuthor, hasCoAuthor } from "../src/i01a19005c31172b68871d
 export { featTree, featRoot, linkedIds } from "../src/i01a1901e263b7209a4b5f39a71c568b3.ts";
 export { nestedRoot } from "../src/i01a1934563e77ed886f06d04416385ef.ts";
 export { UNSAID_DONE_WHEN } from "../src/i01a19f0c888e79b7ae2866e1e45a7493.ts";
-export { INSTRUCTION_FILES, SURFACE_BEGIN, SURFACE_END, surfaceDigest, stampVersion, hasSurface, FENCE_LINE, DROPPED_LINE, ownChange, surfaceDrift } from "../src/i01a19f5c60f879c28541aa6759d2b221.ts";
+export { INSTRUCTION_FILES, SURFACE_BEGIN, SURFACE_END, surfaceDigest, packageVersion, stampVersion, hasSurface, FENCE_LINE, DROPPED_LINE, ownChange, surfaceDrift } from "../src/i01a19f5c60f879c28541aa6759d2b221.ts";
 export { LEGACY_CAPES } from "../src/i01a1b14c48f277e79466d8ed690da136.ts";
 export { capeMigrations, pendingCapeMigrations } from "../src/i01a1b30d4b537775a4e1260cd7fb9067.ts";
 export { changed, stateOf, stateWas, allCapes, discardMinted, gateEdit, gateDrop } from "../src/i01a1b453a16c799bb9ce20fad1a9075b.ts";
@@ -113,6 +113,7 @@ export { sectionPath, writeSection, readSection } from "../src/i794ab6e0060f5ede
 export { heroOf, reposOf, dockPath, dockAt } from "../src/i9dfd0b735ec95af1948f2b3311749c52.ts";
 export { readSections } from "../src/ia2855cb936b2597b8666125991f0d31a.ts";
 export { relinked } from "../src/ibccbde44f93254e0bb6a2af910bc03d9.ts";
+export { prePushGate } from "../src/ie4a628f20d785d3a941ca681bf26e3cf.ts";
 export { findDoc, docFile } from "../src/if4a09298430355a2a473394fbb5103f2.ts";
 export type { Scaffolded } from "../src/i01a133547f5f7c45a3fb2ac0e3a7678e.ts";
 export type { KbDoc } from "../src/i01a1335482f876d6808aec457f512e80.ts";
