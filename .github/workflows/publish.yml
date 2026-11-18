@@ -1,16 +1,13 @@
 name: Publish
 
-# Push to main -> the committed bundle, verified, published as a dev build (yyyy.m.d-utcmillis, npm tag "dev").
-# Manual dispatch -> a published version tagged "latest", with no rebuild.
-# Auth is npm trusted publishing (OIDC): KnowBoss/nosedive, this file, no environment, publish and dist-tag allowed.
+# Push to main -> the committed bundle, verified, published as a dev build (yyyy.m.d-utcmillis, npm tag "dev"). A push that touches only docs/ is skipped.
+# Nothing here moves "latest": `nosedive promote`, in nosedive-dev, tags a dev build latest from the pilot's machine once a demo of it has passed.
+# Auth is npm trusted publishing (OIDC): KnowBoss/nosedive, this file, no environment, publish allowed.
 on:
   push:
     branches: [main]
-  workflow_dispatch:
-    inputs:
-      version:
-        description: A published version to tag latest, as 2026.11.8-1794123456789
-        required: true
+    paths-ignore:
+      - docs/**
 
 permissions:
   contents: read
@@ -22,7 +19,6 @@ concurrency:
 
 jobs:
   dev:
-    if: github.event_name == 'push'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
@@ -42,16 +38,3 @@ jobs:
           npm version --no-git-tag-version "$version"
           echo "Publishing nosedive@$version"
       - run: npm publish --tag dev --access public
-
-  promote:
-    if: github.event_name == 'workflow_dispatch'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/setup-node@v5
-        with:
-          node-version: 24
-          registry-url: https://registry.npmjs.org
-      - name: Update npm
-        run: npm install -g npm@11.5.1
-      - name: Tag it latest
-        run: npm dist-tag add "nosedive@${{ inputs.version }}" latest
