@@ -14,5 +14,4 @@ They are checked in rather than pulled from a CDN so the landing page has no
 external dependency. The bundle build is self-contained -- it loads no worker and
 fetches nothing but the cast.
 
-`demo.cast` is the recording embedded on the page. See
-kb/01a04e21-40d3-733f-bbc9-5274bc42a31c.md for how it is produced.
+`demo.cast` is the recording embedded on the page. `nosedive promote` (nosedive-dev) records it with the build it makes `latest` and pushes it here, with the release block in `index.html`; do not edit it by hand.

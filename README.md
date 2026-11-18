@@ -26,6 +26,6 @@ This repo publishes bundles; it holds no source of its own. Each bundle is:
 
 1. `npm run bundle -- --commit <core commit or branch>` typechecks core, then builds and tests it and its capes in a scratch directory, copies them into `dist/`, writes `bundle.json` and commits.
 2. Pushing that commit to `main` verifies it and publishes it as `nosedive@dev`.
-3. Running the Publish workflow by hand with a published version tags it `latest`.
+3. `nosedive promote [<dev version>]`, run from nosedive-dev, makes a published dev build `latest`: an agent runs a dive on a legacy hero with that build in a throwaway container, and only if it finishes does promote move the tag and push the new cast and release notes to `docs/`, which is what [nosedive.dev](https://nosedive.dev) shows. A push that touches only `docs/` publishes no dev build.
 
 The legacy CLI's source is on the [`legacy`](https://github.com/KnowBoss/nosedive/tree/legacy) branch.
