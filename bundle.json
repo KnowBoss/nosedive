@@ -5,19 +5,8 @@
 		"id": "4dcbece1-08ce-5ae9-b01a-91983182a70c",
 		"version": "2026.11.19-1795053166311"
 	},
-	"capes": [
-		{
-			"name": "nosedive-legacy",
-			"repo": "01a1b13e-111d-73de-8f7d-41b47af07703",
-			"origin": "https://github.com/KnowBoss/nosedive-legacy.git",
-			"commit": "0f3aa0e6b8e427a58dea26ffc0a89981a0d8042c",
-			"build": "4e29349a-cee0-57a2-b6c6-d8caa269dea1",
-			"version": "2026.11.17-1794945400243"
-		}
-	],
 	"tests": {
-		"nosedive-core": "passed",
-		"nosedive-legacy": "passed"
+		"nosedive-core": "passed"
 	},
 	"node": ">=24"
 }
