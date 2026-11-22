@@ -160,13 +160,19 @@
 				<a href="https://github.com/KnowBoss/nosedive/blob/legacy/kb/00000000-0000-79ef-b942-3b52824471f3.md"
 					><strong>bridge</strong></a
 				> -- one notes repo that
-				holds the plan and drives the work across your other repos. Work is
-				split into small vertical slices before anything is built, and what "done" looks like is
-				captured as executable checks that agents can run to find out whether they are actually
-				finished.
+				holds the plan and a knowledge base of docs, and can check out your other repos to work on.
 			</p>
 
 			<pre><code>npm install --global nosedive # needs Node 24+ and git</code></pre>
+
+			<p>
+				The package is nosedive's core: <code>crud</code> (read, mint and edit docs),
+				<code>dock</code> (check a repo out), <code>mint</code> (new ids), <code>next</code>
+				(what is left to do), <code>pass</code> (send a doc through its gates) and
+				<code>seed</code> (make a repo a bridge). Further commands come from a cape, a repo a
+				bridge wears: register its repo with <code>nosedive crud core:repo</code>, then
+				<code>nosedive pass --attach-cape &lt;repo id&gt; --ref &lt;ref&gt;</code>.
+			</p>
 
 			<!-- The cast and the block below are written by `nosedive promote` (nosedive-dev) when it makes a build latest. -->
 			<div class="demo" id="demo"></div>
