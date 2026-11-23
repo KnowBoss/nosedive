@@ -1,9 +1,9 @@
 {
 	"core": {
 		"origin": "https://github.com/KnowBoss/nosedive-core.git",
-		"commit": "176f5b90a2166b6a8db5210c67a59f50f7793a51",
-		"id": "72d9dd67-afd2-5012-aba8-ec8eb5f737c2",
-		"version": "2026.11.22-1795369219374"
+		"commit": "d919dde5519929afc1f3fefb870319916fbeb659",
+		"id": "b0a93822-4abe-5546-b6bf-2ea5ee967a4b",
+		"version": "2026.11.23-1795410043473"
 	},
 	"tests": {
 		"nosedive-core": "passed"

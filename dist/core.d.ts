@@ -86,6 +86,7 @@ export { i01a1b3c3531177d3a3b89d851c6b456c } from "../src/i01a1b3c3531177d3a3b89
 export { i01a1b453a16c799bb9ce20fad1a9075b } from "../src/i01a1b453a16c799bb9ce20fad1a9075b.ts";
 export { i01a1bd8370eb761d998cc4d957a14cfd } from "../src/i01a1bd8370eb761d998cc4d957a14cfd.ts";
 export { i01a1ffce2ea27db19c84f1fec56c9a3d } from "../src/i01a1ffce2ea27db19c84f1fec56c9a3d.ts";
+export { i01a204bc1c1c7395b331c57a3a342b05 } from "../src/i01a204bc1c1c7395b331c57a3a342b05.ts";
 export { kingsmetal } from "../src/i01a1335483aa776cb84df698b04adc06.ts";
 export { insideWorkspace } from "../src/i01a1335485c67c95b7efdf2f0e03cfd6.ts";
 export { usageDescription, uncanonicalDocs, namedExports, kindVersion, schemaDigest, dropWhenOf, dropWhenSlips, onTrunk } from "../src/i01a1335487e477549d84a6fc2c901bf6.ts";
